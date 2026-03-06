@@ -2,13 +2,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body, input, button, textarea, select {
-    font: 16px 'Roboto' sans-serif;
+    font: 16px 'Roboto' , sans-serif;
 }
 
 /*layout*/
 body{
     margin:0;
     display:grid;
-    grid:auto auto 1fr auto;
-    background-color: #FFF38F; /* FF8B5A , FFA95A, FFD45A - color palette*/
+    grid:auto auto 1fr auto/ auto;
+    background-color: #808080;
+}
+
+nav a{
+    white-space: nowrap;
+}
+
+header{
+    padding: 10px 50px;
+    background: #ccc;
+}
+
+header h1{
+    margin: 0;
+    padding-left: 40px;
+    background: url();
+    
+}
+
+header h2{
+    .container {
+  background-image: url("path/to/image.jpg");
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  height: 300px; 
+  width: 100%;
+}
+}
+
+header a{
+    color:inherit;
+    text-decoration: none;
+}
+
+nav a{
+    padding:5px 10px;
+    color: #fff;
+    background: #666;
+    
 }
