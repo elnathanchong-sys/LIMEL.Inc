@@ -6,75 +6,52 @@ body, input, button, textarea, select {
     font: 16px 'Roboto' , sans-serif;
 }
 
-/*layout*/
+/*the whole background*/
 body{
     margin:0;
     background-color: #FBEFEF;
 }
 
+/*the header or navigation*/
 header, footer {
-    padding:10px 40px;
+    display: flex;
+    padding:25px 50px;
     background: #FCF8F8;
+    align-items: center;
+    gap: 10px
 }
 
-header{
-    padding: 40px 10px;
-    background: 
-        #FCF8F8
-        url(images/Logo.png)
-        top /100px
-        no-repeat
-        fixed;
-    background-position-x: 5%;
-    background-position-y: 3.5%;
+/* navigation bar in general*/
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
 
+nav .left{
     display:flex;
-    align-items:center;
+    align-items: center;
+    gap: 20px;
 }
 
- /*header h1{
-    margin: 0;
-    padding-left: 40px;
-    background: url(/imag);
-    
-}
-
-
-/* header h2{
-    .container {
-  background-image: url("images/Logo.png");
-  background-size: cover; 
-  background-repeat: no-repeat; 
-  height: 400px; 
-  width: 100%;
-}
-  
-}
-*/
-
-nav{
-    margin-left: 300px;
+nav .right-icon {
     display:flex;
-    gap: 1px
+    align-items: center;
+    gap: 15px;
 }
 
-nav a{
+/*customisation for the navigation words page*/
+nav a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-family: 'Montserrat', sans-serif;
     white-space: nowrap;
     color: #000000;
     text-decoration: none;
-    padding-left: 170px;
+    margin-left:170px
 } 
 
-main{
-    padding:20px 50px
-}
 
-main h1{
-    margin-top: 0;
-}
-
-.underlined {
-    text-decoration: underline;
-}
 
