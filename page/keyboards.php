@@ -11,7 +11,39 @@
 
     <?php include '../header.php'; ?>
     
-    <h1>Keyboards</h1>
+    <main>
+        <div class="keyboard-grid">
+
+            <div class="keyboard-card">
+                <div class="keyboard-image-container">
+                    <img src="Limel K60HE v2 (Top View).png">
+                </div>
+                <div class="keyboard-brand">Limel</div>
+                <div class="keyboard-title">Limel K60 HE v2</div>
+                <div class="keyboard-desc">60% Gaming Keyboard</div>
+                <div class="keyboard-price">MYR 690.00</div>
+            </div>
+       
+            <div class="keyboard-card">
+                <div class="keyboard-image-container">
+                    <img src="Limel K80HE Jerri Edition (Top View).png">
+                </div>
+                <div class="keyboard-brand">Limel</div>
+                <div class="keyboard-title">Limel K80HE Jerri Edition</div>
+                <div class="keyboard-desc">80% Gaming Keyboard</div>
+                <div class="keyboard-price">MYR 879.00</div>
+            </div>
+
+            <div class="keyboard-card">
+                <div class="keyboard-image-container">
+                    <img src="Limel K80HE (Top View).png">
+                </div>
+                <div class="keyboard-brand">Limel</div>
+                <div class="keyboard-title">Limel K80HE</div>
+                <div class="keyboard-desc">80% Gaming Keyboard</div>
+                <div class="keyboard-price">MYR 729.00</div>
+            </div>
+    </main>
 
         
 </body>
