@@ -408,7 +408,8 @@ main{
 .keyboard-price {
     font-weight: 700;
     font-size: 16px;
-}
+} 
+/* test*/
 
 .zoom-out{
     transform: scale(0.5);
