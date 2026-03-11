@@ -70,10 +70,10 @@
     <div class="mouses-display">
         <div class="mouse-grid">
             <div class="mouse-card">
-                <img src="images/mouse pic/Limel M Hyperlight PrintStream.png" alt="Limel M Hyperlight PrintStream" width="150px">
-                <h3>Limel M Hyperlight PrintStream</h3>
-                <p>MYR 3,000.00</p>
-                <a href=""a>
+                    <img src="images/mouse pic/Limel M Hyperlight PrintStream.png" alt="Limel M Hyperlight PrintStream" width="150px">
+                    <h3>Limel M Hyperlight PrintStream</h3>
+                    <p>MYR 3,000.00</p>
+                    <a href=""a>               
         </div>
         <div class="mouse-card">
                 <img src="images/mouse pic/Limel M Hyperlight.png" alt="Limel M Hyperlight.png" width="150px">

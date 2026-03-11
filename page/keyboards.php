@@ -16,7 +16,7 @@
 
             <div class="keyboard-card">
                 <div class="keyboard-image-container">
-                    <img src="Limel K60HE v2 (Top View).png">
+                    <img src="/images/keyboard pic/Limel K60HE v2 (Top View).png">
                 </div>
                 <div class="keyboard-brand">Limel</div>
                 <div class="keyboard-title">Limel K60 HE v2</div>
@@ -26,7 +26,7 @@
        
             <div class="keyboard-card">
                 <div class="keyboard-image-container">
-                    <img src="Limel K80HE Jerri Edition (Top View).png">
+                    <img src="/images/keyboard pic/Limel K80HE Jerri Edition (Top View).png">
                 </div>
                 <div class="keyboard-brand">Limel</div>
                 <div class="keyboard-title">Limel K80HE Jerri Edition</div>
@@ -36,7 +36,7 @@
 
             <div class="keyboard-card">
                 <div class="keyboard-image-container">
-                    <img src="Limel K80HE (Top View).png">
+                    <img src="/images/keyboard pic/Limel K80HE (Top View).png">
                 </div>
                 <div class="keyboard-brand">Limel</div>
                 <div class="keyboard-title">Limel K80HE</div>

@@ -1,26 +1,19 @@
 <header>
-  <nav> 
-        <div class="left-icon">
-      <a href="/index.php"><img src="/images/logo.png" width="80">
-      </a>
+  <nav>
+    <div class="left-icon">
+      <a href="/index.php"><img src="/images/logo.png" width="80"></a>
     </div>
     
-        <div class="navigation-bar">
+    <div class="navigation-bar">
       <a href="/page/keyboards.php" class="no-underlined">Keyboard</a>
       <a href="/page/mouse.php" class="no-underlined">Mouse</a>
       <a href="/page/contactus.php" class="no-underlined">Contact Us</a>
       <a href="/page/learnmore.php" class="no-underlined">Learn More</a>
     </div>
-
-    <div class="right-icon">
-      <a href="/page/profile.php"><img src="/images/icon/user.png" width="20"></a>
-      <a href="/page/cart.php"><img src="/images/icon/shopping-cart.png" width="20"></a>
-    </div>
-
-        <div class="dropdown-content" id="userMenu">
-      <a href="/page/orders.php">My Orders</a>
-      <a href="/page/profile.php">Account Settings</a>
-      <a href="/page/logout.php">Log Out</a>
-    </div>
   </nav>
+
+  <div class="right-icon">
+    <a href="/page/profile.php"><img src="/images/icon/user.png" width="20"></a>
+    <a href="/page/cart.php"><img src="/images/icon/shopping-cart.png" width="20"></a>
+  </div>
 </header>
