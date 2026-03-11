@@ -41,12 +41,11 @@
     <div class="bot-right">
         <div class="footer-column">
             <h4>Contact</h4>
-            <p>Email: noone@limel.com</p>
+            <p>Email: limelinc@limel.com</p>
             <p>Phone: +60 12-345 6789</p>
         </div>
     </div>
 
-    </div>
 
     <div class="bot-bottom">
         <p>&copy; 2026 LIMEL.Inc. All rights reserved.</p>

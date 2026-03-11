@@ -44,7 +44,7 @@
         hero.style.backgroundImage = images [currentIndex];
 }, 4000);
 </script>
-
+<!--
 <section id="Product">
     <div class="Product-header">
         <h2>Jerome's 18+ Keyboards (..◜ᴗ◝..) </h2>
@@ -60,7 +60,6 @@
         <a href=""a>
 </div>
     
-
 
     <div class="Product-header">
         <h2>Mouses ≽^•⩊•^≼</h2>
@@ -86,9 +85,8 @@
                 <h3>Limel M OP1 8k</h3>
                 <p>MYR 1,000,000.00</p>
                 <a href=""a>
-        </div>
-            
-        
+        </div> 
+-->    
 </body>
 
     <?php include './footer.php'; ?>

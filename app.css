@@ -35,7 +35,7 @@ nav {
 
 .left-icon{
     display:flex;
-    padding: 0 25px;
+    padding: 0 20px;
 }
 
 .navigation-bar{
@@ -57,7 +57,6 @@ nav a {
 .right-icon {
     display: flex;
     gap: 40px;
-    margin-left: auto;
 }
 
 /*customisation for the navigation words page*/
@@ -66,50 +65,16 @@ nav a {
 footer{
     display:flex;
     background-color: #F9DFDF;
-    padding: 40px 50px;
+    padding: 25px 50px 25px 50px;
     font-size: 25px;
-    justify-content: space-between;
-}
-
-.bot-left-down {
-    display: flex;
-    flex-wrap: wrap;
 }
 
 .bot-left{
-    display: flex;
-    align-items: center;
-    margin: auto;
-    text-decoration: none;
+    margin-right: auto;
 }
 
-.botmid1{
-    text-align: center;
-    margin: auto;
-    gap: 20px
-}
-
-.botmid2{
-    text-align: left;
-}
-
-.bot-bottom{
-    margin-top: 300px;
-    padding-right: 1000px;
-    text-align: left;
-    font-size: 25px;
-    align-items: center;
-}
-
-@media (max-width: 768px){
-    .footer-container{
-        flex-direction: column;
-    }
-
-    .bot-left .row{
-        flex-direction: column;
-        align-items: flex-start;
-    }
+.footer-column{
+    margin-: center;
 }
 
 main{
@@ -219,18 +184,12 @@ main{
     padding: 1px 50px;
 }
 
-/*Mouses*/
-.mouse-grid {
-    display: fle;
-    flex-direction: row;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
-}
+/*Mouses
+
 
 .mouse-card {
     width: 200px;
-    justify-content: space-evenly;
+    justify-content: space-evenl;
     text-align: center;
 }
 
@@ -244,13 +203,14 @@ main{
 .mouse-card h3 {
     font-size: small;
     margin: 10px 0 5px 0;
+    color: #000;
 }
 
 .mouse-card p {
     font-size: small;
     color: #000;
 }
-
+*/
 /*kb php*/
 .keyboard-grid {
     display: grid;
