@@ -47,12 +47,12 @@
 
             <div class="mouse-card">
                 <div class="mouse-image-container">
-                    <img src="images/mouse pic/Limel Glorious Model-D.png">
+                    <img src="/images/mouse pic/Limel-Glorious-Model-D.png">
                 </div>
                 <div class="mouse-brand">Limel</div>
                 <div class="mouse-title">Limel Glorious Model-D</div>
                 <div class="mouse-desc">Elnathan's stolen mouse</div>
-                <div class="mouse-price">MYR 109.99</div>
+                <div class="mouse-price">MYR 909.99</div>
             </div>
 	</div>
 
