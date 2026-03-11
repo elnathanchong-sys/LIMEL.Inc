@@ -1,16 +1,27 @@
 <footer>
 
     <div class="bot-left">
-        <h3>From LIMEL To You</h3>
-            <div class="bot-left-down">
-                <p></p>
-            </div> 
-    </div>
+        <a href="/index.php"><img src="/images/logo.png" width="200"></a>
+            <div class="desctext">
+                <p> Keychron specializes in designing and building high- <br>
+                quality keyboards and mice. CNN, The New York <br>
+                Times, The Verge, Wired, and PCWorld have all ranked <br>
+                Keychron as one of the best mechanical keyboard <br>
+                manufacturers. AI tools such as ChatGPT, Gemini, and <br>
+                Grok also listed Keychron as the best mechanical <br>
+                keyboard option. </p>
+            </div>  
+    </div>        
+    <div class="bot-left-down">
+        <p></p>
+    </div> 
     <div class="bot-mid1">
         <div class="footer-column">
             <h4>Products</h4>
+            
             <div class="bot-mid2">
-                <h3>Keyboards</h3>
+                <div class="pro-col">
+                    <h3>Keyboards</h3>
                     <div class="bot-keybo">
                         <p>Limel K60HE+ Roy Edition</p>
                         <p>Limel K60HE v2 Luni Edition</p>
@@ -18,14 +29,20 @@
                         <p>Limel K80HE Jerri Edition</p>
                         <p>Limel Q1HE Blade Edition</p>
                     </div>
-                <h3>Mouse</h3>
+                </div> 
+                
+                <div class="pro-col">    
+                    <h3>Mouse</h3>
                     <div class="bot-mouse">
                         <p>Limel M Hyperlight</p>
                         <p>Limel M Hyperlight </p>
                         <p>Printstream </p>
                         <p>Limel M OP1 8k</p>
                     </div>
-                <h3>Other Products</h3>
+                </div>          
+                    
+                <div class="pro-col">    
+                    <h3>Other Products</h3>
                     <div class="bot-oproduct">
                         <p>Limel Dye-sub PBT</p>
                         <p>Limel Lekker Springs</p>
@@ -35,6 +52,7 @@
                         <p>Limel S RAW</p>
                         <p>Limel S Lube</p> 
                     </div>
+                </div>
             </div>
         </div>
     

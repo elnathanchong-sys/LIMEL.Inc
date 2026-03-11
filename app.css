@@ -70,11 +70,25 @@ footer{
 }
 
 .bot-left{
-    margin-right: auto;
+    padding: 200px;
+}
+
+.bot.-mid1{
+    padding: 0 150px;
+}
+
+.bot-mid2{
+    display:flex;
+    gap: 100px;
+}
+
+.pro-col{
+    display:flex;
+    flex-direction: column;
 }
 
 .footer-column{
-    margin-: center;
+    margin-left:auto;
 }
 
 main{
@@ -212,6 +226,7 @@ main{
 }
 */
 /*kb php*/
+/*
 .keyboard-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
