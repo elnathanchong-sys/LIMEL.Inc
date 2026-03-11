@@ -45,7 +45,7 @@
         <a href="keyboards.php">View More</a>
         </div>
 
- <div class="keyboards-display">
+ <div class="keyboard-display">
     <div class="keyboard-grid">
         <div class="keyboard-image-container">
         <img src="images/keyboard pic/Limel K60HE + (Top View).png">
@@ -56,7 +56,8 @@
 </div>
 
 <div class="keyboard-card">
-    <div class="mouse-image-container">
+    <div class="keyboard-grid">
+    <div class="keyboard-image-container">
     <img src="images/keyboard pic/Limel K60HE v2 (Top View).png">
         </div>
             <div class = "keyboard-brand">Limel</div>
@@ -64,10 +65,19 @@
             <div class = "keyboard-price"> MYR 999.99</div>
 </div>
 
+<div class="keyboard-card">
+    <div class="keyboard-image-container">
+        <img src="images/keyboard pic/Limel K80HE.png">
+</div>
+<div class = "keyboard-brain">Limel</div>
+<div class = "keyboard-title">Limel K80HE </div>
+<div class = "keyboard-price"> MYR 1,100.00 </div>
+</div>
 
 
 <div class="keyboard-card">
-    <img src="images/keyboard pic/Limel K80HE.png" alt="Limel K80HE" width="150px">
+    <div class="keyboard-image-container">
+    <img src="images/keyboard pic/Limel K80HE.png">
     <h3> Limel K80HE </h3>
     <p> MYR 2,500.00 </p>
 

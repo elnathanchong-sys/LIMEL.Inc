@@ -194,7 +194,13 @@ main{
     z-index: 5;
 }
 
+.content-slide{
+    display: none;
+}
 
+.content-slide.active{
+    display: block;
+}
 
 .cta-button{
     background-color:#F5AFAF;
@@ -354,8 +360,8 @@ main{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     margin: 0 auto;
-    gap: 20px;
-    padding: 50px 300px;
+    gap: 70px;
+    padding: 50px 100px;
     width: 70%;
     box-sizing: border-box;
 }
