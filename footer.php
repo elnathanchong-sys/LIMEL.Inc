@@ -1,24 +1,30 @@
 <footer>
-
+<div class="footer-top">
     <div class="bot-left">
-        <a href="/index.php"><img src="/images/logo.png" width="200"></a>
+        <a href="/index.php"><img src="/images/logo.png" class="footer-logo"></a>
             <div class="desctext">
-                <p> Keychron specializes in designing and building high- <br>
+                <p> Limel specializes in designing and building high- <br>
                 quality keyboards and mice. CNN, The New York <br>
                 Times, The Verge, Wired, and PCWorld have all ranked <br>
                 Keychron as one of the best mechanical keyboard <br>
                 manufacturers. AI tools such as ChatGPT, Gemini, and <br>
                 Grok also listed Keychron as the best mechanical <br>
                 keyboard option. </p>
-            </div>  
+            </div> 
+            
+            <div class="contactcol">
+                <h4>Contact</h4>
+                <p>Email: limelinc@limel.com</p>
+                <p>Phone: +60 12-345 6789</p>
+            </div>
     </div>        
-    <div class="bot-left-down">
-        <p></p>
-    </div> 
+
+
     <div class="bot-mid1">
         <div class="footer-column">
-            <h4>Products</h4>
-            
+            <div class="proword">
+                <h4>Products</h4>
+            </div>
             <div class="bot-mid2">
                 <div class="pro-col">
                     <h3>Keyboards</h3>
@@ -55,17 +61,19 @@
                 </div>
             </div>
         </div>
-    
-    <div class="bot-right">
-        <div class="footer-column">
-            <h4>Contact</h4>
-            <p>Email: limelinc@limel.com</p>
-            <p>Phone: +60 12-345 6789</p>
-        </div>
     </div>
+</div>    
+<div class="footer-bottom">
+    <p>© 2026 LIMEL Inc. All rights reserved.</p>
 
-
-    <div class="bot-bottom">
-        <p>&copy; 2026 LIMEL.Inc. All rights reserved.</p>
+    <div class="footer-links">
+        <a href="#">Terms of Service</a>
+        <span>|</span>
+        <a href="#">Privacy Policy</a>
+        <span>|</span>
+        <a href="#">Cookie Policy</a>
     </div>
+    <p>Manage Cookies</p>
+    <p>Kota Kinabalu, SBH, Malaysia</p>
+</div>
 </footer>

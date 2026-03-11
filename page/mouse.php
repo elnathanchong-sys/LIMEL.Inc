@@ -14,24 +14,37 @@
     <main>
 
         <div class="mouse-grid">
+
             <div class="mouse-card">
-                <img src="images/mouse pic/Limel M Hyperlight PrintStream.png" alt="Limel M Hyperlight PrintStream">
-                <h3>Limel M Hyperlight PrintStream</h3>
-                <p>MYR 3,000.00</p>
-                <a href=""a>
-        </div>
-        <div class="mouse-card">
-                <img src="images/mouse pic/Limel M Hyperlight.png" alt="Limel M Hyperlight.png">
-                <h3>Limel M Hyperlight</h3>
-                <p>MYR 12,000.00</p>
-                <a href=""a>
-        </div>
-        <div class="mouse-card">
-                <img src="images/mouse pic/Limel M OP1 8k.png" alt="Limel M OP1 8k">
-                <h3>Limel M OP1 8k</h3>
-                <p>Free</p>
-                <a href=""a>
-        </div>
+                <div class="mouse-image-container">
+                    <img src="images/mouse pic/Limel M Hyperlight.png">
+                </div>
+                <div class="mouse-brand">Limel</div>
+                <div class="mouse-title">Limel M Hyperlight</div>
+                <div class="mouse-desc">100% real mouse and not scam.</div>
+                <div class="mouse-price">MYR 499.99</div>
+            </div>
+       
+            <div class="mouse-card">
+                <div class="mouse-image-container">
+                    <img src="images/mouse pic/Limel M Hyperlight PrintStream.png">
+                </div>
+                <div class="mouse-brand">Limel</div>
+                <div class="mouse-title">Limel M Hyperlight PrintStream</div>
+                <div class="mouse-desc">100% not scam and a functional mouse</div>
+                <div class="mouseprice">MYR 399.99</div>
+            </div>
+
+            <div class="mouse-card">
+                <div class="mouse-image-container">
+                    <img src="images/mouse pic/Limel M OP1 8k.png">
+                </div>
+                <div class="mouse-brand">Limel</div>
+                <div class="mouse-title">Limel M OP1 8k</div>
+                <div class="mouse-desc">1% Gaming Mouse</div>
+                <div class="mouse-price">MYR 299.99</div>
+            </div>
+	</div>
 
     </main>
      
