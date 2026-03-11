@@ -13,3 +13,4 @@ True breakthroughs come from passion and genuine feedback, so we treat every use
 As the industry stuck to basic wired setups loaded with gimmicky lights and fragile components, we envisioned a shift toward smart, adaptable keyboards and mice that integrate cutting-edge wireless connectivity, ergonomic comfort, and durable, eco-conscious builds. This approach delivers extended usage without recharges, pinpoint accuracy for intense sessions or detailed work, and innovative options like programmable macros and modular parts that outdated models can't match.</p>
 Back in 2020, we launched Limel to redefine the standard for peripherals, explore untapped possibilities, and challenge a stagnant field by setting new benchmarks through action and excellence.
 
+<?php include '../footer.php'; ?>

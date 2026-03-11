@@ -11,28 +11,49 @@
 
     <?php include './header.php'; ?>
     
-    <h1 class="title">﹥﹤</h1>
+    <h1 class="title"></h1>
 <section id="hero" class="hero">
     <div class="hero-slides">
-       <img src="images/keyboard pic/Limel K80HE Jerri Edition.png" class="slide active" alt= "Keyboard 1">
-       <img src="images/keyboard pic/Limel K60HE v2.png" class="slide zoom-out" alt= "Keyboard 2">
-    </div>
-
-    <button class="arrow prev" onclick="changeSlide(-1)">&#10094;</button>
-    <button class="arrow next" onclick="changeSlide(1)">&#10095;</button>
-    <div class="hero-content">
-        <h1>The ENR Edition</h1>
+       <img src="images/keyboard-pic/Limel-K80HE-Jerri-Edition.png" class="slide active" alt= "Keyboard 1">
+       <div class="caption">
+        <h1>The ENR Edition"</h1>
         <p>By Enrique</p>
         <p>Precision meets aesthetic.</p>
+    </div>  
+</div>
+<div class="slide">
+    <img src="images/keyboard-pic/Limel-K75HE-Nathan-Edition.png" class="slide" alt= "Keyboard 2">
+    <div class="caption">
+         <h1>The NTH Edition</h1>
+        <p>By Nathan</p>
+        <p>Performance meets style.</p>
+      </div>
     </div>
-        <h1>The Lim V2</h1>
-        <p>By Lim</p>
-        <p>Unmatched speed and responsiveness</p>
-    </div>
-
-        <button class="cta-button">Order now</button>
-    </div>
+  </div>
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+    <button class="aboutus" onclick="location.href='aboutus.html'">About Us</button>
+     <button class="aboutus" onclick="location.href='.html'">Order Now</button>
 </section>
+
+<script>
+let slides = document.querySelectorAll('.slide');
+let current =0;
+
+document.querySelector('.next').addEventListener('click', () => {
+  slides[current].classList.remove('active');
+  current = (current + 1) % slides.length;
+  slides[current].classList.add('active');
+});
+
+document.querySelector('.prev').addEventListener('click', () => {
+  slides[current].classList.remove('active');
+  current = (current - 1 + slides.length) % slides.length;
+  slides[current].classList.add('active');
+});
+</script>
+    
+
 
 <div class="button-wrapper">
     <a href="page/aboutus.php" class="about-button">About Us</a>
@@ -43,53 +64,41 @@
     <div class="Product-header">
         <h2>Keyboards (..◜ᴗ◝..) </h2>
         <a href="keyboards.php">View More</a>
-        </div>
+    </div>
 
- <div class="keyboard-display">
-    <div class="keyboard-grid">
-        <div class="keyboard-image-container">
-        <img src="images/keyboard pic/Limel K60HE + (Top View).png">
-          </div>
-          <div class ="keyboard-brand">Limel</div>
-          <div class ="keyboard-title">Limel K69HE + (Top View)</div>
-          <div class ="keyboard-price"> MYR 888.00</div>
-</div>
-
-<div class="keyboard-card">
-    <div class="keyboard-grid">
-    <div class="keyboard-image-container">
-    <img src="images/keyboard pic/Limel K60HE v2 (Top View).png">
-        </div>
-            <div class = "keyboard-brand">Limel</div>
-            <div class = "keyboard-title">Limel K60HE v2 (Top View)</div>
-            <div class = "keyboard-price"> MYR 999.99</div>
-</div>
-
-<div class="keyboard-card">
-    <div class="keyboard-image-container">
-        <img src="images/keyboard pic/Limel K80HE.png">
-</div>
-<div class = "keyboard-brain">Limel</div>
-<div class = "keyboard-title">Limel K80HE </div>
-<div class = "keyboard-price"> MYR 1,100.00 </div>
-</div>
-
-
-<div class="keyboard-card">
-    <div class="keyboard-image-container">
-    <img src="images/keyboard pic/Limel K80HE.png">
-    <h3> Limel K80HE </h3>
-    <p> MYR 2,500.00 </p>
-
-</div>
     
-<div class="keyboard-card">
-    <img src="images/keyboard pic/Limel K80HE Jerri Edition.png" alt="Limel K80HE Jerri Edition" width="150px">
-    <h3> Limel K80HE Jerri Edition </h3>
-    <p> MYR 3,000.00 </p>
-</div> 
-</div>
-</div>
+    <div class="keyboard-grid">
+
+            <div class="keyboard-card">
+            <div class="keyboard-image-container">
+                <img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png">
+            </div>
+            <div class="keyboard-brand">Limel</div>
+            <div class="keyboard-title">Limel K60 HE v2</div>
+            <div class="keyboard-desc">60% Gaming Keyboard</div>
+            <div class="keyboard-price">MYR 690.00</div>
+        </div>
+       
+        <div class="keyboard-card">
+            <div class="keyboard-image-container">
+                <img src="/images/keyboard-pic/Limel K80HE Jerri Edition (Top View).png">
+            </div>
+            <div class="keyboard-brand">Limel</div>
+            <div class="keyboard-title">Limel K80HE Jerri Edition</div>
+            <div class="keyboard-desc">80% Gaming Keyboard</div>
+            <div class="keyboard-price">MYR 879.00</div>
+        </div>
+
+        <div class="keyboard-card">
+            <div class="keyboard-image-container">
+                <img src="/images/keyboard-pic/Limel K60HE + (Top View).png">
+            </div>
+            <div class="keyboard-brand">Limel</div>
+            <div class="keyboard-title">Limel K60HE+</div>
+            <div class="keyboard-desc">80% Gaming Keyboard</div>
+            <div class="keyboard-price">MYR 459.00</div>
+    </div>
+
 
 </section>
 
@@ -133,8 +142,10 @@
     function changeSlide(direction){ //for the arrows
         const slides = document.querySelectorAll('.slide'); //looks for image with slide class
         slides[currentIndex].classList.remove('active');
+        content[currentIndex].classList.remove('active');
         currentIndex = (currentIndex + direction + slides.length) % slides.length; //ensures picture loops back to the first if reached the last one
         slides[currentIndex].classList.add('active');
+        contents[currentIndex].classList.add('active');
     }
 
 </script>   
@@ -145,3 +156,4 @@
 
     <?php include './footer.php'; ?>
 
+    <script src="/path/to/app.js"></script>

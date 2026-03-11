@@ -1,7 +1,7 @@
 <footer>
 <div class="footer-top">
     <div class="bot-left">
-        <a href="/index.php"><img src="/images/logo.png" class="footer-logo"></a>
+        <a href="/index.php"><img src="/images/logo.png" class="footer-logo" width=100></a>
             <div class="desctext">
                 <p> Limel specializes in designing and building high- <br>
                 quality keyboards and mice. CNN, The New York <br>
@@ -64,16 +64,12 @@
     </div>
 </div>    
 <div class="footer-bottom">
-    <p>© 2026 LIMEL Inc. All rights reserved.</p>
-
-    <div class="footer-links">
-        <a href="#">Terms of Service</a>
-        <span>|</span>
-        <a href="#">Privacy Policy</a>
-        <span>|</span>
-        <a href="#">Cookie Policy</a>
+    <div class="footer-bottom-row">
+        <span>© 2026-2026 LIMEL Inc.  All rights reserved.</span>
+        <span>Terms and Condition</span>
+        <span>Privacy Policy</span>
+        <span>Manage Cookies</span>
+        <span>Kota Kinabalu, Sabah, Malaysia</span>
     </div>
-    <p>Manage Cookies</p>
-    <p>Kota Kinabalu, SBH, Malaysia</p>
 </div>
 </footer>
