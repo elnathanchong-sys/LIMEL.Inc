@@ -66,7 +66,7 @@
 
             <div class="keyboard-card">
                 <div class="keyboard-image-container">
-                    <img src=C:\Users\User\Desktop\vscode\LIMEL.Inc\images\keyboard-pic\Limel-P1HE White.png.png White.png.png">
+                    <img src="\images\keyboard-pic\Limel-P1HE White.png">
                 </div>
                 <div class="keyboard-brand">Limel</div>
                 <div class="keyboard-title">Limel P1HE</div>
