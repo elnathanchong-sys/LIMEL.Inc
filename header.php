@@ -1,7 +1,7 @@
 <header>
   <nav>
     <div class="left-icon">
-      <a href="/index.php"><img src="/images/logo.png" width="80"></a>
+      <a href="/index.php"><img src="/images/logo.png" width="100"></a>
     </div>
     
     <div class="navigation-bar">
