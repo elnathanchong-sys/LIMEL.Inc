@@ -1,3 +1,7 @@
+<body>
+    <a id="top"></a>
+</body>
+
 <header>
   <nav>
     <div class="left-icon">
@@ -13,7 +17,7 @@
   </nav>
 
   <div class="right-icon">
-    <a href="/page/profile.php"><img src="/images/icon/user.png" width="20"></a>
+    <a href="/page/account.php"><img src="/images/icon/user.png" width="20"></a>
     <a href="/page/cart.php"><img src="/images/icon/shopping-cart.png" width="20"></a>
   </div>
 </header>

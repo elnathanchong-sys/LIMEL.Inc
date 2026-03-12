@@ -1,3 +1,4 @@
+
 <footer>
 <div class="footer-top">
     <div class="bot-left">
@@ -72,4 +73,8 @@
         <span>Kota Kinabalu, Sabah, Malaysia</span>
     </div>
 </div>
+<div class="back-top-button">
+    <a href="#top" class="top-button"><img src="/images/icon/arrow icon.png" width=20px></a>
+</div>
 </footer>
+

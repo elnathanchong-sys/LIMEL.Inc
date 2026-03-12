@@ -12,57 +12,36 @@
     <?php include './header.php'; ?>
     
     <h1 class="title"></h1>
-<section id="hero" class="hero">
-    <div class="hero-slides">
-       <img src="images/keyboard-pic/Limel-K80HE-Jerri-Edition.png" class="slide active" alt= "Keyboard 1">
-       <div class="caption">
-        <h1>The ENR Edition"</h1>
-        <p>By Enrique</p>
-        <p>Precision meets aesthetic.</p>
-    </div>  
-</div>
-<div class="slide">
-    <img src="images/keyboard-pic/Limel-K75HE-Nathan-Edition.png" class="slide" alt= "Keyboard 2">
-    <div class="caption">
-         <h1>The NTH Edition</h1>
-        <p>By Nathan</p>
-        <p>Performance meets style.</p>
-      </div>
+    <section class="carousel-section">
+<div class="slidershow">
+  <input type="radio" name="r" id="r1" checked>
+  <input type="radio" name="r" id="r2">
+
+  <div class="slides">
+    <div class="slide s1">
+      <img src="images/keyboard-pic/Limel-K80HE-Jerri-Edition.png" alt="Keyboard 1">
+      <div class="text-overlay">The ENR Edition</div>
+    </div>
+    <div class="slide">
+      <img src="images/keyboard-pic/Limel-K75HE-Nathan-Edition.png" alt="Keyboard 2">
+      <div class="text-overlay">The SLOTH Edition</div>
     </div>
   </div>
-    <button class="prev">&#10094;</button>
-    <button class="next">&#10095;</button>
-    <button class="aboutus" onclick="location.href='aboutus.html'">About Us</button>
-     <button class="aboutus" onclick="location.href='.html'">Order Now</button>
-</section>
 
-<script>
-let slides = document.querySelectorAll('.slide');
-let current =0;
-
-document.querySelector('.next').addEventListener('click', () => {
-  slides[current].classList.remove('active');
-  current = (current + 1) % slides.length;
-  slides[current].classList.add('active');
-});
-
-document.querySelector('.prev').addEventListener('click', () => {
-  slides[current].classList.remove('active');
-  current = (current - 1 + slides.length) % slides.length;
-  slides[current].classList.add('active');
-});
-</script>
-    
-
-
-<div class="button-wrapper">
-    <a href="page/aboutus.php" class="about-button">About Us</a>
+  <div class="navigation">
+    <label for="r1" class="bar"></label>
+    <label for="r2" class="bar"></label>
+  </div>
 </div>
+<div class="button-wrapper">
+    <a href="page/order.php" class="order-button">Order Now</a>
+</div>
+</section>
 
 <section>
     
     <div class="Product-header">
-        <h2>Keyboards (..◜ᴗ◝..) </h2>
+        <h2>Keyboards</h2>
         <a href="keyboards.php">View More</a>
     </div>
 
@@ -101,59 +80,83 @@ document.querySelector('.prev').addEventListener('click', () => {
 
 
 </section>
-
-    <div class="Product-header">
-        <h2>Mouses ≽^•⩊•^≼</h2>
-        <a href="mouse.php">View More</a>
+<section>
+    <div class="mouse-header">
+        <h2>Mouse</h2>
     </div>
 
-     
-<div class="mouse-grid">
-    <div class="mouse-card">
-        <div class="mouse-image-container">
-            <img src="images/mouse pic/Limel M Hyperlight.png">
-                </div>
-                    <div class="mouse-brand">Limel</div>
-                    <div class="mouse-title">Limel M Hyperlight</div>
-                    <div class="mouse-price">MYR 499.99</div>
-                </div>
+    <div class="mouse-view-more">
+        <mouse-li><span href="mouse.php">view more</span></mouse-li>
+    </div>
+
+    <div class="mouse-grid">
+        <div class="mouse-card">
+            <div class="mouse-image-container">
+                <img src="images/mouse pic/Limel M Hyperlight.png">
+                    </div>
+                        <div class="mouse-brand">Limel</div>
+                        <div class="mouse-title">Limel M Hyperlight</div>
+                     <div class="mouse-price">MYR 499.99</div>
+                    </div>
        
-    <div class="mouse-card">
-        <div class="mouse-image-container">
-            <img src="images/mouse pic/Limel M Hyperlight PrintStream.png">
-                </div>
-                    <div class="mouse-brand">Limel</div>
-                    <div class="mouse-title">Limel M Hyperlight PrintStream</div>
-                    <div class="mouseprice">MYR 399.99</div>
-                </div>
+        <div class="mouse-card">
+            <div class="mouse-image-container">
+                <img src="images/mouse pic/Limel M Hyperlight PrintStream.png">
+                    </div>
+                        <div class="mouse-brand">Limel</div>
+                        <div class="mouse-title">Limel M Hyperlight PrintStream</div>
+                        <div class="mouse-price">MYR 399.99</div>
+                    </div>
 
-    <div class="mouse-card">
-        <div class="mouse-image-container">
-            <img src="images/mouse pic/Limel M OP1 8k.png">
-                </div>
-                    <div class="mouse-brand">Limel</div>
-                    <div class="mouse-title">Limel M OP1 8k</div>
-                    <div class="mouse-price">MYR 299.99</div>
-                </div>
-	</div>
+        <div class="mouse-card">
+            <div class="mouse-image-container">
+                <img src="images/mouse pic/Limel M OP1 8k.png">
+                    </div>
+                        <div class="mouse-brand">Limel</div>
+                        <div class="mouse-title">Limel M OP1 8k</div>
+                        <div class="mouse-price">MYR 299.99</div>
+                    </div>
+	
+            </div>
+</section>
+<section class="info-switches-head-class">
+    <div class="info-switches-head">
+        <h2>GAMING</h2>
+        <p>Hall Effect Magnetic Switches</p>
+    </div>
 
-<script>
-    let currentIndex =0;
-    function changeSlide(direction){ //for the arrows
-        const slides = document.querySelectorAll('.slide'); //looks for image with slide class
-        slides[currentIndex].classList.remove('active');
-        content[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + direction + slides.length) % slides.length; //ensures picture loops back to the first if reached the last one
-        slides[currentIndex].classList.add('active');
-        contents[currentIndex].classList.add('active');
-    }
+    <div class="glass-container">
+        <div class="glass-card">
+            <div class="icon"><img src="\images\icon\magnetic-switches-icon.png" width="100px"></div> <h3>MAGNETIC SWITCHES</h3>
+            <p>Ultra-accurate typing experiences adjustable in 0.01mm. Applying for the electromagnetic principle, operated by Hall effect sensing.</p>
+        </div>
 
-</script>   
+        <div class="glass-card">
+            <div class="icon"><img src="images/icon/snap keys icon.png"width="100px"></div> <h3>SNAP KEYS</h3>
+            <p>Limel's implementation of SOCD. With Snap Keys, the last direction input takes priority, allowing for more precise movement in FPS games.</p>
+        </div>
+
+        <div class="glass-card">
+            <div class="icon"><img src="\images\icon\rapid trigger icon.png"width="100px"></div> <h3>RAPID TRIGGER</h3>
+            <p>Instead of relying on a fixed actuation like conventional mechanical keyboards, it immediately activates and deactivates the key with minimal travel. </p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="why-choose-limel-container">
+        <div class="why-choose-limel">
+            <h1>Why Choose Limel</h1>
+        </div>
+        <div class="just-better">
+            <h3>We're just simple better</h3>
+        </div>
+    </div>
+</section>
 
 
 
 </body>
-
     <?php include './footer.php'; ?>
 
     <script src="/path/to/app.js"></script>
