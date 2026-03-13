@@ -81,14 +81,23 @@
 
 </section>
 <section>
-    <div class="mouse-header">
-        <h2>Mouse</h2>
+    
+<div class="mouse-header-grid">
+    <div class=".mouse-header-card">
+        <div class="mouse-header">
+            <h2>Mouse</h2>
+        </div>
     </div>
 
-    <div class="mouse-view-more">
-        <mouse-li><span href="mouse.php">view more</span></mouse-li>
-    </div>
+    <div class=".mouse-header-card"></div>
 
+    <div class=".mouse-header-card">
+        <div class="mouse-view-more">
+            <mouse-li><a href="page/mouse.php">view more</a></mouse-li>
+        </div>
+    </div>
+</div>
+<!--
     <div class="mouse-grid">
         <div class="mouse-card">
             <div class="mouse-image-container">
@@ -118,6 +127,7 @@
                     </div>
 	
             </div>
+-->
 </section>
 <section class="info-switches-head-class">
     <div class="info-switches-head">
@@ -149,7 +159,7 @@
             <h1>Why Choose Limel</h1>
         </div>
         <div class="just-better">
-            <h3>We're just simple better</h3>
+            <h3>We're just simply better</h3>
         </div>
     </div>
 </section>
