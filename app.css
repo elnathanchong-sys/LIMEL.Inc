@@ -398,28 +398,40 @@ position: absolute;
 /*-----------------------------------------------------------Mouse-----------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------------------------------*/
 /*---------------------------------------------------------------------------------------------------------------------------*/
+.mouse-header-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 0 auto;
+    gap: 70px;
+    padding: 50px 100px 200px;
+    width: 70%;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+.mouse-header-card{
+    background-color: #c4d1e4;
+    border-radius: 12px;
+    padding: 20px;
+}
 
 .mouse-header{
     display: flex;
     justify-content: flex-start;
     text-align: left;
-    
+    text-indent: 17%;
     color: #000000;
+    font-size: 20px;
 }
 
 .mouse-view-more{
-    display: flex;
-    justify-content: flex-end;
-    text-align: right;
+    display:flex;
+    flex-direction: row-reverse;
     color: #000000;
+    align-items: center;
+    align-self: center;
+    text-decoration: none;
 }
-
-.mouse-li {
-  display: flex;
-  justify-content: flex-end;
-}
-
-
 
 .mouse-grid {
     display: grid;
@@ -520,6 +532,7 @@ position: absolute;
     padding: 10px;
     text-align: center;
     margin-bottom: 15px;
+    text-decoration: none;
 }
 
 .keyboard-image-container img {
@@ -676,4 +689,26 @@ position: absolute;
 
 .addtocart-button:hover{ 
     background-color: #444;
+}
+
+/* P1HE */
+.Limel-P1HE-white{
+    display:flex;
+    gap: 40px;
+    max-width: 120px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.product-images{
+    flex:1;
+}
+
+.product-image img{
+    width: 100%;
+    border-radius: 8px;
+}
+
+.product-details{
+    flex: 1;
 }
