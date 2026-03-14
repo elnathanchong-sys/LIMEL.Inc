@@ -66,12 +66,12 @@
 
             <div class="keyboard-card">
                 <div class="keyboard-image-container">
-                    <a href="/product-page/Limel-P1HE.php"><img src="\images\keyboard-pic\Limel-P1HE White.png">
+                    <a href="/product-page/Limel-P1HE.php"><img src="\images\keyboard-pic\Limel-P1HE White\Limel-P1HE White.png"></a>
                 </div>
-                <div class="keyboard-brand">Limel</div>
-                <div class="keyboard-title">Limel P1HE</div>
-                <div class="keyboard-desc">75% Gaming Keyboard</div>
-                <div class="keyboard-price">MYR 859.00</div>
+                <div class="keyboard-brand" >Limel</div>
+                <div class="keyboard-title" >Limel P1HE</div>
+                <div class="keyboard-desc" >75% Gaming Keyboard</div>
+                <div class="keyboard-price" >MYR 859.00</div>
             </div>
     </main>
 
