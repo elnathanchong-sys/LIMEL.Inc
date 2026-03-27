@@ -97,7 +97,6 @@
         </div>
     </div>
 </div>
-<!--
     <div class="mouse-grid">
         <div class="mouse-card">
             <div class="mouse-image-container">
