@@ -1,14 +1,10 @@
-<?php
-//keyboards.php
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart</title>
-    <link rel="stylesheet" href="app.css">
+    <title>LIMEL - Cart</title>
+    <link rel="stylesheet" href="/app.css">
 </head>
 
 <body>
@@ -29,7 +25,7 @@
                 
                 <div class="keyboard-card">
                     <div class="keyboard-image-container">
-                        <img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png">
+                        <img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png" alt="Keyboard">
                     </div>
                     <div class="keyboard-brand">Limel</div>
                     <div class="keyboard-title">Limel K60 HE v2</div>
@@ -37,8 +33,8 @@
                 </div>
 
                 <div class="keyboard-card">
-                    <div class="mouse-image-container">
-                        <img src="/images/mouse pic/Limel M Hyperlight.png">
+                    <div class="keyboard-image-container">
+                        <img src="/images/mouse pic/Limel M Hyperlight.png" alt="Mouse">
                     </div>
                     <div class="keyboard-brand">Limel</div>
                     <div class="keyboard-title">Limel M Hyperlight</div>
@@ -47,7 +43,7 @@
 
                 <div class="keyboard-card">
                     <div class="keyboard-image-container">
-                        <img src="/images/keyboard-pic/Limel K80HE (Top View).png">
+                        <img src="/images/keyboard-pic/Limel K80HE (Top View).png" alt="Keyboard">
                     </div>
                     <div class="keyboard-brand">Limel</div>
                     <div class="keyboard-title">Limel K80HE</div>
@@ -61,7 +57,4 @@
         
     <?php include '../footer.php'; ?>
 </body>
-
-<?php include 'header.php'; ?>
-
-<?php include '../footer.php'; ?>
+</html>
