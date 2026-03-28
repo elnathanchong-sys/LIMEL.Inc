@@ -54,6 +54,26 @@
                 <div class="mouse-desc">Elnathan's stolen mouse</div>
                 <div class="mouse-price">MYR 909.99</div>
             </div>
+
+            <div class="mouse-card">
+                <div class="mouse-image-container">
+                    <img src="/images/mouse pic/Limel_Frozen_Egypt_LW(Top view).png">
+                </div>
+                <div class="mouse-brand">Limel</div>
+                <div class="mouse-title">Limel Frozen Egypt LW</div>
+                <div class="mouse-desc">An old Pharaoh's gaming mouse(also stolen)</div>
+                <div class="mouse-price">MYR 2.00</div>
+            </div>
+
+            <div class="mouse-card">
+                <div class="mouse-image-container">
+                    <img src="/images/mouse pic/Limel_GlacierLW_Translucent_Purple(Top view).png">
+                </div>
+                <div class="mouse-brand">Limel</div>
+                <div class="mouse-title">Limel GlacierLW Translucent Purple</div>
+                <div class="mouse-desc">a very good purple mice.👍</div>
+                <div class="mouse-price">MYR 9,999.99</div>
+            </div>
 	</div>
 
     </main>

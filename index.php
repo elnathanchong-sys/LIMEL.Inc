@@ -44,6 +44,7 @@
         <h2>Keyboards</h2>
         <a href="keyboards.php">View More</a>
     </div>
+</div>
 
     
     <div class="keyboard-grid">
