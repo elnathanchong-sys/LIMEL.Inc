@@ -34,13 +34,17 @@
             </div>
 
             <div class="detail">
-                <label>Email:</label>
-                <input type="email">
+                <label for ="email"
+                class="label">Email:</label>
+                <input type="email"
+                id="email">
             </div>
 
             <div class="detail">
-                <label>Password:</label>
-                <input type="password" placeholder="Enter new password">
+                <label for ="password"
+                class="label">Password:</label>
+                <input type="password"
+                id="password" placeholder="Enter new password">
             </div>
 
             <div class="detail">

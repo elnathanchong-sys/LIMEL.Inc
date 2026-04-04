@@ -778,8 +778,6 @@ position: absolute;
     position: relative;
     margin: 40px auto;
 
-    border: 2px solid #ccc;
-    border-radius: 10px;
 }
 
 .slides {
@@ -801,6 +799,9 @@ position: absolute;
     object-fit: cover;
     margin: 0;
     padding: 0;
+
+    border: 2px solid #ccc;
+    border-radius: 10px;
 }
 
 input[name="p"] {
@@ -915,31 +916,47 @@ input[name="p"] {
 
 /*account page*/
 
+main{
+    display: block;
+    width: 100%;
+}
+
 .account-page{
     padding: 60px 20px;
-    background-color: #f5f5f5;
+    background-color: #f9fafb;
 }
 
 .account-container{
     max-width:900px;
-    margin: auto;
+    margin: 0 auto;
     background: #ffffff;
     padding: 40px;
     border-radius: 20px;
     
 }
 
-.account-details .details{
+.account-details{
     display: flex;
     flex-direction: column;
-    margin-bottom: 25px;
+    gap: 20px;
 }
 
-.label{
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #333;
+.detail{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
+
+
+.label{
+    font-weight: 600;
+    color: #000;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+    
 
 .value,
 input[type="email"],
@@ -947,7 +964,73 @@ input[type="password"],
 input[type="tel"]{
     padding: 12px;
     border-radius: 10px;
-    border: 1px;
+    border: 1px solid #e5e7eb;
     font-size: 14px;
-    transition: 0.3s
+    width: 100%;
+}
+
+.profile-picture {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+    padding-bottom: 40px;
+    border-bottom: 2px solid #808080;
+}
+
+.profile-picture img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #808080;
+}
+
+.profile-picture p {
+    font-size:14px;
+    color: #6b7280;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.button-wrapper{
+    margin-top: 35px;
+    display: flex;
+    gap: 15px;
+    padding-top: 30px;
+    border-top: 2px solid #808080;
+}
+
+.customize-button{
+    padding: 12px;
+    background: #808080;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+#success-msg{
+    font-size: 14px;
+    color: #10b981;
+    font-weight: 600;
+    opacity: 0;
+    display: none;
+    margin: 0;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 3px solid #10b981
+}
+
+#success-msg.show{
+    display: block;
+    opacity: 1;
 }
