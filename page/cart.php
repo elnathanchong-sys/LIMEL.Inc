@@ -21,10 +21,10 @@
         <section class="recommendation-section">
             <h2 class="recommendation-title">You Might Like..</h2>
             
-            <div class="keyboard-grid">
+            <div class="cart-grid">
                 
-                <div class="keyboard-card">
-                    <div class="keyboard-image-container">
+                <div class="cart-card">
+                    <div class="cart-image-container">
                         <img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png" alt="Keyboard">
                     </div>
                     <div class="keyboard-brand">Limel</div>
@@ -32,8 +32,8 @@
                     <div class="keyboard-price">MYR 690.00</div>
                 </div>
 
-                <div class="keyboard-card">
-                    <div class="keyboard-image-container">
+                <div class="cart-card">
+                    <div class="cart-image-container">
                         <img src="/images/mouse pic/Limel M Hyperlight.png" alt="Mouse">
                     </div>
                     <div class="keyboard-brand">Limel</div>
@@ -41,8 +41,8 @@
                     <div class="keyboard-price">MYR 499.99</div>
                 </div>
 
-                <div class="keyboard-card">
-                    <div class="keyboard-image-container">
+                <div class="cart-card">
+                    <div class="cart-image-container">
                         <img src="/images/keyboard-pic/Limel K80HE (Top View).png" alt="Keyboard">
                     </div>
                     <div class="keyboard-brand">Limel</div>

@@ -38,6 +38,27 @@
 </div>
 </section>
 
+<script>
+    const slides = document.querySelectorAll('input[name="r"]');
+    let currentIndex = 0;
+
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % slides.length;
+        slides[currentIndex].checked = true;
+    }
+
+    let slideInterval = setInterval(nextSlide, 5000);
+
+    slides.forEach((radio, index) => {
+        radio.addEventListener('change', () => {
+            currentIndex = index;
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
+        });
+    });
+</script>
+
+
 <section>
     
     <div class="Product-header">

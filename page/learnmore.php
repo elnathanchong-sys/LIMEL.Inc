@@ -11,12 +11,13 @@
 
     <?php include '../header.php'; ?>
     
-    <h2><u> Why choose us? ٩(ˊᗜˋ*)و ♡</u></h2>
+<div class="learn-more">
+    <h2><u> Why choose us?</u></h2>
     <p><b> ╰› Quality Products </b>- We offer only the best keyboards and mice, carefully selected to ensure quality and durability. </p>
     <p><b>╰› Wide Selection </b>- From gaming to office use, we have a wide range of keyboards and mice to suit every need. </p>
     <p><b> ╰› Customer Support </b>- Have a question? Our friendly support team is always ready to assist!  </p>
 
-    <h2><u> FAQs ₍^. .^₎⟆ </u></h2>
+    <h2><u> FAQs</u></h2>
     <p><b> How long does delivery take?</b></p>
     <p> ⤷ ゛Approximately 3-5 days, may be longer depending on locations! </p>
     <p><b>Is this product good for gaming?</b></p>
@@ -31,7 +32,7 @@
     <p><strong>Phone:</strong> <span>+60 12 345 6722</span></p>
     <p><strong>Business Hours:</strong> <span>Greenwich Mean Time +8 - Monday to Saturday, 10A.M. - 6P.M.</span></p>
     <p><strong>Response Time:</strong> <span>Within 24 hours</span></p>
-
+</div>
 
     <?php include '../footer.php'; ?>
         
