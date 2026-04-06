@@ -12,76 +12,18 @@ body, input, button, textarea, select {
     font-size: 80px;
 }
 
-.Product-header{
-    display: flex;
-    justify-content: flex-start;
-    color: #000000;
-    text-align:left;
-    text-indent:17%;
-    font-size:20px;
-}
-
-.Product-header a{
-    display: flex;
-    color: #000000;
-    align-items:center;
-    justify-content: center;
-    text-decoration: underline;
-    width: 100%;
-
-}
-
-/* Learn More */
-
-.learn-more{
-    text-align: center;
-}
-
-/* Contact Us*/
-
-.contact-page p {
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    margin: 15px 0;
-    line-height: 1.5;
-}
-
-.contact-page strong {
-    display: block;
-}
-
-/* Learn More */
-
-
-.menu-item:hover .dropdown {
-    display: flex;
-    gap: 50px;
-}
-
-.dropdown {
-    position: absolute;
-}
-
-.menu-item {
-    position: relative;
-}
-
-.mouse-header{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-}
-
-
 /*the whole background*/
 body{
     margin:0;
-    background-color: #ADB5BD;
+    background-color: #ffffff;
 }
 
+main{
+    display:flex;
+    display: inline-flex;
+}
 
-/*the header or navigation*/
+/*---------------------------------->Header<----------------------------------*/
 header{
     display: flex;
     padding:20px 50px 20px 50px;
@@ -127,204 +69,57 @@ nav a {
     gap: 40px;
 }
 
-/*customisation for the navigation words page*/
+/* Learn More */
 
-
-footer{
-    display:flex;
-    background-color: #1a1a1a;
-    font-size:15px;
-    flex-direction:column;
-    color: #e6e6e6;
+.learn-more{
+    text-align: left;
 }
 
-.footer-top{
-    display:flex;
-    justify-content:center;
-    align-items:flex-start;
-}
-.footer-logo{
-    margin-top:46px;
+/* Contact Us*/
+
+.contact-page p {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    margin: 15px 0;
+    line-height: 1.5;
 }
 
-.bot-left{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
+.contact-page strong {
+    display: block;
 }
 
-.desctext{
-    font-size: 15px;
-    
-}
-.bot-mid1{
-    padding: 0 150px;
-}
-
-.proword{
-    font-size:20px;
-    margin-top:46px
-}
-
-.bot-mid2{
-    display:flex;
-    gap: 100px;
-}
-
-.pro-col{
-    display:flex;
-    flex-direction: column;
-}
-
-.footer-column{
-    margin:0;
-}
-
-.contactcol{
-    display:flex;
-    flex-direction:column;
-    gap:5px;
-}
-
-.contactcol p{
-    margin: 2px 0;
-}
-
-.contactcol h4{
-    margin-bottom:5px;
-}
-
-.footer-bottom{
-    width: 100%;
-    border-top:1px solid #FFFFFF;
-    margin-top:30px;
-    padding:40px 0;
-    text-align:center;
-    font-size:18px;
-}
-
-.footer-bottom-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    width:100%;
-    max-width: 1200px;  
-    margin: 0 auto;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.footer-bottom-row a{
-    text-decoration: #e6e6e6;
-    color: white;
-    font-weight: 500;
-}
-
-.footer-links{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin:10px 0;
-}
-
-.footer-links a{
-    text-decoration: none;
-    color:white;
-}
+/* Learn More */
 
 
-main{
-    display:flex;
-    display: inline-flex;
+.menu-item:hover .dropdown {
+    display: flex;
+    gap: 50px;
 }
 
-/*back top button*/
-.back-top-button{
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    background: #000000;
-    color: white;
-    padding: 12px 16px;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 18px;
+.dropdown {
+    position: absolute;
 }
 
-.back-top-button:hover{
-    background:#555;
+.menu-item {
+    position: relative;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
-/* info about keyboard features */
-.info-switches-head-class{
-    padding: 120px 0;
-    background-image: url("/images/keyboard-pic/Limel-P1-HE-Black-Frame-Version.png");
-    background-size: cover;
-    background-position: center;
-    text-align: center;
-    color: white; 
+.mouse-header{
     display: flex;
     flex-direction: column;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.info-switches-head h3{
-    letter-spacing: 4px;
-    margin-bottom: 5px;
-}
-
-.glass-container{
-    display: flex;
-    flex-direction: row;
     justify-content: center;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+    text-align: center;
 }
+/*--------------------------------->End of Header<----------------------------------*/
 
-.glass-card{
-    flex: 1;
-    min-width: 280px;
-    background: rgba(255, 255, 255, 0.07);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    padding: 30px;
-    transition: 0.3s;
-    font-family: 'Montserrat', sans-serif;
-}
-/*.glass-card:hover {
-    background: rgba(255, 255, 255, 0.12);
-    transform: translateY(-5px);
-}*/
-.glass-card .icon {
-    margin-bottom: 15px;
-}
-
-.glass-card p {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: #e0e0e0;
-}
-
-/* before footer */
-.why-choose-limel-container{
-    display:flex;
-    flex-direction: column;
-    text-align:center;
-    padding: 200px 200px;
-    font-family: 'Montserrat', sans-serif;
-}
-/*carousel*/
+/*--------------------------------->Picture Carousel<----------------------------------*/
+/*
 body {
   margin: 0;
   padding: 0;
   background: #FFFFFF;
 }
+*/
 
 .slidershow {
  height: 70vh;
@@ -435,12 +230,195 @@ position: absolute;
     transform: translateY(30px);
 }
 
+/*--------------------------------->End of Picture Carousel<----------------------------------*/
 
-/*---------------------------------------------------------------------------------------------------------------------------*/
-/*---------------------------------------------------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------Mouse-----------------------------------------------------------*/
-/*---------------------------------------------------------------------------------------------------------------------------*/
-/*---------------------------------------------------------------------------------------------------------------------------*/
+/*----------------------------------->back top button<----------------------------------*/
+.back-top-button{
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background: #000000;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+.back-top-button:hover{
+    background:#555;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+/*----------------------------------->End of back top button<----------------------------------*/
+
+/*----------------------------------->Gaming Info<----------------------------------*/
+.info-switches-head-class{
+    padding: 120px 0;
+    background-image: url("/images/keyboard-pic/Limel-P1-HE-Black-Frame-Version.png");
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: white; 
+    display: flex;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.info-switches-head h3{
+    letter-spacing: 4px;
+    margin-bottom: 5px;
+}
+
+.glass-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.glass-card{
+    flex: 1;
+    min-width: 280px;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 30px;
+    transition: 0.3s;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.glass-card .icon {
+    margin-bottom: 15px;
+}
+
+.glass-card p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #e0e0e0;
+}
+
+/* before footer */
+.why-choose-limel-container{
+    display:flex;
+    flex-direction: column;
+    text-align:center;
+    padding: 200px 200px;
+    font-family: 'Montserrat', sans-serif;
+}
+/*----------------------------------->End of Gaming Info<----------------------------------*/
+
+/*--------------------------------->Footer<------------------------------------------------*/
+footer{
+    display:flex;
+    background-color: #1a1a1a;
+    font-size:15px;
+    flex-direction:column;
+    color: #e6e6e6;
+}
+
+.footer-top{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+}
+.footer-logo{
+    margin-top:46px;
+}
+
+.bot-left{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.desctext{
+    font-size: 15px;
+    
+}
+.bot-mid1{
+    padding: 0 150px;
+}
+
+.proword{
+    font-size:20px;
+    margin-top:46px
+}
+
+.bot-mid2{
+    display:flex;
+    gap: 100px;
+}
+
+.pro-col{
+    display:flex;
+    flex-direction: column;
+}
+
+.footer-column{
+    margin:0;
+}
+
+.contactcol{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.contactcol p{
+    margin: 2px 0;
+}
+
+.contactcol h4{
+    margin-bottom:5px;
+}
+
+.footer-bottom{
+    width: 100%;
+    border-top:1px solid #FFFFFF;
+    margin-top:30px;
+    padding:40px 0;
+    text-align:center;
+    font-size:18px;
+}
+
+.footer-bottom-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    width:100%;
+    max-width: 1200px;  
+    margin: 0 auto;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-bottom-row a{
+    text-decoration: #e6e6e6;
+    color: white;
+    font-weight: 500;
+}
+
+.footer-links{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:10px 0;
+}
+
+.footer-links a{
+    text-decoration: none;
+    color:white;
+}
+
+/*---------------------------------------------->End Footer<--------------------------------------------------------*/
+
+/*-----------------------------------------------------------Homepage Mouse-----------------------------------------------------------*/
 .mouse-header-grid{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -545,14 +523,27 @@ position: absolute;
     font-size: 16px;
 }
 
-/*---------------------------------------------------------------------------------------------------------------------------*/
-/*---------------------------------------------------------------------------------------------------------------------------*/
-/*-----------------------------------------------------------Mouse-----------------------------------------------------------*/
-/*---------------------------------------------------------------------------------------------------------------------------*/
-/*---------------------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------End of Homepage Mouse-----------------------------------------------------------*/
 
 
-/*--------------------------------------------------------------------kb php--------------------------------------------------------------------------------*/
+/* ----------------------------------------------------------------Homepage Keyboard ----------------------------------------------------*/
+
+.keyboard-header {
+    display: flex;
+    flex-direction: row;
+    color: #000000;
+    align-items: center;
+    justify-content: space-between;
+    width: 59%;
+    margin: 0 auto;
+}
+
+.keyboard-header a {
+    color: #000000;
+    text-decoration: underline;
+}
+
+/*-----------------------------------------------------------Keyboard-----------------------------------------------------------*/
 .keyboard-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -625,143 +616,15 @@ position: absolute;
     font-size: 16px;
 } 
 
-.product-detail-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-    max-width: 1200px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 15px;
-}
+/*---------------------------------------------------------------------End of Keyboard---------------------------------------------------------------------------*/
 
-.product-gallery {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.productimage-box {
-    background-color: #f8f9fa;
-    border-radius: 12px;
-    padding: 40px;
-    text-align: center;
-}
-
-.productimage-box img {
-    width: 100px;
-    max-width: 500px;
-    object-fit: contain;
-}
-
-.thumbnail-row {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-
-.thumbnail-row .thumb {
-    width: 80px;
-    height: 80px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    padding: 10px;
-    cursor: pointer;
-    border: 2px solid transparent;
-}
-
-.thumbnail-row .thumb:hover, .thumbnail-row .thumb.active {
-    border: 2px solid #333;
-}
-
-.detail-title {
-    font-size: 32px;
-    margin: 0 0 10px 0;
-}
-
-.detail-price {
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 30px;
-}
-
-.spec-box {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    border: 1px solid #eee;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 30px;
-}
-
-.spec-item{
-    font-size: 14px;
-    color: #666;
-}
-
-.spec-item strong {
-    color: #000;
-}
-
-.cart-action-row{
-    display: flex;
-    gap: 20px;
-}
-
-.quantity-selector {
-    display: flex;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.quantity-button {
-    background: white;
-    border: none;
-    padding: 0 15px;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.quantity-input{
-    width: 50px;
-    text-align: center;
-    border: none;
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    font-size: 16px;
-}
-
-.addtocart-button {
-    flex-grow: 1;
-    background-color: #111;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 15px;
-    transition: 0.3s;
-}
-
-.addtocart-button:hover{ 
-    background-color: #444;
-}
-
-/* P1HE */
+/*---------------------------------------------------------------------Product page------------------------------------------------------------------------*/
 .Limel-P1HE-white{
     display:flex;
     gap: 40px;
     max-width: 120px;
     margin: 0 auto;
     padding-top: 50px;
-}
-
-.product-images{
-    flex:1;
 }
 
 .product-image img{
@@ -773,13 +636,13 @@ position: absolute;
     flex: 1;
 }
 
-/*----------------------------------Product page------------------------------------*/
+
 .product-container{
     display:flex;
     justify-content: center;
     gap: 50px;
-    margin: auto 10%;
-
+    max-width: 1200px;
+    margin: 0 auto;  
 }
 
 .product-images {
@@ -788,7 +651,7 @@ position: absolute;
     overflow: hidden;
     position: relative;
     margin: 40px auto;
-
+    flex:1;
 }
 
 .slides {
@@ -884,8 +747,9 @@ input[name="p"] {
     cursor: pointer;
     margin-top: 10px auto 10px auto;
 }
+/*<----------------------------------------------------------------------End of Product Page----------------------------------------------------------------------> */
 
-/*<----------------------------------------------------------------------cart----------------------------------------------------------------------> */
+/*<----------------------------------------------------------------------Cart----------------------------------------------------------------------> */
 .cart-container {
     display: flex;
     flex-direction: column;
@@ -968,9 +832,9 @@ input[name="p"] {
     margin-bottom: 20px;
 }
 
-/*<------------------------------------------------------------------------------------------------------------------------------------------------> */
+/*<----------------------------------------------------------------------End of Cart---------------------------------------------------------------------> */
 
-/*account page*/
+/*<----------------------------------------------------------------------Account Page---------------------------------------------------------------------> */
 
 main{
     display: block;
@@ -1091,3 +955,4 @@ input[type="tel"]{
     opacity: 1;
 }
 
+/*<----------------------------------------------------------------------End of Account Page---------------------------------------------------------------------> */

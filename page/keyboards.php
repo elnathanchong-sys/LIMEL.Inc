@@ -73,6 +73,7 @@
                 <div class="keyboard-desc" >75% Gaming Keyboard</div>
                 <div class="keyboard-price" >MYR 859.00</div>
             </div>
+        </div>
     </main>
 
         
