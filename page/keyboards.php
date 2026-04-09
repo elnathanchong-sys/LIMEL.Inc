@@ -16,7 +16,7 @@
 
             <div class="keyboard-card">
                 <div class="keyboard-image-container">
-                    <img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png">
+                    <a href="/product-page/Limel-K60-HE-v2.php"><img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png">
                 </div>
                 <div class="keyboard-brand">Limel</div>
                 <div class="keyboard-title">Limel K60 HE v2</div>

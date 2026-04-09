@@ -15,7 +15,7 @@ body, input, button, textarea, select {
 /*the whole background*/
 body{
     margin:0;
-    background-color: #ffffff;
+    background-color: #000;
 }
 
 main{
@@ -123,10 +123,10 @@ body {
 
 .slidershow {
  height: 70vh;
- width: 60%;
- margin: 40px auto;
- border: 4px #808080;
- border-radius: 20px;
+ width: 100%;
+ margin: 0;
+ border: 0;
+ border-radius: none;
  overflow: hidden;
  position: relative;
 }
@@ -178,6 +178,7 @@ input[name="r"] {
 .slide img {
   width: 100%;
   height: 100%;
+  object-fit:cover;
 }
 .text-overlay {
   position: absolute;
@@ -440,13 +441,13 @@ footer{
     justify-content: flex-start;
     text-align: left;
     text-indent: 17%;
-    color: #000000;
+    color: #ffffff;
     font-size: 20px;
 }
 
 .mouse-view-more{
     display: flex;
-    color: #000000;
+    color: #ffffff;
     align-items:center;
     justify-content:center;
     width: 100%;
@@ -465,7 +466,7 @@ footer{
 }
 
 .mouse-card {
-    background-color: #ffffff;
+    background-color: #101010;
     border-radius: 12px;
     padding: 20px;
     transition: all 0.4s ease;
@@ -477,7 +478,7 @@ footer{
 }
 
 .mouse-image-container {
-        background-color: #ffffff;
+        background-color: #000000;
     border-radius: 12px;
     padding: 10px;
     text-align: center;
