@@ -12,11 +12,54 @@
     <?php include '../header.php'; ?>
     
     <main>
+        <section class="carousel-section">
+    <div class="slidershow">
+        <input type="radio" name="r" id="r1" checked>
+        <input type="radio" name="r" id="r2">
+
+        <div class="slides">
+            <div class="slide s1">
+                <img src="/images/keyboard-pic/Jerry 80HE.png" alt="Keyboard 1">
+                <div class="text-overlay">The ENR Edition</div>
+            </div>
+            <div class="slide">
+                <img src="/images/keyboard-pic/Limel-K75HE-Nathan-Edition.png" alt="Keyboard 2">
+                <div class="text-overlay">The SLOTH Edition</div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <label for="r1" class="bar"></label>
+            <label for="r2" class="bar"></label>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('input[name="r"]');
+        let currentIndex = 0;
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slides.length;
+            slides[currentIndex].checked = true;
+        }
+
+        let slideInterval = setInterval(nextSlide, 5000);
+
+        slides.forEach((radio, index) => {
+            radio.addEventListener('change', () => {
+                currentIndex = index;
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 5000);
+            });
+        });
+    </script>
+</section>
+
         <div class="keyboard-grid">
 
             <div class="keyboard-card">
                 <div class="keyboard-image-container">
-                    <a href="/product-page/Limel-K60-HE-v2.php"><img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png">
+                    <a href="/product-page/Limel-K60-HE-v2.php"><img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png"></a>
                 </div>
                 <div class="keyboard-brand">Limel</div>
                 <div class="keyboard-title">Limel K60 HE v2</div>
