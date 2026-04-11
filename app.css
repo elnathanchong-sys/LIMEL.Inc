@@ -23,16 +23,6 @@ main{
     display: inline-flex;
 }
 
-/* transition */
-body {
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-
-body.loaded {
-    opacity: 1;
-}
-
 /*---------------------------------->Header<----------------------------------*/
 header{
     display: flex;
@@ -79,24 +69,50 @@ nav a {
     gap: 40px;
 }
 
+/* Why Choose LIMEL */
+
+.why-choose-limel{
+    color: white;
+    font-size:40px;
+}
+
+.just-better{
+    color: white;
+    font-size: 32px;
+}
+
 /* Learn More */
 
 .learn-more{
-    text-align: left;
+    font-size: 20px;
+    color: white;
+    text-indent: 50px;
+}
+/* contact-learn-more */
+
+.contact-learn-more p{
+    font-size: 20px;
+    color: white;
+    text-indent:50px;
+    display: grid;
+    grid-template-columns: 200px 10px 1fr;
 }
 
 /* Contact Us*/
+.contact-us{
+    font-size: 20px;
+    color: white;
+    text-indent:50px;
+}
 
-.contact-page p {
+.contact-info p {
+    font-size: 20px;
+    color: white;
+    text-indent:50px;
     display: grid;
-    grid-template-columns: 180px 1fr;
-    margin: 15px 0;
-    line-height: 1.5;
+    grid-template-columns: 200px 10px 1fr;
 }
 
-.contact-page strong {
-    display: block;
-}
 
 /* Learn More */
 
@@ -157,12 +173,14 @@ display: block;
 }
 
 .bar {
-  width: 50px;
-  height: 10px;
-  border: 2px solid #fff;
+  width: 8px;
+  height: 8px;
+  border: 1px solid #808080;
   margin: 6px;
   cursor: pointer;
+  border-radius: 50%;
   transition: 0.4s;
+  background: transparent;
 }
 
 .bar:hover {
@@ -226,7 +244,7 @@ input[name="r"] {
 
 .order-button{
 position: absolute;
-  bottom: 50%;
+  bottom: 28%;
   left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(145deg, #d6d6d6);
@@ -432,39 +450,19 @@ footer{
 /*---------------------------------------------->End Footer<--------------------------------------------------------*/
 
 /*-----------------------------------------------------------Homepage Mouse-----------------------------------------------------------*/
-.mouse-header-grid{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    margin: 0 auto;
-    gap: 70px;
-    padding: 10px 20px;
-    width: 70%;
-    box-sizing: border-box;
-    align-items: center;
-}
-
-.mouse-header-card{
-    border-radius: 12px;
-    padding: 20px;
-}
-
 .mouse-header{
     display: flex;
-    justify-content: flex-start;
-    text-align: left;
-    text-indent: 17%;
+    flex-direction: row;
     color: #ffffff;
-    font-size: 20px;
+    align-items: center;
+    justify-content: space-between;
+    width: 59%;
+    margin: 0 auto;
 }
 
 .mouse-view-more{
-    display: flex;
     color: #ffffff;
-    align-items:center;
-    justify-content:center;
-    width: 100%;
-    text-decoration:underline;
-    padding-left:10px;
+    text-decoration: underline;
 }
 
 .mouse-grid {
@@ -478,10 +476,11 @@ footer{
 }
 
 .mouse-card {
-    background-color: #101010;
+    background-color: #000000;
     border-radius: 12px;
     padding: 20px;
     transition: all 0.4s ease;
+    border: 1px solid #2f2f2f;
 }
 
 .mouse-card:hover {
@@ -490,9 +489,9 @@ footer{
 }
 
 .mouse-image-container {
-        background-color: #000000;
+    background-color: #000000;
     border-radius: 12px;
-    padding: 10px;
+    padding: 1px;
     text-align: center;
     margin-bottom: 10px;
     text-decoration: none;
@@ -515,25 +514,32 @@ footer{
 
 .mouse.brand {
     font-size: 12px;
-    color: #888888;
-    margin-bottom: 5px
+    color: #ffffff;
+    margin-bottom: 5px;
 }
 
 .mouse-title {
     font-size: 18px;
     font-weight: 700;
     margin: 0 0 5px 0;
+    color: #ffffff;
 }
 
 .mouse-desc {
     font-size: 13px;
-    color: #666666;
+    color: #ffffff;
     margin-bottom: 20px;
 }
 
 .mouse-price {
     font-weight: 700;
     font-size: 16px;
+    color: #ffffff;
+}
+
+.card-line{
+    color: #ffffff;
+    padding-bottom: 10px;
 }
 
 /*-----------------------------------------------------------End of Homepage Mouse-----------------------------------------------------------*/
@@ -544,7 +550,7 @@ footer{
 .keyboard-header {
     display: flex;
     flex-direction: row;
-    color: #000000;
+    color: #ffffff;
     align-items: center;
     justify-content: space-between;
     width: 59%;
@@ -552,7 +558,7 @@ footer{
 }
 
 .keyboard-header a {
-    color: #000000;
+    color: #ffffff;
     text-decoration: underline;
 }
 
@@ -568,7 +574,8 @@ footer{
 }
 
 .keyboard-card {
-    background-color: #ffffff;
+    background-color: #000000;
+    color: #000000;
     border-radius: 12px;
     padding: 20px;
     display: flex;
@@ -576,15 +583,16 @@ footer{
     justify-content: center;
     transition: all 0.4s ease;
     box-sizing: border-box;
+    border: 1px solid #2f2f2f;
 }
 
 .keyboard-card:hover {
     scale: 1.05;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 20px rgba(73,80,87,1);
 }
 
 .keyboard-image-container {
-    background-color: #ffffff;
+    background-color: #000000;
     border-radius: 12px;
     padding: 10px;
     text-align: center;
@@ -606,9 +614,9 @@ footer{
     object-fit: contain;
 }
 
-.keyboard.brand {
+.keyboard-brand {
     font-size: 12px;
-    color: #888888;
+    color: #ffffff;
     margin-bottom: 5px
 }
 
@@ -616,17 +624,19 @@ footer{
     font-size: 18px;
     font-weight: 700;
     margin: 0 0 5px 0;
+    color: #ffffff;
 }
 
 .keyboard-desc {
     font-size: 13px;
-    color: #666666;
+    color: #ffffff;
     margin-bottom: 20px;
 }
 
 .keyboard-price {
     font-weight: 700;
     font-size: 16px;
+    color: #ffffff;
 } 
 
 /*---------------------------------------------------------------------End of Keyboard---------------------------------------------------------------------------*/
@@ -655,7 +665,8 @@ footer{
     justify-content: center;
     gap: 50px;
     max-width: 1200px;
-    margin: 0 auto;  
+    margin: 0 auto;
+    color: #ffffff;  
 }
 
 .product-images {
@@ -849,57 +860,93 @@ input[name="p"] {
 
 /*<----------------------------------------------------------------------Account Page---------------------------------------------------------------------> */
 
-main{
+main {
     display: block;
     width: 100%;
 }
 
-.account-page{
+.account-page {
     padding: 60px 20px;
-    background-color: #f9fafb;
+    background-color: #000;
 }
 
-.account-container{
-    max-width:900px;
+.account-container {
+    max-width: 900px;
     margin: 0 auto;
-    background: #ffffff;
+    background: #141414;
     padding: 40px;
     border-radius: 20px;
-    
 }
 
-.account-details{
+.account-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: #fff;
+    color: #000;
+}
+
+.account-user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.account-user-info span {
+    color: #000;
+    font-weight: 600;
+}
+
+.account-user-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #808080;
+}
+
+.account-details {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
-.detail{
+.detail {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-
-.label{
+.label {
     font-weight: 600;
-    color: #000;
+    color: #fff;
     font-size: 15px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin: 0;
 }
-    
 
 .value,
 input[type="email"],
 input[type="password"],
-input[type="tel"]{
+input[type="tel"],
+input[type="text"],
+input[type="file"] {
     padding: 12px;
     border-radius: 10px;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #2f2f2f;
     font-size: 14px;
     width: 100%;
+    background-color: #1a1a1a;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4a9eff;
+    box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
 }
 
 .profile-picture {
@@ -911,34 +958,39 @@ input[type="tel"]{
     border-bottom: 2px solid #808080;
 }
 
-.profile-picture img{
+.profile-picture img {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
     border: 4px solid #808080;
+    display: block;
+    max-width: 100%;
+    background-color: #2a2a2a;
+    margin-bottom: 20px;
 }
 
 .profile-picture p {
-    font-size:14px;
-    color: #6b7280;
+    font-size: 14px;
+    color: #999;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin: 0;
+    margin: 10px 0 0 0;
 }
 
-.button-wrapper{
+.button-wrapper {
     margin-top: 35px;
     display: flex;
     gap: 15px;
     padding-top: 30px;
     border-top: 2px solid #808080;
+    flex-wrap: wrap;
 }
 
-.customize-button{
-    padding: 12px;
-    background: #808080;
+.customize-button {
+    padding: 12px 24px;
+    background: #4a9eff;
     color: white;
     border: none;
     border-radius: 10px;
@@ -947,25 +999,63 @@ input[type="tel"]{
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
-    position: relative;
-    overflow: hidden;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 150px;
 }
 
-#success-msg{
+.customize-button:hover {
+    background: #3a7dcc;
+}
+
+.customize-button.reset-btn {
+    background: #555;
+}
+
+.forgot-link {
+    font-size: 12px;
+    color: #4a9eff;
+    text-decoration: underline;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+.error-messages {
+    margin-top: 20px;
+}
+
+.error-msg {
+    font-size: 14px;
+    color: #ff6b6b;
+    font-weight: 600;
+    padding: 12px;
+    border-radius: 8px;
+    border-left: 3px solid #ff6b6b;
+    background-color: rgba(255, 107, 107, 0.1);
+    margin-bottom: 10px;
+}
+
+#success-msg {
     font-size: 14px;
     color: #10b981;
     font-weight: 600;
-    opacity: 0;
-    display: none;
-    margin: 0;
+    margin-top: 20px;
     padding: 12px;
     border-radius: 8px;
-    border-left: 3px solid #10b981
+    border-left: 3px solid #10b981;
+    background-color: rgba(16, 185, 129, 0.1);
+    display: none;
 }
 
-#success-msg.show{
+#success-msg.show {
     display: block;
-    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .account-container { padding: 20px; }
+    .account-header { flex-direction: column; gap: 15px; }
+    .button-wrapper { flex-direction: column; }
+    .customize-button { width: 100%; min-width: unset; }
 }
 
 /*<----------------------------------------------------------------------End of Account Page---------------------------------------------------------------------> */

@@ -19,7 +19,7 @@
                 <div class="mouse-image-container">
                     <img src="/images/mouse pic/Limel M Hyperlight.png">
                 </div>
-                <div class="mouse-brand">Limel</div>
+                <div class="card-line">_________________________________</div>
                 <div class="mouse-title">Limel M Hyperlight</div>
                 <div class="mouse-desc">100% real mouse and not scam.</div>
                 <div class="mouse-price">MYR 499.99</div>
@@ -29,7 +29,7 @@
                 <div class="mouse-image-container">
                     <img src="/images/mouse pic/Limel M Hyperlight PrintStream.png">
                 </div>
-                <div class="mouse-brand">Limel</div>
+                <div class="card-line">_________________________________</div>
                 <div class="mouse-title">Limel M Hyperlight PrintStream</div>
                 <div class="mouse-desc">100% not scam and a functional mouse</div>
                 <div class="mouseprice">MYR 399.99</div>
@@ -39,7 +39,7 @@
                 <div class="mouse-image-container">
                     <img src="/images/mouse pic/Limel M OP1 8k.png">
                 </div>
-                <div class="mouse-brand">Limel</div>
+                <div class="card-line">_________________________________</div>
                 <div class="mouse-title">Limel M OP1 8k</div>
                 <div class="mouse-desc">1% Gaming Mouse</div>
                 <div class="mouse-price">MYR 299.99</div>
@@ -49,7 +49,7 @@
                 <div class="mouse-image-container">
                     <img src="/images/mouse pic/Limel-Glorious-Model-D.png">
                 </div>
-                <div class="mouse-brand">Limel</div>
+                <div class="card-line">_________________________________</div>
                 <div class="mouse-title">Limel Glorious Model-D</div>
                 <div class="mouse-desc">Elnathan's stolen mouse</div>
                 <div class="mouse-price">MYR 909.99</div>
@@ -59,7 +59,7 @@
                 <div class="mouse-image-container">
                     <img src="/images/mouse pic/Limel_Frozen_Egypt_LW(Top view).png">
                 </div>
-                <div class="mouse-brand">Limel</div>
+                <div class="card-line">_________________________________</div>
                 <div class="mouse-title">Limel Frozen Egypt LW</div>
                 <div class="mouse-desc">An old Pharaoh's gaming mouse(also stolen)</div>
                 <div class="mouse-price">MYR 2.00</div>
@@ -69,7 +69,7 @@
                 <div class="mouse-image-container">
                     <img src="/images/mouse pic/Limel_GlacierLW_Translucent_Purple(Top view).png">
                 </div>
-                <div class="mouse-brand">Limel</div>
+                <div class="card-line">_________________________________</div>
                 <div class="mouse-title">Limel GlacierLW Translucent Purple</div>
                 <div class="mouse-desc">a very good purple mice.👍</div>
                 <div class="mouse-price">MYR 9,999.99</div>

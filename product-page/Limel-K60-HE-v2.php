@@ -1,7 +1,12 @@
 <?php
-    $stm = $_db->prepare(SELECT * FROM `products`);
+    require '../base.php';
+
+    $stm = $_db->prepare("SELECT * FROM products");
     $stm->execute([]);
-    $arr= $stm->feectAll();
+    $products= $stm->fetchAll();
+    $p = $products[0];
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -52,10 +57,10 @@
                 </div>
             
                 <div class="product-info">
-                      
+
                     <div class="product-header">
-                        <h1><?php echo $keyboardName; ?></h1>
-                        <p>Price: RM<?php echo $price; ?></p>
+                        <h1><?php echo $p->productName; ?></h1>
+                        <p>Price: RM<?php echo $p->productPrice; ?></p>
 
                         <hr>
                     </div>
@@ -73,7 +78,7 @@
                     </div>
 
                     <div class="product-details">
-                        <p>Theme: White</p>
+                        <p>Theme: <?php echo $p->productTheme; ?></p>
                         <p>The Fully Assembled version includes:</p>
                         <ul>
                             <li>The keyboard PCB, the case, and the aluminium plate.</li>
@@ -81,11 +86,7 @@
                             <li>Adjustable-actuation-point Gateron double-rail magnetic switches.</li>
                         </ul>
                         <p> </p>
-                        <p>The P1 HE is compatible exclusively with the Gateron Double-Rail Magnetic Switch.<br>
-                            It does not support other magnetic switches such as the
-                            Gateron Magnetic Jade or <br> Gateron KS-20 Magnetic Switches.<br>
-                        </p>
-                        <p> </p>
+                        <p><?php echo $p->productDesc; ?></p>
                         <p style="color:red;">Please drop your emailon "Notify Me When Available" if the product model is out of stock.</p>
                 </div>
             </div>

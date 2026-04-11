@@ -73,7 +73,7 @@
             <div class="keyboard-image-container">
                 <img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png">
             </div>
-            <div class="keyboard-brand">Limel</div>
+            <div class="card-line">_________________________________</div>
             <div class="keyboard-title">Limel K60 HE v2</div>
             <div class="keyboard-desc">60% Gaming Keyboard</div>
             <div class="keyboard-price">MYR 690.00</div>
@@ -83,7 +83,7 @@
             <div class="keyboard-image-container">
                 <img src="/images/keyboard-pic/Limel K80HE Jerri Edition (Top View).png">
             </div>
-            <div class="keyboard-brand">Limel</div>
+            <div class="card-line">_________________________________</div>
             <div class="keyboard-title">Limel K80HE Jerri Edition</div>
             <div class="keyboard-desc">80% Gaming Keyboard</div>
             <div class="keyboard-price">MYR 879.00</div>
@@ -93,7 +93,7 @@
             <div class="keyboard-image-container">
                 <img src="/images/keyboard-pic/Limel K60HE + (Top View).png">
             </div>
-            <div class="keyboard-brand">Limel</div>
+            <div class="card-line">_________________________________</div>
             <div class="keyboard-title">Limel K60HE+</div>
             <div class="keyboard-desc">80% Gaming Keyboard</div>
             <div class="keyboard-price">MYR 459.00</div>
@@ -107,28 +107,19 @@
 <section>
 <!--Start of Mouse-->
     
-<div class="mouse-header-grid">
-    <div class=".mouse-header-card">
-        <div class="mouse-header">
-            <h2>Mouse</h2>
-        </div>
+<div class="mouse-header">
+        <h2>Mouses</h2>
+        <a href="page/mouse.php" class="mouse-view-more">View More</a>
     </div>
 
-    <div class=".mouse-header-card"></div>
-
-    <div class=".mouse-header-card">
-        <div class="mouse-view-more">
-            <mouse-li><a href="page/mouse.php">View more</a></mouse-li>
-        </div>
-    </div>
-</div>
     <div class="mouse-grid">
         <div class="mouse-card">
             <div class="mouse-image-container">
                 <img src="images/mouse pic/Limel M Hyperlight.png">
             </div>
-            <div class="mouse-brand">Limel</div>
+            <div class="card-line">_________________________________</div>
             <div class="mouse-title">Limel M Hyperlight</div>
+            <div class="mouse-desc">100% real mouse and not scam.</div>
             <div class="mouse-price">MYR 499.99</div>
         </div>
        
@@ -136,8 +127,9 @@
             <div class="mouse-image-container">
                 <img src="images/mouse pic/Limel M Hyperlight PrintStream.png">
             </div>
-            <div class="mouse-brand">Limel</div>
+            <div class="card-line">_________________________________</div>
             <div class="mouse-title">Limel M Hyperlight PrintStream</div>
+            <div class="mouse-desc">100% not scam and a functional mouse</div>
             <div class="mouse-price">MYR 399.99</div>
         </div>
 
@@ -145,8 +137,9 @@
             <div class="mouse-image-container">
                 <img src="images/mouse pic/Limel M OP1 8k.png">
             </div>
-            <div class="mouse-brand">Limel</div>
+            <div class="card-line">_________________________________</div>
             <div class="mouse-title">Limel M OP1 8k</div>
+            <div class="mouse-desc">1% Gaming Mouse</div>
             <div class="mouse-price">MYR 299.99</div>
         </div>	
     </div>
