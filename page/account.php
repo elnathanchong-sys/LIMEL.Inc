@@ -1,13 +1,15 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Settings</title>
+
     <link rel="stylesheet" href="/app.css">
 </head>
 <body class="account-management-system">
-
+    <?php include '../header.php'; ?>
     <div class="user-status-bar">
         Logged in as: <span id="navUsername">Guest</span>
     </div>
@@ -156,6 +158,6 @@
     });
 });
 </script>
-
+<?php include '../footer.php'; ?>
 </body>
 </html>

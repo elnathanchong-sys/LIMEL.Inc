@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LIMEL</title>
     <link rel="stylesheet" href="/app.css">
+    <link rel="tab icon" href="/images/Logo.png">
 </head>
     
 <body>
@@ -71,7 +72,7 @@
 
         <div class="keyboard-card">
             <div class="keyboard-image-container">
-                <img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png">
+                <a href="/page/staff.php"><img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png"></a>
             </div>
             <div class="card-line">_________________________________</div>
             <div class="keyboard-title">Limel K60 HE v2</div>

@@ -19,8 +19,8 @@ body{
 }
 
 main{
-    display:flex;
-    display: inline-flex;
+    display: block;
+    width: 100%;
 }
 
 /*---------------------------------->Header<----------------------------------*/
@@ -437,7 +437,7 @@ input[name="r"] {
 
 .order-button{
 position: absolute;
-  bottom: 28%;
+  bottom: 30%;
   left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(145deg, #d6d6d6);
@@ -662,7 +662,7 @@ footer{
     grid-template-columns: repeat(3, 1fr);
     margin: 0 auto;
     gap: 70px;
-    padding: 50px 100px 200px;
+    padding: 50px 100px;
     width: 70%;
     box-sizing: border-box;
 }
@@ -1079,13 +1079,15 @@ input[name="p"] {
 
 /*<----------------------------------------------------------------------Account Page---------------------------------------------------------------------> */
 
+body {
+    margin: 0;
+}
+
 .account-management-system {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #000;
     min-height: 100vh;
-    padding: 32px 16px;
     color: #1a1a1a;
-    line-height: 1.6;
     position: relative;
 }
 
@@ -1093,7 +1095,7 @@ input[name="p"] {
     position: absolute;
     top: 20px;
     right: 20px;
-    color: white;
+    color: gray;
     background: rgba(0, 0, 0, 0.2);
     padding: 8px 16px;
     border-radius: 30px;
@@ -1104,6 +1106,7 @@ input[name="p"] {
 .account-management-system .container {
     max-width: 650px;
     margin: 0 auto;
+    padding-bottom: 80px;
 }
 
 .account-management-system .header {
@@ -1113,7 +1116,7 @@ input[name="p"] {
 }
 
 .account-management-system .card {
-    background: #ffffff;
+    background: #292929;
     border-radius: 12px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     padding: 40px;
@@ -1139,7 +1142,7 @@ input[name="p"] {
     align-items: center;
     gap: 20px;
     padding: 20px;
-    background: #f8f9fa;
+    background: #292929;
     border-radius: 10px;
     margin-bottom: 20px;
 }
@@ -1149,13 +1152,13 @@ input[name="p"] {
     height: 120px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid #667eea;
-    background: #e0e0e0;
+    border: 3px solid #878787;
+    background: #141414;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    color: #666;
+    color: #fff;
 }
 
 .account-management-system .profile-picture-container img {
@@ -1167,21 +1170,28 @@ input[name="p"] {
 .account-management-system .drag-drop-area {
     width: 100%;
     padding: 20px;
-    border: 2px dashed #667eea;
+    border: 2px dashed #878787;
     border-radius: 8px;
     text-align: center;
     cursor: pointer;
-    background: white;
+    background: gray;
 }
 
-.account-management-system .form-group { margin-bottom: 20px; }
+.account-management-system .form-group {
+     margin-bottom: 20px;
+     color: #292929
+     }
 
 .account-management-system input {
     width: 100%;
     padding: 12px;
-    border: 1.5px solid #ddd;
     border-radius: 6px;
     box-sizing: border-box;
+    
+ 
+    background-color: #292929;  
+    color: #fff;            
+    border: 2px solid #fff; 
 }
 
 .account-management-system .button-group { display: flex; gap: 12px; }
@@ -1195,7 +1205,7 @@ input[name="p"] {
     font-weight: 600;
 }
 
-.btn-primary { background: #667eea; color: white; }
+.btn-primary { background: rgb(190, 190, 190)52, 58, 69); color: white; }
 .btn-secondary { background: #f5f5f5; color: #333; border: 1px solid #ddd; }
 
 @keyframes slideDown {
@@ -1205,3 +1215,34 @@ input[name="p"] {
 
 
 /*<----------------------------------------------------------------------End of Account Page---------------------------------------------------------------------> */
+
+/*----------------------------------------about us----------------------------------*/
+.about-card {
+    background-color: #1A1A1A;
+    border-radius: 16px;
+    padding: 60px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    border: 1px solid #2f2f2f;
+}
+
+.about-card p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 17px;
+    line-height: 1.8;
+    color: #cccccc;
+    margin-bottom: 25px;
+}
+
+.about-card p:last-child {
+    margin-bottom: 0;
+}
+
+.about-card p.highlight-text {
+    font-size: 19px;
+    color: #ffffff;
+    font-weight: 700;
+    font-style: italic;
+    border-left: 4px solid #ffffff;
+    padding-left: 20px;
+    margin-top: 40px;
+}
