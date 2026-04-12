@@ -185,7 +185,7 @@ nav a {
     gap: 15px;
 }
 
-/* Contact Us*/
+/* ----------------------------------Contact Us-------------------------------------*/
 .contact-us{
     font-size: 20px;
     color: white;
@@ -309,9 +309,7 @@ nav a {
     transform: translateY(-2px);
 }
 
-/* Learn More */
-
-
+/* -------------------------------------Learn More--------------------------------------*/
 .menu-item:hover .dropdown {
     display: flex;
     gap: 50px;
@@ -515,7 +513,6 @@ html {
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 12px;
     padding: 30px;
-    transition: 0.3s;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -837,12 +834,12 @@ footer{
 /*---------------------------------------------------------------------End of Keyboard---------------------------------------------------------------------------*/
 
 /*---------------------------------------------------------------------Product page------------------------------------------------------------------------*/
-.Limel-P1HE-white{
-    display:flex;
+.keyboard-product-page{
     gap: 40px;
-    max-width: 120px;
+    max-width: 1200px;
     margin: 0 auto;
     padding-top: 50px;
+
 }
 
 .product-image img{
@@ -865,12 +862,12 @@ footer{
 }
 
 .product-images {
-    width: 790px;
+    width: 500px;
     height: 500px;
     overflow: hidden;
     position: relative;
     margin: 40px auto;
-    flex:1;
+    max-width: 600px;
 }
 
 .slides {
@@ -892,9 +889,12 @@ footer{
     object-fit: cover;
     margin: 0;
     padding: 0;
-
+    
+    object-fit: cover;
     border: 2px solid #ccc;
     border-radius: 10px;
+
+    box-sizing: border-box; /* it ensures the border is ccalculated inside the 100% width and height apprently */
 }
 
 input[name="p"] {
@@ -931,6 +931,7 @@ input[name="p"] {
 
 .product-info{
     margin: 20px;
+    max-width: 600px;
 }
 
 .quantity-button{
@@ -939,32 +940,52 @@ input[name="p"] {
     margin: 10px 0px;
     gap: 10px;
     padding: 0%;
+    max-width: 150px;
 }
 
 .quantity-button button{
-    width: 30px;
-    height: 30px;
-    font-size: 18px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 10px;
 }
 
 .quantity-button input{
-    width:40px;
-    text-align: center;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
     font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 10px;
+    text-align: center;
 }
 
-.add-to-cart{
+.buy-now{
     display: flex;
     align-items: center;
 }
 
-.add-to-cart button{
-    width: 120x;
-    height: 40px;
-    font-size: 18px;
+.buy-now button{
+    background-color: #fff;
+    color: #000;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    margin-top: 10px auto 10px auto;
+    transition: 0.3s ease;
+    margin-top: 10px;
 }
 /*<----------------------------------------------------------------------End of Product Page----------------------------------------------------------------------> */
 
@@ -988,7 +1009,7 @@ input[name="p"] {
 }
 
 .cart-card {
-    background-color: #ffffff;
+    background-color: #000000;
     border-radius: 12px;
     padding: 20px;
     display: flex;
@@ -996,11 +1017,12 @@ input[name="p"] {
     transition: all 0.4s ease;
     box-sizing: border-box;
     cursor: pointer;
+    border: 1px solid #2f2f2f;
 }
 
 .cart-card:hover {
     scale: 1.06;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+    box-shadow: 0px 0px 20px rgba(73,80,87,1);
 }
 
 .cart-image-container {
@@ -1024,6 +1046,7 @@ input[name="p"] {
 .cart-title {
     font-size: 32px;
     margin-bottom: 25px;
+    color: #ffffff;
 }
 
 .empty-cart-section {
@@ -1032,13 +1055,13 @@ input[name="p"] {
 
 .empty-text {
     font-size: 18px;
-    color: #333333;
+    color: #ffffff;
     margin-bottom: 10px;
 }
 
 .empty-subtext {
     font-size: 16px;
-    color: #666666;
+    color: #ffffff;
 }
 
 .recommendation-section {
@@ -1049,6 +1072,7 @@ input[name="p"] {
 .recommendation-title {
     font-size: 24px;
     margin-bottom: 20px;
+    color: #ffffff;
 }
 
 /*<----------------------------------------------------------------------End of Cart---------------------------------------------------------------------> */

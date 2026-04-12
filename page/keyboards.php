@@ -46,12 +46,12 @@
 
             <div class="keyboard-card">
                 <div class="keyboard-image-container">
-                    <img src="/images/keyboard-pic/Limel K60HE + (Top View).png">
+                    <a href="/product-page/Limel-M1-V5-TMR.php"><img src="/images/keyboard-pic/Limel-M1-V5-TMR/M1-V5-TMR-Magnetic-Switch-Keyboard.png"></a>
                 </div>
                 <div class="card-line">_________________________________</div>
-                <div class="keyboard-title">Limel K60HE+</div>
-                <div class="keyboard-desc">80% Gaming Keyboard</div>
-                <div class="keyboard-price">MYR 459.00</div>
+                <div class="keyboard-title">Limel M1 V5 TMR</div>
+                <div class="keyboard-desc">75% Gaming Keyboard</div>
+                <div class="keyboard-price">MYR 749.00</div>
             </div>
 
             <div class="keyboard-card">

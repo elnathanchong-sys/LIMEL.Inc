@@ -27,6 +27,7 @@
                     <div class="cart-image-container">
                         <img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png" alt="Keyboard">
                     </div>
+                    <div class="card-line">____________________________________</div>
                     <div class="keyboard-brand">Limel</div>
                     <div class="keyboard-title">Limel K60 HE v2</div>
                     <div class="keyboard-price">MYR 690.00</div>
@@ -36,6 +37,7 @@
                     <div class="cart-image-container">
                         <img src="/images/mouse pic/Limel M Hyperlight.png" alt="Mouse">
                     </div>
+                    <div class="card-line">____________________________________</div>
                     <div class="keyboard-brand">Limel</div>
                     <div class="keyboard-title">Limel M Hyperlight</div>
                     <div class="keyboard-price">MYR 499.99</div>
@@ -45,6 +47,7 @@
                     <div class="cart-image-container">
                         <img src="/images/keyboard-pic/Limel K80HE (Top View).png" alt="Keyboard">
                     </div>
+                    <div class="card-line">____________________________________</div>
                     <div class="keyboard-brand">Limel</div>
                     <div class="keyboard-title">Limel K80HE</div>
                     <div class="keyboard-price">MYR 729.00</div>

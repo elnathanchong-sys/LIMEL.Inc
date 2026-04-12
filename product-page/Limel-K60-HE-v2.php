@@ -6,7 +6,6 @@
     $products= $stm->fetchAll();
     $p = $products[0];
 
-    
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +19,7 @@
 <body>
     <?php include '../header.php';?>
 <main>
-        <div class="Limel-K60-HE-v2">    
+        <div class="keyboard-product-page">    
             <div class="product-container">    
                 <div class="product-images">
                     <input type="radio" name="p" id="p1" checked>
@@ -31,19 +30,19 @@
 
                     <div class="slides">    
                         <div class="product-image">
-                            <img src="\images\keyboard-pic\Limel-P1HE White\Limel-P1-HE-01.png" alt="Keyboard" style="width: 100%; max-width: 500px;">
+                            <img src="/images/keyboard-pic/Limel-P1HE White/Limel-P1-HE-01.png" alt="Keyboard">
                         </div>
                         <div class="product-image">
-                            <img src="\images\keyboard-pic\Limel-P1HE White\Limel-P1-HE-02.png" alt="Keyboard" style="width: 100%; max-width: 500px;">
+                            <img src="/images/keyboard-pic/Limel-P1HE White/Limel-P1-HE-02.png" alt="Keyboard">
                         </div>
                         <div class="product-image">
-                            <img src="\images\keyboard-pic\Limel-P1HE White\Limel-P1-HE-03.png" alt="Keyboard" style="width: 100%; max-width: 500px;">
+                            <img src="/images/keyboard-pic/Limel-P1HE White/Limel-P1-HE-03.png" alt="Keyboard">
                         </div>
                         <div class="product-image">
-                            <img src="\images\keyboard-pic\Limel-P1HE White\Limel-P1-HE-04.png" alt="Keyboard" style="width: 100%; max-width: 500px;">
+                            <img src="/images/keyboard-pic/Limel-P1HE White/Limel-P1-HE-04.png" alt="Keyboard">
                         </div>
                         <div class="product-image">
-                            <img src="\images\keyboard-pic\Limel-P1HE White\Limel-P1-HE-05.png" alt="Keyboard" style="width: 100%; max-width: 500px;">
+                            <img src="/images/keyboard-pic/Limel-P1HE White/Limel-P1-HE-05.png" alt="Keyboard">
                         </div>            
                     </div>
                     
@@ -72,8 +71,8 @@
                             <button type="button" id=minus>-</button>
                         </div>
 
-                        <div class="add-to-cart">
-                            <button type="button" id=add-to-cart>Add to cart</button>
+                        <div class="buy-now">
+                            <button type="button" id=buy-now>Add to cart</button>
                         </div>
                     </div>
 
@@ -81,9 +80,9 @@
                         <p>Theme: <?php echo $p->productTheme; ?></p>
                         <p>The Fully Assembled version includes:</p>
                         <ul>
-                            <li>The keyboard PCB, the case, and the aluminium plate.</li>
-                            <li>Keycaps</liv>
-                            <li>Adjustable-actuation-point Gateron double-rail magnetic switches.</li>
+                            <li><?php echo $p->productLayers; ?></li>
+                            <li><?php echo $p->productKeycaps; ?></li>
+                            <li><?php echo $p->productSwitches; ?></li>
                         </ul>
                         <p> </p>
                         <p><?php echo $p->productDesc; ?></p>
