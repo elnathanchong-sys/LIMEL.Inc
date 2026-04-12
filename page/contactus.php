@@ -3,33 +3,64 @@
 <head>
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIMEL</title>
+    <title>LIMEL - Contact Us</title>
     <link rel="stylesheet" href="/app.css">
 </head>
     
 <body>
-
     <?php include '../header.php'; ?>
 
-<main class="contact-us">
-    <h1>Contact Us</h1>
-</main>
-
-<!-- Contact Info -->
-<div class="contact-info">
-    <p><strong>Business Name</strong> <span>:</span> <span>LIMEL</span></p>
-    <p><strong>Email</strong> <span>:</span> <span>limelinc@gmail.com</span></p>
-    <p><strong>Phone</strong> <span>:</span> <span>+60 12 345 6722</span></p>
-    <p><strong>Business Hours</strong> <span>:</span> <span>Greenwich Mean Time +8 - Monday to Saturday, 10A.M. - 6P.M.</span></p>
-    <p><strong>Response Time</strong> <span>:</span> <span>Within 24 hours</span></p>
-</div>
-
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+    <main class="contact-main-container">
         
-</body>
+        <div class="contact-header">
+            <h1>Contact Us</h1>
+            <p>We'd love to hear from you. Reach out to us below.</p>
+        </div>
 
-<?php include '../footer.php'; ?>
+        <div class="contact-wrapper">
+            
+            <div class="contact-info-panel">
+                <h3>Contact Information</h3>
+                
+                <div class="con-info">
+                    <strong>Business Name</strong>
+                    <span>LIMEL</span>
+                </div>
+                <div class="con-info">
+                    <strong>Email</strong>
+                    <span>limelinc@gmail.com</span>
+                </div>
+                <div class="con-info">
+                    <strong>Phone</strong>
+                    <span>+60 12 345 6722</span>
+                </div>
+                <div class="con-info">
+                    <strong>Business Hours</strong>
+                    <span>Greenwich Mean Time +8 - Monday to Saturday, 10A.M. - 6P.M.</span>
+                </div>
+                <div class="con-info">
+                    <strong>Response Time</strong>
+                    <span>Within 24 hours</span>
+                </div>
+            </div>
+
+            <div class="contact-form-panel">
+                <h3>Send us a Message</h3>
+                
+                <form action="#" method="POST" class="limel-form" id="contactForm">
+                    <div class="input-row">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <input type="text" placeholder="Order Number (Optional)">
+                    <textarea rows="5" placeholder="How can we help you?" required></textarea>
+                    <button type="submit" class="submit-message-btn">Send Message</button>
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <?php include '../footer.php'; ?>
+</body>
+</html>

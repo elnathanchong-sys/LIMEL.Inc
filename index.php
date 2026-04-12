@@ -19,7 +19,7 @@
 
   <div class="slides">
     <div class="slide s1">
-      <img src="images/keyboard-pic/Jerry 80HE.png" alt="Keyboard 1">
+      <img src="images/keyboard-pic/Jerri_80HE.png" alt="Keyboard 1">
       <div class="text-overlay">The ENR Edition</div>
     </div>
     <div class="slide">
