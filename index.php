@@ -72,7 +72,7 @@
 
         <div class="keyboard-card">
             <div class="keyboard-image-container">
-                <a href="/Administration/staff.php"><img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png"></a>
+                <a href="/Administration/product-listing/inventory.php"><img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png"></a>
             </div>
             <div class="card-line">_________________________________</div>
             <div class="keyboard-title">Limel K60 HE v2</div>
@@ -82,7 +82,7 @@
        
         <div class="keyboard-card">
             <div class="keyboard-image-container">
-                <img src="/images/keyboard-pic/Limel K80HE Jerri Edition (Top View).png">
+                <a href="/page/myaccount.php"><img src="/images/keyboard-pic/Limel K80HE Jerri Edition (Top View).png">
             </div>
             <div class="card-line">_________________________________</div>
             <div class="keyboard-title">Limel K80HE Jerri Edition</div>
@@ -114,9 +114,9 @@
     </div>
 
     <div class="mouse-grid">
-        <div class="mouse-card">
+        <div class="mouse-card"><a href="/Administration/order.php" class="sidebar-link"></a>
             <div class="mouse-image-container">
-                <img src="images/mouse pic/Limel M Hyperlight.png">
+                </a><img src="images/mouse pic/Limel M Hyperlight.png">
             </div>
             <div class="card-line">_________________________________</div>
             <div class="mouse-title">Limel M Hyperlight</div>

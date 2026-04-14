@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= $pageTitle ?? 'LIMEL' ?></title>
+    <link rel="stylesheet" href="/app.css">
+</head>
 <body>
     <a id="top"></a>
 </body>
@@ -16,9 +24,8 @@
     </div>
   </nav>
 
-  <div class="right-icon">
-    <a href="/page/account.php"><img src="/images/icon/user.png" width="20"></a>
-    <a href="/page/cart.php"><img src="/images/icon/shopping-cart.png" width="20"></a>
-  </div>
-</header>
+ <div class="right-icon">
+  <a href="#" id="userMenuBtn"><img src="/images/icon/user.png" width="20" alt="User"></a>
+</div>
 
+</header>

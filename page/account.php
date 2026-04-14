@@ -1,15 +1,16 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <title>Account Settings</title>
     <link rel="stylesheet" href="/app.css">
 </head>
 <body class="account-management-system">
     <?php include '../header.php'; ?>
+    
+    <button class="logout-btn" id="logoutBtn">← Back to Login</button>
+    
     <div class="user-status-bar">
         Logged in as: <span id="navUsername">Guest</span>
     </div>
@@ -71,18 +72,19 @@
     const imgPlaceholder = document.getElementById('imgPlaceholder');
     const saveBtn = document.getElementById('saveBtn');
     const clearBtn = document.getElementById('clearBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
     const navUsername = document.getElementById('navUsername');
-    
     const successMsg = document.getElementById('successMessage');
     const errorMsg = document.getElementById('errorMessage');
 
-   
+    logoutBtn.addEventListener('click', () => {
+        window.location.href = 'login.php';
+    });
+
     phoneInput.addEventListener('input', (e) => {
-        
         e.target.value = e.target.value.replace(/\D/g, '');
     });
 
-   
     const handleFileUpload = (file) => {
         if (file && file.type.startsWith('image/')) {
             const reader = new FileReader();
@@ -95,13 +97,14 @@
         }
     };
 
-    dragDropArea.addEventListener('click', () => fileInput.click());
+    dragDropArea.addEventListener('click', () => {
+        fileInput.click();
+    });
 
     fileInput.addEventListener('change', (e) => {
         handleFileUpload(e.target.files[0]);
     });
 
-   
     dragDropArea.addEventListener('dragover', (e) => {
         e.preventDefault();
         dragDropArea.style.borderColor = '#764ba2';
@@ -118,20 +121,15 @@
         handleFileUpload(file);
     });
 
-   
     saveBtn.addEventListener('click', () => {
         const userValue = document.getElementById('username').value;
         const emailValue = document.getElementById('email').value;
         const phoneValue = phoneInput.value;
 
         if (userValue && emailValue && phoneValue) {
-            
             navUsername.textContent = userValue;
-            
-         
             errorMsg.classList.remove('show');
             successMsg.classList.add('show');
-            
             setTimeout(() => successMsg.classList.remove('show'), 3000);
         } else {
             errorMsg.textContent = "Please fill in all fields.";
@@ -139,25 +137,19 @@
         }
     });
 
-    
     clearBtn.addEventListener('click', () => {
-      
         document.getElementById('username').value = '';
         document.getElementById('email').value = '';
         phoneInput.value = '';
-        
-    
         imagePreview.src = '';
         imagePreview.style.display = 'none';
         imgPlaceholder.style.display = 'block';
         fileInput.value = '';
-
-        
         successMsg.classList.remove('show');
         errorMsg.classList.remove('show');
     });
 });
-</script>
-<?php include '../footer.php'; ?>
+    </script>
+    <?php include '../footer.php'; ?>
 </body>
 </html>

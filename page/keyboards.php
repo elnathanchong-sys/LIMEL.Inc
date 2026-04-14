@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LIMEL</title>
     <link rel="stylesheet" href="/app.css">
+    <link rel="tab icon" href="/images/Logo.png">
 </head>
     
 <body>
@@ -15,6 +16,8 @@
         <div class="keyboard-grid">
 
             <div class="keyboard-card">
+                <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'K60HEv2')">🤍</button>
+
                 <div class="keyboard-image-container">
                     <a href="/product-page/Limel-K60-HE-v2.php"><img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png"></a>
                 </div>
@@ -76,7 +79,30 @@
         </div>
     </main>
 
-        
+<script>
+function toggleFavorite(e, button, productID) {
+    // Stop the browser from refreshing or following links
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    button.classList.toggle('active');
+    
+    if (button.classList.contains('active')) {
+        button.innerHTML = "❤️"; 
+        button.style.color = "#ff7675"; // This sets the style directly on the element
+        console.log("Saved " + productID);
+    } else {
+        button.innerHTML = "🤍"; 
+        button.style.color = "white";
+        console.log("Removed " + productID);
+    }
+}
+</script>
+
 </body>
 
 <?php include '../footer.php'; ?>
+
+
