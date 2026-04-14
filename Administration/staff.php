@@ -9,8 +9,6 @@
     
 <body>
 
-    <?php include '../header.php';?>
+    <?php include './sidebar.php';?>
 </body>
-
-    <?php include '../footer.php';?>
 </html>
