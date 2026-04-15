@@ -41,7 +41,8 @@ function toggleOrder($currentSort, $currentOrder, $col) {
     <title>LIMEL | Member Directory</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="admin-body">
+    <?php include 'sidebar.php';?>
 
     <div class="container">
         <div class="header">

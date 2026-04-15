@@ -1,5 +1,5 @@
 <?php
-    require '../base.php';
+    require '../Administration/product-listing/base.php';
 
     $stm = $_db->prepare("SELECT * FROM products");
     $stm->execute([]);

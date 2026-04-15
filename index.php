@@ -116,7 +116,7 @@
     <div class="mouse-grid">
         <div class="mouse-card"><a href="/Administration/order.php" class="sidebar-link"></a>
             <div class="mouse-image-container">
-                </a><img src="images/mouse pic/Limel M Hyperlight.png">
+                <img src="images/mouse pic/Limel M Hyperlight.png">
             </div>
             <div class="card-line">_________________________________</div>
             <div class="mouse-title">Limel M Hyperlight</div>

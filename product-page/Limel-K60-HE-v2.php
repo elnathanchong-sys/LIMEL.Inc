@@ -1,5 +1,5 @@
 <?php
-    require '../base.php';
+    require '../Administration/product-listing/base.php';
 
     $stm = $_db->prepare("SELECT * FROM products");
     $stm->execute([]);
@@ -77,15 +77,17 @@
                     </div>
 
                     <div class="product-details">
-                        <p>Theme: <?php echo $p->productTheme; ?></p>
+                        
+                        <br><p>Theme: <?php echo $p->productTheme; ?></p><br>
+                        
                         <p>The Fully Assembled version includes:</p>
                         <ul>
                             <li><?php echo $p->productLayers; ?></li>
                             <li><?php echo $p->productKeycaps; ?></li>
                             <li><?php echo $p->productSwitches; ?></li>
-                        </ul>
-                        <p> </p>
-                        <p><?php echo $p->productDesc; ?></p>
+                        </ul><br>
+                        
+                        <p><?php echo $p->productDesc; ?></p><br>
                         <p style="color:red;">Please drop your emailon "Notify Me When Available" if the product model is out of stock.</p>
                 </div>
             </div>

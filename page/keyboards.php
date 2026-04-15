@@ -16,7 +16,7 @@
         <div class="keyboard-grid">
 
             <div class="keyboard-card">
-                <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'K60HEv2')">🤍</button>
+                <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel K60HE v2 (Top View)')">🤍</button>
 
                 <div class="keyboard-image-container">
                     <a href="/product-page/Limel-K60-HE-v2.php"><img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png"></a>
@@ -28,6 +28,7 @@
             </div>
        
             <div class="keyboard-card">
+            <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel K80 Jerri Edition')">🤍</button>
                 <div class="keyboard-image-container">
                     <img src="/images/keyboard-pic/Limel K80HE Jerri Edition (Top View).png">
                 </div>
@@ -38,6 +39,7 @@
             </div>
 
             <div class="keyboard-card">
+                <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel K80HE')">🤍</button>
                 <div class="keyboard-image-container">
                     <img src="/images/keyboard-pic/Limel K80HE (Top View).png">
                 </div>
@@ -48,6 +50,7 @@
             </div>
 
             <div class="keyboard-card">
+                <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel M1 V5 TMR')">🤍</button>
                 <div class="keyboard-image-container">
                     <a href="/product-page/Limel-M1-V5-TMR.php"><img src="/images/keyboard-pic/Limel-M1-V5-TMR/M1-V5-TMR-Magnetic-Switch-Keyboard.png"></a>
                 </div>
@@ -58,6 +61,7 @@
             </div>
 
             <div class="keyboard-card">
+                <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel K60HE')">🤍</button>
                 <div class="keyboard-image-container">
                     <img src="/images/keyboard-pic/Limel K60HE + (Top View).png">
                 </div>
@@ -68,6 +72,7 @@
             </div>
 
             <div class="keyboard-card">
+                <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel P1HE')">🤍</button>
                 <div class="keyboard-image-container">
                     <a href="/product-page/Limel-P1HE.php"><img src="\images\keyboard-pic\Limel-P1HE White\Limel-P1HE White.png"></a>
                 </div>
@@ -81,23 +86,12 @@
 
 <script>
 function toggleFavorite(e, button, productID) {
-    // Stop the browser from refreshing or following links
-    if (e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
+    e.preventDefault();
+    e.stopPropagation();
 
-    button.classList.toggle('active');
-    
-    if (button.classList.contains('active')) {
-        button.innerHTML = "❤️"; 
-        button.style.color = "#ff7675"; // This sets the style directly on the element
-        console.log("Saved " + productID);
-    } else {
-        button.innerHTML = "🤍"; 
-        button.style.color = "white";
-        console.log("Removed " + productID);
-    }
+    const isActive = button.classList.toggle('active');
+    button.textContent = isActive ? '❤️' : '🤍';
+    console.log(isActive ? 'Saved ' : 'Removed ', productID);
 }
 </script>
 

@@ -9,6 +9,9 @@
 </head>
 
 <?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include './base.php';
 
 // ----------------------------------------------------------------------------
@@ -165,67 +168,111 @@ if (is_post()) {
 // ----------------------------Stop if errors exist--------------------------------------
 
 
-$_title = 'Insert new product';
+
 include '../sidebar.php';
 ?>
+<body>
+    
+    <div class="insert-container">
+        <div class="insert-header">
+            <div class="insert-title">
+                <h1 class="title">Add new Products</h1>
+                <p class="subtitle">Insert Products</p>
+            </div>
+        </div>
+        
+        <div class="insert-body">
+            <form method="post" class="insert-form" enctype="multipart/form-data" TODO>
+                <div class="insert-table-left">
+                    <label for="productID">ProductID</label>
+                    <br>
+                    <?= html_text('productID', 'maxlength="20"  data-upper') ?>
+                    <?= err('productID') ?>
+                    <br>
 
-<p>
-    <button data-get="inventory.php">Back</button>
-</p>
+                    <label for="productName">Product Name</label>
+                    <br>
+                    <?= html_text('productName', 'maxlength="255"') ?>
+                    <?= err('productName') ?>
+                    <br>
 
-<form method="post" class="form" enctype="multipart/form-data" TODO>
-    <label for="productID">ProductID</label>
-    <?= html_text('productID', 'maxlength="20"  data-upper') ?>
-    <?= err('productID') ?>
+                    <label for="productTheme">Product Theme</label>
+                    <br>
+                    <?= html_text('productTheme', 'maxlength="20"') ?>
+                    <?= err('productTheme') ?>
+                    <br>
 
-    <label for="productName">Product Name</label>
-    <?= html_text('productName', 'maxlength="255"') ?>
-    <?= err('productName') ?>
+                    <label for="categoryID">Category</label>
+                    <br>
+                    <select id="categoryID" name="categoryID">
+                        <option value="">Select Category</option>
+                        <?=
+                            $stm = $_db->query('SELECT categoryID, categoryName FROM category');
+                            while ($cat = $stm->fetch()) {
+                                $selected = ($cat['categoryID'] == ($categoryID ?? '-')) ? 'selected' : '';
+                                echo "<option value='{$cat['categoryID']}' $selected>{$cat['categoryName']}</option>";
+                            }
+                        ?>
+                    </select>
+                    <br>
 
-    <label for="productTheme">Product Theme</label>
-    <?= html_text('productTheme', 'maxlength="20"') ?>
-    <?= err('productTheme') ?>
+                    <label for="productLayers">Product Layers</label>
+                    <br>
+                    <?= html_text('productLayers', 'maxlength="200"') ?>
+                    <?= err('productLayers') ?>
+                    <br>
+                </div>
+                <div class="insert-table-right">
+                    
+                    <label for="productKeycaps">Product Keycaps</label>
+                    <br>
+                    <?= html_text('productKeycaps', 'maxlength="200"') ?>
+                    <?= err('productKeycaps') ?>
+                    <br>
 
-    <label for="productLayers">Product Layers</label>
-    <?= html_text('productLayers', 'maxlength="200"') ?>
-    <?= err('productLayers') ?>
+                    <label for="productSwitches">Product Switches</label>
+                    <br>
+                    <?= html_text('productSwitches', 'maxlength="200"') ?>
+                    <?= err('productSwitches') ?>
+                    <br>
 
-    <label for="productSwitches">Product Switches</label>
-    <?= html_text('productSwitches', 'maxlength="200"') ?>
-    <?= err('productSwitches') ?>
+                    <label for="productDesc">Product Description</label>
+                    <br>
+                    <?= html_text('productDesc') ?>
+                    <?= err('productDesc') ?>
+                    <br>
 
-    <label for="productDesc">Product Description</label>
-    <?= html_text('productDesc') ?>
-    <?= err('productDesc') ?>
+                    <label for="productPrice">Price</label>
+                    <br>
+                    <?= html_number('productPrice', 0.01, 9999.99, 0.01) ?>
+                    <?= err('productPrice') ?>
+                    <br>
 
-    <label for="productPrice">Price</label>
-    <?= html_number('productPrice', 0.01, 9999.99, 0.01) ?>
-    <?= err('productPrice') ?>
+                    <label for="stockAmount">Stock Amount</label>
+                    <br>
+                    <?= html_number('stockAmount', 0, null, 1) ?>
+                    <br>
 
-    <label for="stockAmount">Stock Amount</label>
-    <?= html_number('stockAmount', 0, null, 1) ?>
+                    
 
-    <label for="categoryID">Category</label>
-    <select id="categoryID" name="categoryID">
-        <option value="">Select Category</option>
-        <?php
-        $stm = $_db->query('SELECT categoryID, categoryName FROM category');
-        while ($row = $stm->fetch()) {
-            $selected = ($row['categoryID'] == ($categoryID ?? '-')) ? 'selected' : '';
-            echo "<option value='{$row['categoryID']}' $selected>{$row['categoryName']}</option>";
-        }
-        ?>
+                    <!--<label for="photo">Photo</label>
+                    <label class="upload" tabindex="0">
+                        <?= html_file('photo', 'image/*', 'hidden') ?>
+                        <img src="/images/photo.jpg">
+                    </label>
+                    <?= err('photo') ?>
+                    -->
+                </div>
 
-    <!--<label for="photo">Photo</label>
-    <label class="upload" tabindex="0">
-        <?= html_file('photo', 'image/*', 'hidden') ?>
-        <img src="/images/photo.jpg">
-    </label>
-    <?= err('photo') ?>
-    -->
-
-    <section>
-        <button>Submit</button>
-        <button type="reset">Reset</button>
-    </section>
-</form>
+                <section>
+                    <button>Submit</button>
+                    <button type="reset">Reset</button>
+                </section>
+                
+            </form>
+        </div>
+        <p>
+            <button data-get="inventory.php">Back</button>
+        </p>
+    </div>
+</body>

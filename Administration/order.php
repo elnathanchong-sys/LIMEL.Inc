@@ -125,53 +125,55 @@ include '/Administration/sidebar.php'
 </style>
 </head>
 <body>
-    <?php include 'sidebar.php';?>
+    <div class="inventory-layout">
+        <?php include 'sidebar.php';?>
 
-    <main class="admin-content">
+        <main class="admin-content">
 
-    <div class="order-page-container">
-        <div class="order-card">
-            <div class="card-header">
-                <h3>Customer Order List</h3>
-                <button style="background: #5e72e4; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
-                    + Add New Order
-                </button>
-            </div>
+        <div class="order-page-container">
+            <div class="order-card">
+                <div class="card-header">
+                    <h3>Customer Order List</h3>
+                    <button style="background: #5e72e4; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">
+                        + Add New Order
+                    </button>
+                </div>
         
-            <div class="table-responsive">
-                <table class="order-table">
-                    <thead>
-                        <tr>
-                            <th>SL</th>
-                            <th>Invoice ID</th>
-                            <th>Date</th>
-                            <th>Customer</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $sl = 1; foreach ($orders as $order): ?>
-                        <tr>
-                            <td><?= $sl++ ?></td>
-                            <td><strong>#S-<?= $order['id'] ?></strong></td>
-                            <td><?= date('d M Y', strtotime($order['created_at'])) ?></td>
-                            <td><?= htmlspecialchars($order['username']) ?></td>
-                            <td>$<?= number_format($order['total_price'], 2) ?></td>
-                            <td>
-                            <span class="status-badge badge-<?= $order['status'] ?>">
-                                <?= ucfirst($order['status'] == 'delivered' ? 'Approved' : $order['status']) ?>
-                            </span>
-                            </td>
-                            <td>
-                                <button class="action-btn" title="View Details">👁</button>
-                                <button class="action-btn" title="Edit Status">✏️</button>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="order-table">
+                        <thead>
+                            <tr>
+                                <th>SL</th>
+                                <th>Invoice ID</th>
+                                <th>Date</th>
+                                <th>Customer</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $sl = 1; foreach ($orders as $order): ?>
+                            <tr>
+                                <td><?= $sl++ ?></td>
+                                <td><strong>#S-<?= $order['id'] ?></strong></td>
+                                <td><?= date('d M Y', strtotime($order['created_at'])) ?></td>
+                                <td><?= htmlspecialchars($order['username']) ?></td>
+                                <td>$<?= number_format($order['total_price'], 2) ?></td>
+                                <td>
+                                <span class="status-badge badge-<?= $order['status'] ?>">
+                                    <?= ucfirst($order['status'] == 'delivered' ? 'Approved' : $order['status']) ?>
+                                </span>
+                                </td>
+                                <td>
+                                    <button class="action-btn" title="View Details">👁</button>
+                                    <button class="action-btn" title="Edit Status">✏️</button>
+                                </td>
+                            </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
