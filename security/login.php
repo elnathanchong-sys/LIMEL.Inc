@@ -43,8 +43,8 @@
             </form>
 
             <div class="signup-link">
-                Don't have an account? <a onclick="alert('Sign up feature coming soon!')">Create one</a>
-            </div>
+                Don't have an account? <a href="/page/account.php">Create one</a>
+        </div>
         </div>
 
         <!-- ===== FORGOT PASSWORD FORM ===== -->
@@ -138,17 +138,17 @@
                 </p>
 
                 <div class="form-group">
-                    <label for="recoveryEmail">Email Address (if you remember)</label>
+                    <label for="recoveryEmail">Email Address</label>
                     <input type="email" id="recoveryEmail" placeholder="Enter your email">
                 </div>
 
                 <div class="form-group">
-                    <label for="recoveryPhone">Phone Number (if you remember)</label>
+                    <label for="recoveryPhone">Phone Number</label>
                     <input type="tel" id="recoveryPhone" placeholder="Enter your phone number">
                 </div>
 
                 <div class="form-group">
-                    <label for="recoveryUsername">Username (if you remember)</label>
+                    <label for="recoveryUsername">Username</label>
                     <input type="text" id="recoveryUsername" placeholder="Enter your username">
                 </div>
 

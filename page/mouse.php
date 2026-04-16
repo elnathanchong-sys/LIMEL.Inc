@@ -17,6 +17,7 @@
         <div class="mouse-grid">
 
             <div class="mouse-card">
+                <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel M Hyperlight')">🤍</button>
                 <div class="mouse-image-container">
                     <img src="/images/mouse pic/Limel M Hyperlight.png">
                 </div>
@@ -27,6 +28,7 @@
             </div>
        
             <div class="mouse-card">
+                <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel M Hyperlight PrintStream')">🤍</button>
                 <div class="mouse-image-container">
                     <img src="/images/mouse pic/Limel M Hyperlight PrintStream.png">
                 </div>
@@ -37,6 +39,7 @@
             </div>
 
             <div class="mouse-card">
+                <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel M OP1 8k')">🤍</button>
                 <div class="mouse-image-container">
                     <img src="/images/mouse pic/Limel M OP1 8k.png">
                 </div>
@@ -47,6 +50,7 @@
             </div>
 
             <div class="mouse-card">
+                <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel Glorious Model-D')">🤍</button>
                 <div class="mouse-image-container">
                     <img src="/images/mouse pic/Limel-Glorious-Model-D.png">
                 </div>
@@ -57,6 +61,7 @@
             </div>
 
             <div class="mouse-card">
+                <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel Frozen Egypt LW')">🤍</button>
                 <div class="mouse-image-container">
                     <img src="/images/mouse pic/Limel_Frozen_Egypt_LW(Top view).png">
                 </div>
@@ -67,6 +72,7 @@
             </div>
 
             <div class="mouse-card">
+                <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel GlacierLW Translucent Purple')">🤍</button>
                 <div class="mouse-image-container">
                     <img src="/images/mouse pic/Limel_GlacierLW_Translucent_Purple(Top view).png">
                 </div>
@@ -77,9 +83,20 @@
             </div>
 	</div>
 
+    <script>
+function toggleFavorite(e, button, productID) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const isActive = button.classList.toggle('active');
+    button.textContent = isActive ? '❤️' : '🤍';
+    console.log(isActive ? 'Saved ' : 'Removed ', productID);
+}
+</script>
+
     </main>
-     
-    <?php include '../footer.php'; ?>
 </body>
+    <?php include '../footer.php'; ?>
+
 
     

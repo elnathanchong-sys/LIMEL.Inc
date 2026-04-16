@@ -163,6 +163,27 @@ if (is_post()) {
 
         redirect('inventory.php');
     }
+
+    //upload photo
+    $f = get_file('photo');
+
+    // Validate: photo (file)
+    if ($f == null) {
+        $_err['photo'] = 'Required';
+    }
+    else if (!str_starts_with($f->type, 'image/')) { // TODO
+        $_err['photo'] = 'Must be image';
+    }
+    else if ($f->size > (1024*1024)) { // TODO
+        $_err['photo'] = 'Maximum 10MB';
+    }
+
+    if (!$_err) {
+        // TODO
+        move_uploaded_file($f->tmp_name, 'uploads/' . $f->name);
+        temp('info', 'Photo uploaded');
+        redirect();
+    }
 }
 
 // ----------------------------Stop if errors exist--------------------------------------
@@ -183,92 +204,81 @@ include '../sidebar.php';
         
         <div class="insert-body">
             <form method="post" class="insert-form" enctype="multipart/form-data" TODO>
-                <div class="insert-table-left">
-                    <label for="productID">ProductID</label>
-                    <br>
-                    <?= html_text('productID', 'maxlength="20"  data-upper') ?>
-                    <?= err('productID') ?>
-                    <br>
+                <div class="insert-top-section"   
+                    <div class="insert-table-left">
+                        <label for="productID">ProductID</label>
+                        <br>
+                        <?= html_text('productID', 'maxlength="20"  data-upper') ?>
+                        <?= err('productID') ?>
+                        <br>
 
-                    <label for="productName">Product Name</label>
-                    <br>
-                    <?= html_text('productName', 'maxlength="255"') ?>
-                    <?= err('productName') ?>
-                    <br>
+                        <label for="productName">Product Name</label>
+                        <br>
+                        <?= html_text('productName', 'maxlength="255"') ?>
+                        <?= err('productName') ?>
+                        <br>
 
-                    <label for="productTheme">Product Theme</label>
-                    <br>
-                    <?= html_text('productTheme', 'maxlength="20"') ?>
-                    <?= err('productTheme') ?>
-                    <br>
+                        <label for="productTheme">Product Theme</label>
+                        <br>
+                        <?= html_text('productTheme', 'maxlength="20"') ?>
+                        <?= err('productTheme') ?>
+                        <br>
 
-                    <label for="categoryID">Category</label>
-                    <br>
-                    <select id="categoryID" name="categoryID">
-                        <option value="">Select Category</option>
-                        <?=
-                            $stm = $_db->query('SELECT categoryID, categoryName FROM category');
-                            while ($cat = $stm->fetch()) {
-                                $selected = ($cat['categoryID'] == ($categoryID ?? '-')) ? 'selected' : '';
-                                echo "<option value='{$cat['categoryID']}' $selected>{$cat['categoryName']}</option>";
-                            }
-                        ?>
-                    </select>
-                    <br>
+                        <label for="productLayers">Product Layers</label>
+                        <br>
+                        <?= html_text('productLayers', 'maxlength="200"') ?>
+                        <?= err('productLayers') ?>
+                        <br>
 
-                    <label for="productLayers">Product Layers</label>
-                    <br>
-                    <?= html_text('productLayers', 'maxlength="200"') ?>
-                    <?= err('productLayers') ?>
-                    <br>
+                        <label for="productKeycaps">Product Keycaps</label>
+                        <br>
+                        <?= html_text('productKeycaps', 'maxlength="200"') ?>
+                        <?= err('productKeycaps') ?>
+                        <br>
+                    </div>
+                    <div class="insert-table-right">
+                        
+                        
+
+                        <label for="productSwitches">Product Switches</label>
+                        <br>
+                        <?= html_text('productSwitches', 'maxlength="200"') ?>
+                        <?= err('productSwitches') ?>
+                        <br>
+
+                        <label for="productDesc">Product Description</label>
+                        <br>
+                        <?= html_text('productDesc') ?>
+                        <?= err('productDesc') ?>
+                        <br>
+
+                        <label for="productPrice">Price</label>
+                        <br>
+                        <?= html_number('productPrice', 0.01, 9999.99, 0.01) ?>
+                        <?= err('productPrice') ?>
+                        <br>
+
+                        <label for="stockAmount">Stock Amount</label>
+                        <br>
+                        <?= html_number('stockAmount', 0, null, 1) ?>
+                        <br>
+                        
+                        <label for="photo">Photo</label>
+                        <label class="upload" tabindex="0">
+                            <?= html_file('photo', 'image/*', 'hidden') ?>
+                            <img src="/images/keyboard-pic/photo.jpg">
+                        </label>
+                        <?= err('photo') ?>
+                        
+                        <br>
+                    </div>
                 </div>
-                <div class="insert-table-right">
-                    
-                    <label for="productKeycaps">Product Keycaps</label>
-                    <br>
-                    <?= html_text('productKeycaps', 'maxlength="200"') ?>
-                    <?= err('productKeycaps') ?>
-                    <br>
-
-                    <label for="productSwitches">Product Switches</label>
-                    <br>
-                    <?= html_text('productSwitches', 'maxlength="200"') ?>
-                    <?= err('productSwitches') ?>
-                    <br>
-
-                    <label for="productDesc">Product Description</label>
-                    <br>
-                    <?= html_text('productDesc') ?>
-                    <?= err('productDesc') ?>
-                    <br>
-
-                    <label for="productPrice">Price</label>
-                    <br>
-                    <?= html_number('productPrice', 0.01, 9999.99, 0.01) ?>
-                    <?= err('productPrice') ?>
-                    <br>
-
-                    <label for="stockAmount">Stock Amount</label>
-                    <br>
-                    <?= html_number('stockAmount', 0, null, 1) ?>
-                    <br>
-
-                    
-
-                    <!--<label for="photo">Photo</label>
-                    <label class="upload" tabindex="0">
-                        <?= html_file('photo', 'image/*', 'hidden') ?>
-                        <img src="/images/photo.jpg">
-                    </label>
-                    <?= err('photo') ?>
-                    -->
-                </div>
-
-                <section>
-                    <button>Submit</button>
-                    <button type="reset">Reset</button>
-                </section>
-                
+                    <div class="insert-table-bottom">
+                        <section>
+                            <button>Submit</button>
+                            <button type="reset">Reset</button>
+                        </section>
+                    </div>
             </form>
         </div>
         <p>

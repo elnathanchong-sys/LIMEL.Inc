@@ -1,14 +1,13 @@
 <?php
 session_start();
 
-// 1. SECURITY: If the user isn't logged in, kick them back to the login page
 if (!isset($_SESSION['username'])) {
     header("Location: ../security/login.php");
     exit();
 }
 
 $pageTitle = 'My Account';
-include '../header.php'; // This includes the hover dropdown we made
+include '../header.php'; 
 ?>
 
 
@@ -37,7 +36,7 @@ include '../header.php'; // This includes the hover dropdown we made
                 </div>
             </a>
 
-            <a href="orders.php" class="dashboard-card">
+            <a href="myorders.php" class="dashboard-card">
                 <div class="card-icon">📦</div>
                 <div>
                     <div class="card-title">My Orders</div>

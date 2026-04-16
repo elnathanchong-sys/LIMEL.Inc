@@ -1658,9 +1658,28 @@ aside, .sidebar {
     gap: 40px;
 }
 
+.insert-top-section {
+    display: flex;
+    gap: 40px;
+}
+
 .insert-table-left,
 .insert-table-right {
     flex: 1;
+    
+}
+
+.insert-bottom-section {
+    margin-top: 20px;
+}
+
+label.upload img {
+    display: block;
+    border: 1px solid #333;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
 }
 /*----------------------------------------Login page------------------------------------*/
 * {
@@ -2117,6 +2136,8 @@ body.admin-body {
 
 
 
+/*------------------------------------end ofOrder page(Admin)------------------------------------*/
+
 
 /*----------------------------------------Member page(Admin)---------------------------------*/
 .member-body {
@@ -2194,3 +2215,163 @@ body.admin-body {
 .u-date-text { color: #555; font-size: 13px; }
 .member-error-box { background: rgba(255,0,0,0.1); color: #ff5f5f; border: 1px solid #ff5f5f; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
 .member-no-data { text-align: center; color: #333; padding: 60px 0; }
+/*------------------------------------end of member page(Admin)------------------------------------*/
+
+
+/*-----------------------------------Admin Login----------------------------------------------------*/
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+.adm-ln-body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #1A1A1A;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.adm-ln-main {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.adm-ln-container {
+    background: #1e1e1e;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    border: 1px solid #2a2a2a;
+}
+
+.adm-ln-badge-inner {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    margin: 0 auto 20px;
+}
+
+.adm-ln-header { 
+    text-align: center; 
+    margin-bottom: 28px;
+ }
+.adm-ln-header h1 { 
+    color: #ffffff; 
+    font-size: 24px; 
+    margin-bottom: 6px;
+ }
+.adm-ln-header p { 
+    color: #a0a0a0; 
+    font-size: 13px;
+ }
+
+.adm-ln-ribbon {
+    background: rgba(229, 57, 53, 0.1);
+    border: 1px solid rgba(229, 57, 53, 0.3);
+    padding: 10px;
+    color: #ef9a9a;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 6px;
+}
+
+.adm-ln-group { margin-bottom: 18px; }
+.adm-ln-group label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 600; }
+.adm-ln-input {
+    width: 100%;
+    padding: 12px;
+    background-color: #292929;
+    border: 2px solid #444;
+    border-radius: 6px;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.adm-ln-field-user label { color: #667eea; }
+#adm_user_field:focus { outline: none; border-color: #667eea; box-shadow: 0 0 10px rgba(102, 126, 234, 0.2); }
+
+.adm-ln-field-pass label { color: #a78bfa; }
+#adm_pass_field:focus { outline: none; border-color: #a78bfa; box-shadow: 0 0 10px rgba(167, 139, 250, 0.2); }
+
+.adm-ln-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.adm-ln-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+.adm-ln-error {
+    background: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef5350;
+    border-radius: 6px;
+    padding: 12px;
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+.adm-ln-back { text-align: center; margin-top: 20px; font-size: 13px; }
+.adm-ln-back a { color: #667eea; text-decoration: none; }
+/*------------------------------------enf of admin login------------------------------------*/
+
+
+/*--------------------------------------Order (Admin Page)--------------------------------------*/
+
+.status-badge {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+    display: inline-block;
+}
+
+
+.badge-delivered { background: #1a3326; color: #2dce89; border: 1px solid #2dce89; }
+.badge-pending   { background: #33211a; color: #fb6340; border: 1px solid #fb6340; }
+.badge-shipped   { background: #1a2733; color: #11cdef; border: 1px solid #11cdef; }
+.badge-cancelled { background: #331a1a; color: #f5365c; border: 1px solid #f5365c; }
+
+.action-btn {
+    background: transparent;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 8px;
+    transition: 0.2s;
+}
+
+.action-btn:hover {
+    color: #fff;
+}
+
+.text-dim {
+    color: #666;
+}
+
+
+
+/*------------------------------Create account------------------------*/

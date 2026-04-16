@@ -12,6 +12,7 @@ $arr = $_db->query('SELECT * FROM products')->fetchAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/app.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="tab icon" href="/images/Logo.png">
     <script src="./app.js"></script>
 </head>
 <body>
