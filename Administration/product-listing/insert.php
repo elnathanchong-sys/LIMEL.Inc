@@ -138,6 +138,28 @@ if (is_post()) {
 //        temp('info', 'Record inserted');
 //        redirect('index.php');
 //    }
+
+    $f = get_file('photo');
+
+        // Validate: photo (file)
+        if ($f == null) {
+            $_err['photo'] = 'Required';
+        }
+        else if (!str_starts_with($f->type, 'image/')) { // TODO
+            $_err['photo'] = 'Must be image';
+        }
+        else if ($f->size > (1024*1024)) { // TODO
+            $_err['photo'] = 'Maximum 1MB';
+        }
+
+        if (!$_err) {
+            // TODO
+            move_uploaded_file($f->tmp_name, 'uploads/' . $f->name);
+            temp('info', 'Photo uploaded');
+            redirect();
+        }
+    }
+    
     if (!$_err) {
 
         $stm = $_db->prepare("
@@ -165,26 +187,7 @@ if (is_post()) {
     }
 
     //upload photo
-    $f = get_file('photo');
-
-    // Validate: photo (file)
-    if ($f == null) {
-        $_err['photo'] = 'Required';
-    }
-    else if (!str_starts_with($f->type, 'image/')) { // TODO
-        $_err['photo'] = 'Must be image';
-    }
-    else if ($f->size > (1024*1024)) { // TODO
-        $_err['photo'] = 'Maximum 10MB';
-    }
-
-    if (!$_err) {
-        // TODO
-        move_uploaded_file($f->tmp_name, 'uploads/' . $f->name);
-        temp('info', 'Photo uploaded');
-        redirect();
-    }
-}
+   
 
 // ----------------------------Stop if errors exist--------------------------------------
 
@@ -193,94 +196,83 @@ if (is_post()) {
 include '../sidebar.php';
 ?>
 <body>
-    
     <div class="insert-container">
         <div class="insert-header">
             <div class="insert-title">
                 <h1 class="title">Add new Products</h1>
-                <p class="subtitle">Insert Products</p>
             </div>
         </div>
         
         <div class="insert-body">
-            <form method="post" class="insert-form" enctype="multipart/form-data" TODO>
-                <div class="insert-top-section"   
+            <form method="post" class="insert-form" enctype="multipart/form-data">
+                
+                <div class="insert-top-section">
+
                     <div class="insert-table-left">
-                        <label for="productID">ProductID</label>
-                        <br>
-                        <?= html_text('productID', 'maxlength="20"  data-upper') ?>
-                        <?= err('productID') ?>
-                        <br>
+                        <label for="productID">ProductID</label><br>
+                        <?= html_text('productID', 'maxlength="20" data-upper') ?>
+                        <?= err('productID') ?><br><br>
 
-                        <label for="productName">Product Name</label>
-                        <br>
+                        <label for="productName">Product Name</label><br>
                         <?= html_text('productName', 'maxlength="255"') ?>
-                        <?= err('productName') ?>
-                        <br>
+                        <?= err('productName') ?><br><br>
 
-                        <label for="productTheme">Product Theme</label>
-                        <br>
+                        <label for="productTheme">Product Theme</label><br>
                         <?= html_text('productTheme', 'maxlength="20"') ?>
-                        <?= err('productTheme') ?>
-                        <br>
+                        <?= err('productTheme') ?><br><br>
 
-                        <label for="productLayers">Product Layers</label>
-                        <br>
+                        <label for="productLayers">Product Layers</label><br>
                         <?= html_text('productLayers', 'maxlength="200"') ?>
-                        <?= err('productLayers') ?>
-                        <br>
+                        <?= err('productLayers') ?><br><br>
 
-                        <label for="productKeycaps">Product Keycaps</label>
-                        <br>
+                        <label for="productKeycaps">Product Keycaps</label><br>
                         <?= html_text('productKeycaps', 'maxlength="200"') ?>
-                        <?= err('productKeycaps') ?>
-                        <br>
+                        <?= err('productKeycaps') ?><br><br>
                     </div>
+
                     <div class="insert-table-right">
-                        
-                        
-
-                        <label for="productSwitches">Product Switches</label>
-                        <br>
+                        <label for="productSwitches">Product Switches</label><br>
                         <?= html_text('productSwitches', 'maxlength="200"') ?>
-                        <?= err('productSwitches') ?>
-                        <br>
+                        <?= err('productSwitches') ?><br><br>
 
-                        <label for="productDesc">Product Description</label>
-                        <br>
+                        <label for="productDesc">Product Description</label><br>
                         <?= html_text('productDesc') ?>
-                        <?= err('productDesc') ?>
-                        <br>
+                        <?= err('productDesc') ?><br><br>
 
-                        <label for="productPrice">Price</label>
-                        <br>
+                        <label for="productPrice">Price</label><br>
                         <?= html_number('productPrice', 0.01, 9999.99, 0.01) ?>
-                        <?= err('productPrice') ?>
-                        <br>
+                        <?= err('productPrice') ?><br><br>
 
-                        <label for="stockAmount">Stock Amount</label>
-                        <br>
-                        <?= html_number('stockAmount', 0, null, 1) ?>
-                        <br>
+                        <label for="stockAmount">Stock Amount</label><br>
+                        <?= html_number('stockAmount', 0, null, 1) ?><br><br>
                         
-                        <label for="photo">Photo</label>
-                        <label class="upload" tabindex="0">
-                            <?= html_file('photo', 'image/*', 'hidden') ?>
-                            <img src="/images/keyboard-pic/photo.jpg">
-                        </label>
-                        <?= err('photo') ?>
                         
-                        <br>
                     </div>
+
                 </div>
-                    <div class="insert-table-bottom">
+
+                <div class="insert-table-bottom">
+                    <label for="photo"></label>
+                        <label class="insert-upload">
+                            <?= html_file('photo', 'image/*', 'hidden') ?>
+                            <div class="insert-upload-box">
+                                <br>Drag & Drop Image Here<br>
+                                <span>or click to upload</span><br><br>
+                            </div>
+                        </label>
+                        <?= err('photo') ?><br>
+                    
+                    <div class="insert-buttons-section">
                         <section>
-                            <button>Submit</button>
-                            <button type="reset">Reset</button>
+                            <button class="insert-buttons-reset" type="reset">Reset</button>
+                            <button class="insert-buttons" type="submit">Submit</button>
                         </section>
                     </div>
+                </div>
+
             </form>
         </div>
+
         <p>
             <button data-get="inventory.php">Back</button>
         </p>

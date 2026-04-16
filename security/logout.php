@@ -1,13 +1,9 @@
 <?php
-session_start(); // Start the session so we can kill it
+session_start();    
+session_unset();  
+session_destroy();  
 
-// 1. Unset all session variables (clears the username, etc.)
-$_SESSION = array();
-
-// 2. Destroy the session entirely
-session_destroy();
-
-// 3. Kick the user back to the login page
-header("Location: login.php?status=loggedout");
+// NOW redirect them to the login page
+header("Location: login.php");
 exit();
 ?>

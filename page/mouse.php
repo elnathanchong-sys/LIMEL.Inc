@@ -23,7 +23,7 @@
                 </div>
                 <div class="card-line">_________________________________</div>
                 <div class="mouse-title">Limel M Hyperlight</div>
-                <div class="mouse-desc">100% real mouse and not scam.</div>
+                <div class="mouse-desc">Built with all-new nano coating.</div>
                 <div class="mouse-price">MYR 499.99</div>
             </div>
        
@@ -34,7 +34,7 @@
                 </div>
                 <div class="card-line">_________________________________</div>
                 <div class="mouse-title">Limel M Hyperlight PrintStream</div>
-                <div class="mouse-desc">100% not scam and a functional mouse</div>
+                <div class="mouse-desc">Limited "PrintStream" edition Mice!</div>
                 <div class="mouseprice">MYR 399.99</div>
             </div>
 

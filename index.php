@@ -35,7 +35,7 @@
   </div>
 </div>
 <div class="button-wrapper">
-    <a href="page/order.php" class="order-button">Order Now</a>
+    <a href="page/myorders.php" class="order-button">Order Now</a>
 </div>
 </section>
 
@@ -71,7 +71,6 @@
     <div class="keyboard-grid">
 
         <div class="keyboard-card">
-            <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel K60 HE v2')">🤍</button>
             <div class="keyboard-image-container">
                 <a href="/Administration/product-listing/inventory.php"><img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png"></a>
             </div>
@@ -82,9 +81,8 @@
         </div>
        
         <div class="keyboard-card">
-            <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel K80 Jerri Edition')">🤍</button>
             <div class="keyboard-image-container">
-                <a href="/page/myaccount.php"><img src="/images/keyboard-pic/Limel K80HE Jerri Edition (Top View).png">
+              <img src="/images/keyboard-pic/Limel K80HE Jerri Edition (Top View).png"></a>
             </div>
             <div class="card-line">_________________________________</div>
             <div class="keyboard-title">Limel K80HE Jerri Edition</div>
@@ -93,9 +91,8 @@
         </div>
 
         <div class="keyboard-card">
-            <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel K60HE+')">🤍</button>
             <div class="keyboard-image-container">
-                <img src="/images/keyboard-pic/Limel K60HE + (Top View).png">
+            <img src="/images/keyboard-pic/Limel K60HE + (Top View).png">
             </div>
             <div class="card-line">_________________________________</div>
             <div class="keyboard-title">Limel K60HE+</div>
@@ -112,15 +109,14 @@
 <!--Start of Mouse-->
     
 <div class="mouse-header">
-        <h2>Mouses</h2>
+        <h2>Mouse</h2>
         <a href="page/mouse.php" class="mouse-view-more">View More</a>
     </div>
 
     <div class="mouse-grid">
         <div class="mouse-card">
-            <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel M Hyperlight')">🤍</button>
             <div class="mouse-image-container">
-                <a href="/Administration/order.php" class="sidebar-link"><img src="images/mouse pic/Limel M Hyperlight.png"></a>
+                <a href="/Administration/order.php"><img src="images/mouse pic/Limel M Hyperlight.png"></a>
             </div>
             <div class="card-line">_________________________________</div>
             <div class="mouse-title">Limel M Hyperlight</div>
@@ -129,7 +125,6 @@
         </div>
        
         <div class="mouse-card">
-            <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel M Hyperlight PrintStream')">🤍</button>
             <div class="mouse-image-container">
                 <img src="images/mouse pic/Limel M Hyperlight PrintStream.png">
             </div>
@@ -140,7 +135,6 @@
         </div>
 
         <div class="mouse-card">
-            <button class="wishlist-btn" onclick="toggleFavorite(event, this, 'Limel M OP1 8k')">🤍</button>
             <div class="mouse-image-container">
                 <img src="images/mouse pic/Limel M OP1 8k.png">
             </div>
@@ -188,16 +182,6 @@
     </div>
 </section>
 
-<script>
-function toggleFavorite(e, button, productID) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const isActive = button.classList.toggle('active');
-    button.textContent = isActive ? '❤️' : '🤍';
-    console.log(isActive ? 'Saved ' : 'Removed ', productID);
-}
-</script>
 
 </body>
     <?php include './footer.php'; ?>

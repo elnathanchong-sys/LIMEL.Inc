@@ -13,7 +13,33 @@
     
     <main class="cart-container">
         
+    <!--
+    <?php if (empty($cart_items)): ?>
         <section class="empty-cart-section">
+            <h1 class="cart-title">Your Cart</h1>
+            <p class="empty-text">It's empty right here...</p>
+            <p class="empty-subtext">Anything you like so far?</p>
+        </section>
+    <?php else: ?>
+        <section class="filled-cart-section">
+            <h1 class="cart-title">Your Cart Items</h1>
+            <div class="cart-list">
+                <?php foreach ($cart_items as $item): ?>
+                    <div class="cart-item-row">
+                        <p><?php echo htmlspecialchars($item['name']); ?> - <?php echo $item['price']; ?></p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </section>
+    <?php endif; ?>
+
+    <section class="recommendation-section">
+        <h2 class="recommendation-title">You Might Like..</h2>
+        <div class="cart-grid">
+            </div>
+    </section>
+    -->
+    <section class="empty-cart-section">
             <h1 class="cart-title">Your Cart</h1>
             <p class="empty-text">It's empty right here...</p>
             <p class="empty-subtext">Anything you like so far?</p>

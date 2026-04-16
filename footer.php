@@ -1,4 +1,5 @@
-
+<!DOCTYPE html>
+<html>
 <footer>
 <div class="footer-top">
     <div class="bot-left">
