@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/app.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="./app.js"></script>
-</head>
-
 <?php
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include './base.php';
+echo "<pre>";
+var_dump($_FILES);
+echo "</pre>";
 
 // ----------------------------------------------------------------------------
 
@@ -26,7 +18,7 @@ if (is_post()) {
     $productDesc = req('productDesc');
     $productPrice = req('productPrice');
     $stockAmount = req('stockAmount');  
-    $categoryID = req('categoryID');
+    $f = $_FILES['imageFile'] ?? null;
 
     // Validate: id
     if ($productID == '') {
@@ -106,67 +98,49 @@ if (is_post()) {
     }
 
     // Validate: category
-    if ($categoryID == '') {
-        $_err['categoryID'] = 'Required';
-    }
-    else if (!is_exists($categoryID, 'category', 'categoryID')) {
-        $_err['categoryID'] = 'Invalid Category';
-    }
+    //if ($categoryID == '') {
+    //    $_err['categoryID'] = 'Required';
+    //}
+    //else if (!is_exists($categoryID, 'category', 'categoryID')) {
+    //    $_err['categoryID'] = 'Invalid Category';
+    //}
 
     // Validate: photo (file)
-//    if (!$f) {
-//       $_err['photo'] = 'Required';
-//    }
-//    else if (!str_starts_with($f->type, 'image/')) {
-//        $_err['photo'] = 'Must be image';
-//    }
-//    else if ($f->size > 1 * 1024 * 1024) {
-//        $_err['photo'] = 'Maximum 1MB';
-//    }
-//
-//    // DB operation
-//    if (!$_err) {
-//        // Save photo
-//        $photo = save_photo($f, '../photos');
-//
-//        $stm = $_db->prepare('
-//            INSERT INTO product (id, name, price, photo)
-//            VALUES (?, ?, ?, ?)
-//        ');
-//        $stm->execute([$id, $name, $price, $photo]);
-//
-//        temp('info', 'Record inserted');
-//        redirect('index.php');
-//    }
-
-    $f = get_file('photo');
-
-        // Validate: photo (file)
-        if ($f == null) {
-            $_err['photo'] = 'Required';
-        }
-        else if (!str_starts_with($f->type, 'image/')) { // TODO
-            $_err['photo'] = 'Must be image';
-        }
-        else if ($f->size > (1024*1024)) { // TODO
-            $_err['photo'] = 'Maximum 1MB';
-        }
-
-        if (!$_err) {
-            // TODO
-            move_uploaded_file($f->tmp_name, 'uploads/' . $f->name);
-            temp('info', 'Photo uploaded');
-            redirect();
-        }
+    if (!$f || $f['error'] !== UPLOAD_ERR_OK) {
+        $_err['imageFile'] = 'Required';
     }
-    
+    else if (!str_starts_with($f['type'], 'image/')) {
+        $_err['imageFile'] = 'Must be image';
+    }
+    else if ($f['size'] > 1 * 1024 * 1024) {
+        $_err['imageFile'] = 'Maximum 1MB';
+    }
+
+    //databse that executes to save the data
     if (!$_err) {
+        //save photo
+       $imageFile = null;
+
+        try {
+            $imageFile = upload_image(
+                $_FILES['imageFile'],
+                '../images/new-image-save'
+            );
+        } catch (Exception $e) {
+            $_err['imageFile'] = $e->getMessage();
+        }
+
+        if ($_err) {
+            echo "REACHED INSERT BLOCK";
+            exit;
+
+        }
 
         $stm = $_db->prepare("
             INSERT INTO products
             (productID, productName, productTheme, productLayers,
             productKeycaps, productSwitches, productDesc,
-            productPrice, stockAmount, categoryID)
+            productPrice, stockAmount, imageFile)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
 
@@ -180,21 +154,31 @@ if (is_post()) {
             $productDesc,
             $productPrice,
             $stockAmount,
-            $categoryID
+            $imageFile
         ]);
 
+        temp('info', 'Record inserted');
         redirect('inventory.php');
     }
+}
 
-    //upload photo
    
 
 // ----------------------------Stop if errors exist--------------------------------------
 
-
-
 include '../sidebar.php';
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/app.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="./app.js"></script>
+</head>
+
 <body>
     <div class="insert-container">
         <div class="insert-header">
@@ -204,6 +188,13 @@ include '../sidebar.php';
         </div>
         
         <div class="insert-body">
+            <?php if ($msg = temp('info')): ?>
+                <div class="success"><?= $msg ?></div>
+            <?php endif; ?>
+
+            <?php if ($msg = temp('error')): ?>
+                <div class="error"><?= $msg ?></div>
+            <?php endif; ?>
             <form method="post" class="insert-form" enctype="multipart/form-data">
                 
                 <div class="insert-top-section">
@@ -254,13 +245,13 @@ include '../sidebar.php';
                 <div class="insert-table-bottom">
                     <label for="photo"></label>
                         <label class="insert-upload">
-                            <?= html_file('photo', 'image/*', 'hidden') ?>
+                            <?= html_file('imageFile', 'image/*', 'hidden') ?>
                             <div class="insert-upload-box">
                                 <br>Drag & Drop Image Here<br>
                                 <span>or click to upload</span><br><br>
                             </div>
                         </label>
-                        <?= err('photo') ?><br>
+                        <?= err('imageFile') ?><br>
                     
                     <div class="insert-buttons-section">
                         <section>

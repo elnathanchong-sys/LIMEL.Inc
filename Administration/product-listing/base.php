@@ -4,6 +4,7 @@ date_default_timezone_set('Asia/Kuala_Lumpur');
 
 $_db = new PDO('mysql:dbname=limel', 'root', '', [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 ]);
 
 
@@ -69,17 +70,17 @@ function get_file($key) {
 }
 
 // Crop, resize and save photo
-function save_photo($f, $folder, $width = 200, $height = 200) {
-    $photo = uniqid() . '.jpg';
-    
-    require_once 'lib/SimpleImage.php';
-    $img = new SimpleImage();
-    $img->fromFile($f->tmp_name)
-        ->thumbnail($width, $height)
-        ->toFile("$folder/$photo", 'image/jpeg');
+//function save_photo($f, $folder, $width = 200, $height = 200) {
+//    $imageFile = uniqid() . '.jpg';
+//    
+//    require_once 'lib/SimpleImage.php';
+//    $img = new SimpleImage();
+//    $img->fromFile($f->tmp_name)
+//        ->thumbnail($width, $height)
+//       ->toFile("$folder/$imageFile", 'image/jpeg');
 
-    return $photo;
-}
+//    return $imageFile;
+//}
 
 // Is money?
 function is_money($value) {
@@ -186,10 +187,6 @@ function err($key) {
 // Database Setups and Functions
 // ============================================================================
 
-// Global PDO object
-$_db = new PDO('mysql:dbname=limel', 'root', '', [
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-]);
 
 // Is unique?
 function is_unique($value, $table, $field) {
@@ -208,8 +205,38 @@ function is_exists($value, $table, $field) {
 }
 
 // ============================================================================
-// Global Constants and Variables
+// upload for insert.php
 // ============================================================================
+function upload_image($file, $folder, $width = 200, $height = 200)
+{
+    // 1. Validate input exists
+    if (!$file || $file['error'] !== UPLOAD_ERR_OK) {
+        throw new Exception("No file uploaded or upload error.");
+    }
 
+    // 2. Validate type
+    if (!str_starts_with($file['type'], 'image/')) {
+        throw new Exception("File must be an image.");
+    }
+
+    // 3. Validate size (1MB)
+    if ($file['size'] > 1 * 1024 * 1024) {
+        throw new Exception("Image too large (max 1MB).");
+    }
+
+    // 4. Generate safe filename
+    $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    $filename = uniqid('img_', true) . '.' . $ext;
+
+    // 5. Load image library
+    require_once __DIR__ . '/SimpleImage.php';
+
+    $img = new SimpleImage();
+    $img->fromFile($file['tmp_name'])
+        ->thumbnail($width, $height)
+        ->toFile("$folder/$filename", 'image/jpeg');
+
+    return $filename;
+}
 
 

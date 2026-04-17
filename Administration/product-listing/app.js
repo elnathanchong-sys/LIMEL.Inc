@@ -75,4 +75,10 @@ $(() => {
         }
     });
 
+    document.querySelector('input[type="file"]').addEventListener('change', function () {
+        const file = this.files[0];
+        if (file) {
+            alert("Selected file: " + file.name);
+        }
+    });
 });
