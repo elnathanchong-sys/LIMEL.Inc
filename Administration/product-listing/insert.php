@@ -2,9 +2,6 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include './base.php';
-echo "<pre>";
-var_dump($_FILES);
-echo "</pre>";
 
 // ----------------------------------------------------------------------------
 
@@ -112,30 +109,33 @@ if (is_post()) {
     else if (!str_starts_with($f['type'], 'image/')) {
         $_err['imageFile'] = 'Must be image';
     }
-    else if ($f['size'] > 1 * 1024 * 1024) {
-        $_err['imageFile'] = 'Maximum 1MB';
+    else if ($f['size'] > 10 * 1024 * 1024) { 
+        $_err['imageFile'] = 'Image too large (max 10MB)';
     }
 
     //databse that executes to save the data
+// ================= INSERT =================
     if (!$_err) {
-        //save photo
-       $imageFile = null;
+
+        // Ensure folder exists
+        $folder = __DIR__ . '/../../images/new-image-save';
+
+        if (!is_dir($folder)) {
+            mkdir($folder, 0777, true);
+        }
 
         try {
-            $imageFile = upload_image(
-                $_FILES['imageFile'],
-                '../images/new-image-save'
-            );
+            $imageFile = upload_image($f, $folder);
         } catch (Exception $e) {
             $_err['imageFile'] = $e->getMessage();
         }
 
         if ($_err) {
-            echo "REACHED INSERT BLOCK";
-            exit;
-
+            temp('error', 'Image upload failed');
+            redirect(); // reload page with error
         }
 
+        // Insert into DB
         $stm = $_db->prepare("
             INSERT INTO products
             (productID, productName, productTheme, productLayers,
@@ -157,11 +157,10 @@ if (is_post()) {
             $imageFile
         ]);
 
-        temp('info', 'Record inserted');
+        temp('info', 'Record inserted successfully');
         redirect('inventory.php');
     }
 }
-
    
 
 // ----------------------------Stop if errors exist--------------------------------------

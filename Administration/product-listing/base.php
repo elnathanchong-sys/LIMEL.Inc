@@ -209,28 +209,24 @@ function is_exists($value, $table, $field) {
 // ============================================================================
 function upload_image($file, $folder, $width = 200, $height = 200)
 {
-    // 1. Validate input exists
+    // 1. Check upload success
     if (!$file || $file['error'] !== UPLOAD_ERR_OK) {
-        throw new Exception("No file uploaded or upload error.");
+        throw new Exception("Upload failed.");
     }
 
-    // 2. Validate type
+    // 2. Check file type
     if (!str_starts_with($file['type'], 'image/')) {
         throw new Exception("File must be an image.");
     }
 
-    // 3. Validate size (1MB)
-    if ($file['size'] > 1 * 1024 * 1024) {
-        throw new Exception("Image too large (max 1MB).");
-    }
-
-    // 4. Generate safe filename
+    // 3. Generate unique filename
     $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
     $filename = uniqid('img_', true) . '.' . $ext;
 
-    // 5. Load image library
+    // 4. Load image library (correct path)
     require_once __DIR__ . '/SimpleImage.php';
 
+    // 5. Process + save image
     $img = new SimpleImage();
     $img->fromFile($file['tmp_name'])
         ->thumbnail($width, $height)
@@ -238,5 +234,4 @@ function upload_image($file, $folder, $width = 200, $height = 200)
 
     return $filename;
 }
-
 
