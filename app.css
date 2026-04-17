@@ -127,10 +127,11 @@ main{
 /*---------------------------------->Header<----------------------------------*/
 header{
     display: flex;
-    padding:20px 50px 20px 50px;
+    padding:20px 50px;
     background: #1A1A1A;
     align-items: center;
     color: #ffffff;
+    justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -141,19 +142,22 @@ header{
 nav {
     display: flex;
     align-items: center;
-    width: 100%;
+    flex-grow: 1;
 }
 
 .left-icon{
-    display:flex;
-    justify-content:start;
-    margin-right:25%;
+    display: flex;
+    align-items: center;
+    flex: 0;
 }
 
 .navigation-bar{
-    display:flex;
+    display: flex;
     align-items: center;
-    gap: 150px; 
+    justify-content: center;
+    gap: 160px;
+    flex: 1;
+    text-align: center;
 }
 
 nav a {
@@ -168,9 +172,12 @@ nav a {
 
 .right-icon {
     display: flex;
-    gap: 40px;
+    flex: 0;
 }
 
+nav {
+    display: contents; 
+}
 /* Why Choose LIMEL */
 
 .why-choose-limel{

@@ -15,7 +15,7 @@
     <div class="left-icon">
       <a href="/index.php"><img src="/images/logo.png" width="100"></a>
     </div>
-    
+
     <div class="navigation-bar">
       <a href="/page/keyboards.php" class="no-underlined">Keyboard</a>
       <a href="/page/mouse.php" class="no-underlined">Mouse</a>
