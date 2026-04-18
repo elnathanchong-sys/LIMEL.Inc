@@ -1,5 +1,5 @@
 <?php
-include '../Administration/product-listing/base.php';
+require_once '../base.php';
 
 // ----------------------------------------------------------------------------
 

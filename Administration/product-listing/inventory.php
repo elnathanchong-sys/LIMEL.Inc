@@ -1,6 +1,8 @@
 <?php
 include '../../base.php';
 
+auth('Admin');
+
 $arr = $_db->query('SELECT * FROM products')->fetchAll();
 
 

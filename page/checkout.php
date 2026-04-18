@@ -6,27 +6,29 @@ include '../header.php';
 $err = temp('error');
 $suc = temp('success');
 
-// Fetch cart items
-$userID = $_user->id ?? 1;
+// Fetch cart items from SESSION
 $cartItems = [];
 $subtotal = 0;
-try {
-    $stmt = $_db->prepare("
-        SELECT cart.*, products.productName, products.productPrice, products.imageFile
-        FROM cart
-        JOIN products ON cart.productID = products.productID
-        WHERE cart.userID = ?
-    ");
-    $stmt->execute([$userID]);
-    $cartItems = $stmt->fetchAll();
-    $subtotal = array_sum(array_map(fn($i) => $i->price * $i->cartQuantity, $cartItems));
-} catch (PDOException $e) {
-    // cart table doesn't exist yet
+
+if (!empty($_SESSION['cart'])) {
+    $ids = array_keys($_SESSION['cart']);
+    $placeholders = implode(',', array_fill(0, count($ids), '?'));
+    
+    $stmt = $_db->prepare("SELECT * FROM products WHERE productID IN ($placeholders)");
+    $stmt->execute($ids);
+    $products = $stmt->fetchAll();
+
+    foreach ($products as $p) {
+        $qty = $_SESSION['cart'][$p->productID];
+        $p->cartQuantity = $qty; 
+        $cartItems[] = $p;
+        $subtotal += ($p->productPrice * $qty);
+    }
 }
+
 $shipping = 15.00;
 $total    = $subtotal + $shipping;
 ?>
-
 
 <div class="checkout-wrapper">
     <h1>Checkout</h1>
@@ -41,7 +43,6 @@ $total    = $subtotal + $shipping;
     <form method="POST" action="checkoutprocess.php" id="checkoutForm">
         <div class="checkout-grid">
 
-            <!-- LEFT: SHIPPING + PAYMENT -->
             <div class="left-col">
                 <div class="section-card">
                     <h2>Shipping Details</h2>
@@ -90,10 +91,11 @@ $total    = $subtotal + $shipping;
                         </div>
                     </div>
                     <input type="hidden" name="paymentMethod" value="tng_qr">
+                    
+                    <button type="submit" class="place-order-btn" style="margin-top: 20px;">Place Order Now</button>
                 </div>
             </div>
 
-            <!-- RIGHT: ORDER SUMMARY -->
             <div class="right-col">
                 <div class="section-card" style="height:100%; box-sizing:border-box;">
                     <h2>Order Summary</h2>
@@ -106,9 +108,9 @@ $total    = $subtotal + $shipping;
                             <img src="/images/<?= htmlspecialchars($item->imageFile) ?>" alt="<?= htmlspecialchars($item->productName) ?>">
                             <div class="order-item-info">
                                 <div class="order-item-name"><?= htmlspecialchars($item->productName) ?></div>
-                                <div class="order-item-qty">RM <?= number_format($item->price * $item->cartQuantity, 2) ?></div>
+                                <div class="order-item-qty">Qty: <?= $item->cartQuantity ?></div>
                             </div>
-                            <div class="order-item-price">RM <?= number_format($item->price * $item->cartQuantity, 2) ?></div>
+                            <div class="order-item-price">RM <?= number_format($item->productPrice * $item->cartQuantity, 2) ?></div>
                         </div>
                         <?php endforeach; ?>
 

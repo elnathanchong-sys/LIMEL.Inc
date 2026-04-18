@@ -6,42 +6,40 @@ if (!is_post()) {
     redirect('checkout.php');
 }
 
-$userID   = $_user->id;
+// 1. Get the logged-in user's ID safely
+$userID   = $_users->userID ?? null; 
+
+if (!$userID) {
+    temp('error', 'You must be logged in to place an order.');
+    redirect('/security/login.php');
+}
+
 $fullName = post('fullName');
 $phone    = post('phone');
 $address1 = post('address1');
-$address2 = post('address2');
 $city     = post('city');
 $postcode = post('postcode');
 
-// Validation
+// 2. Validate Shipping Info
 if (!$fullName || !$phone || !$address1 || !$city || !$postcode) {
     temp('error', 'Please fill in all required shipping details.');
     redirect('checkout.php');
 }
 
-// Fetch cart items
-$stmt = $_db->prepare("
-    SELECT cart.*, products.productPrice 
-    FROM cart 
-    JOIN products ON cart.productID = products.productID 
-    WHERE cart.userID = ?
-");
-$stmt->execute([$userID]);
-$cartItems = $stmt->fetchAll();
-
-if (empty($cartItems)) {
+if (empty($_SESSION['cart'])) {
     temp('error', 'Your cart is empty.');
     redirect('cart.php');
 }
 
-// Build full address
-$shippingAddress = $address1;
-if ($address2) $shippingAddress .= ', ' . $address2;
-$shippingAddress .= ', ' . $city . ', ' . $postcode . ', Malaysia';
+$ids = array_keys($_SESSION['cart']);
+$placeholders = implode(',', array_fill(0, count($ids), '?'));
+$stmt = $_db->prepare("SELECT * FROM products WHERE productID IN ($placeholders)");
+$stmt->execute($ids);
+$products = $stmt->fetchAll();
 
-// Generate next orderID e.g. ORD005
-$lastOrder = $_db->query("SELECT orderID FROM orders ORDER BY orderID DESC LIMIT 1")->fetch();
+$shippingAddress = $address1 . ', ' . $city . ', ' . $postcode . ', Malaysia';
+
+$lastOrder = $_db->query("SELECT orderID FROM orders ORDER BY CAST(SUBSTRING(orderID, 4) AS UNSIGNED) DESC LIMIT 1")->fetch();
 if ($lastOrder) {
     $lastNum = (int) substr($lastOrder->orderID, 3);
     $nextNum = $lastNum + 1;
@@ -52,20 +50,23 @@ if ($lastOrder) {
 $shipping = 15.00;
 
 try {
-    foreach ($cartItems as $item) {
+    foreach ($products as $p) {
+        $qty = $_SESSION['cart'][$p->productID];
         $orderID    = 'ORD' . str_pad($nextNum, 3, '0', STR_PAD_LEFT);
-        $itemTotal  = ($item->price * $item->cartQuantity) + $shipping;
-        $shipping   = 0; // only charge shipping once
+        
+        $itemTotal  = ($p->productPrice * $qty) + $shipping;
+        $shipping   = 0; 
 
         $stmt = $_db->prepare("
             INSERT INTO orders (orderID, userID, productID, orderHistoryQuantity, totalPrice, orderStatus, shippingAddress, phoneNumber, purchasedAt)
             VALUES (?, ?, ?, ?, ?, 'Processing', ?, ?, NOW())
         ");
+        
         $stmt->execute([
             $orderID,
             $userID,
-            $item->productID,
-            $item->cartQuantity,
+            $p->productID,
+            $qty,
             $itemTotal,
             $shippingAddress,
             $phone
@@ -74,9 +75,7 @@ try {
         $nextNum++;
     }
 
-    // Clear cart
-    $stmt = $_db->prepare("DELETE FROM cart WHERE userID = ?");
-    $stmt->execute([$userID]);
+    unset($_SESSION['cart']);
 
     temp('success', 'Order placed successfully! Your order is now being processed.');
     redirect('myorders.php');

@@ -1,6 +1,8 @@
 <?php
 include '../base.php'; 
 
+auth('Admin');
+
 $rev_query = $_db->query("SELECT SUM(totalPrice) as total_rev FROM orders WHERE orderStatus != 'cancelled'");
 $total_revenue = $rev_query->fetch()->total_rev ?? 0;
 

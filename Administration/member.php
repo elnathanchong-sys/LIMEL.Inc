@@ -1,11 +1,6 @@
 <?php
 session_start();
-/*
-if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
-    header("Location: ../security/adminlogin.php");
-    exit();
-}
-*/
+
 $host = 'localhost';
 $db   = 'limel';
 $user = 'root';
@@ -28,14 +23,13 @@ try {
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
 if (!empty($search)) {
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username LIKE ? OR email LIKE ? OR userID LIKE ? ORDER BY acountCreatedAt DESC");
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE username LIKE ? OR email LIKE ? OR userID LIKE ? ORDER BY userID DESC");
     $searchTerm = "%$search%";
     $stmt->execute([$searchTerm, $searchTerm, $searchTerm]);
 } 
-
-/*else {
-    $stmt = $pdo->query("SELECT * FROM users ORDER BY acountCreatedAt DESC");
-}*/
+else {
+    $stmt = $pdo->query("SELECT * FROM users ORDER BY userID DESC");
+}
 
 $members = $stmt->fetchAll();
 ?>
@@ -68,8 +62,7 @@ $members = $stmt->fetchAll();
                     <tr>
                         <th>User</th>
                         <th>Email</th>
-                        <th>Registered</th>
-                    </tr>
+                        </tr>
                 </thead>
                 <tbody>
                     <?php if (count($members) > 0): ?>
@@ -91,14 +84,11 @@ $members = $stmt->fetchAll();
                                         <?= htmlspecialchars($m['email']) ?>
                                     </a>
                                 </td>
-                                <td class="u-date-text">
-                                    <?= date('M j, Y', strtotime($m['acountCreatedAt'])) ?>
-                                </td>
-                            </tr>
+                                </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="3" class="member-no-data">
+                            <td colspan="2" class="member-no-data">
                                 No members found matching your search.
                             </td>
                         </tr>
