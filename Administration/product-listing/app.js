@@ -32,14 +32,26 @@ $(() => {
     $('[data-post]').on('click', function (e) {
         e.preventDefault();
 
-        const url = $(this).data('post') || window.location.href;
+        const ok = confirm('Delete this product?');
+        if (!ok) return;
+
+        const url = $(this).data('post');
+        const id = $(this).data('id');
+
+        if (!id) return; // safety check
 
         const f = $('<form>', {
             method: 'POST',
             action: url
-        }).appendTo(document.body);
+        });
 
-        f[0].submit();
+        $('<input>').attr({
+            type: 'hidden',
+            name: 'productID',
+            value: id
+        }).appendTo(f);
+
+        f.appendTo(document.body).submit();
     });
 
     // Reset form (force reload)

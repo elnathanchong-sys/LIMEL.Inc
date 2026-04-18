@@ -30,7 +30,7 @@ $arr = $_db->query('SELECT * FROM products')->fetchAll();
                     Add New Product <span>+</span>
                 </button>
             </div>
-            
+
             <section class="filter-section">
                 <div class="inventory-search-bar">
                     <i class="isearch"></i>
@@ -69,8 +69,8 @@ $arr = $_db->query('SELECT * FROM products')->fetchAll();
                         <td>RM<?= $p->productPrice ?></td>
                         
                         <td>
-                            <span class="stock-count <?= ($p->stock_count ?? 0) <= 5 ? 'low' : '' ?>">
-                                <?= $p->stock_count ?? '0' ?>
+                            <span class="stockAmount <?= ($p->stockAmount ?? 0) <= 5 ? 'low' : '' ?>">
+                                <?= $p->stockAmount ?? '0' ?>
                             </span>
                         </td>
                         
@@ -85,6 +85,20 @@ $arr = $_db->query('SELECT * FROM products')->fetchAll();
                         <td><?= $p->productSwitches ?? '-' ?></td>
                         
                         <td><?= $p->productDesc ?? '-' ?></td>
+
+                        <td>
+                            <button type="button"
+                                class="update-button-insert"
+                                data-get="update.php?productID=<?= $p->productID ?>">
+                                Update
+                            </button>
+
+                            <button class="insert-button-delete"
+                                data-post="delete.php"
+                                data-id="<?= $p->productID ?>">
+                                Delete
+                            </button>
+                        </td>
                     </tr>
                         <?php endforeach ?>
                     </tbody>

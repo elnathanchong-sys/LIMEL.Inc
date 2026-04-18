@@ -1,22 +1,36 @@
 <?php
-include '../_base.php';
+include './base.php';
 
 // ----------------------------------------------------------------------------
 
 if (is_post()) {
-    $id = req('id');
+    $productID = req('productID');
+
+    if (!$productID) {
+        temp('error', 'Invalid product ID');
+        redirect('inventory.php');
+    }
 
     // Delete photo
-    $stm = $_db->prepare('SELECT photo FROM products WHERE id = ?');
-    $stm->execute([$id]);
+    $stm = $_db->prepare('SELECT imageFile FROM products WHERE productID = ?');
+    $stm->execute([$productID]);
     $photo = $stm->fetchColumn();
-    unlink("../photos/$photo");
+    
+    if ($photo) {
+        $filePath = __DIR__ . '/../../images/new-image-save/' . $photo;
 
-    $stm = $_db->prepare('DELETE FROM products WHERE id = ?');
-    $stm->execute([$id]);
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+    }
+
+    $stm = $_db->prepare('DELETE FROM products WHERE productID = ?');
+    $stm->execute([$productID]);
+    
     temp('info', 'Record deleted');
 }
 
-redirect('index.php');
+redirect('inventory.php');
 
+?>
 // ----------------------------------------------------------------------------
