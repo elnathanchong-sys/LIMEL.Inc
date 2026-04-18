@@ -1,3 +1,9 @@
 <?php
-require_once '../base.php';
-logout('login.php');
+include '../Administration/product-listing/base.php';
+
+// ----------------------------------------------------------------------------
+
+temp('info', 'Logout successfully');
+logout();
+
+// ----------------------------------------------------------------------------

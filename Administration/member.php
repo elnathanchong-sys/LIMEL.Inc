@@ -31,9 +31,11 @@ if (!empty($search)) {
     $stmt = $pdo->prepare("SELECT * FROM users WHERE username LIKE ? OR email LIKE ? OR userID LIKE ? ORDER BY acountCreatedAt DESC");
     $searchTerm = "%$search%";
     $stmt->execute([$searchTerm, $searchTerm, $searchTerm]);
-} else {
+} 
+
+/*else {
     $stmt = $pdo->query("SELECT * FROM users ORDER BY acountCreatedAt DESC");
-}
+}*/
 
 $members = $stmt->fetchAll();
 ?>

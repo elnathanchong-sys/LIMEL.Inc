@@ -1,9 +1,8 @@
 <?php
-// Define the path to base.php. Adjust this path based on where the file actually is!
 $basePath = './product-listing/base.php'; 
 
 if (file_exists($basePath)) {
-    require_once $basePath; // base.php handles session_start()
+    require_once $basePath;
 } else {
     die("<div style='color: white; background: red; padding: 20px;'>
             CRITICAL ERROR: Could not find base.php at: $basePath. 

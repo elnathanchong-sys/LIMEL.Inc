@@ -1,5 +1,5 @@
 <?php
-include './base.php';
+include '../../base.php';
 
 $arr = $_db->query('SELECT * FROM products')->fetchAll();
 

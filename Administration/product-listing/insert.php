@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include './base.php';
+include '../../base.php';
 
 // ----------------------------------------------------------------------------
 
@@ -189,13 +189,7 @@ include '../sidebar.php';
         </div>
         
         <div class="insert-body">
-            <?php if ($msg = temp('info')): ?>
-                <div class="success"><?= $msg ?></div>
-            <?php endif; ?>
-
-            <?php if ($msg = temp('error')): ?>
-                <div class="error"><?= $msg ?></div>
-            <?php endif; ?>
+            
             <form method="post" class="insert-form" enctype="multipart/form-data">
                 
                 <div class="insert-top-section">

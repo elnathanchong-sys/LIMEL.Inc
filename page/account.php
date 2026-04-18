@@ -1,3 +1,101 @@
+<?php
+include '../base.php';
+
+// ----------------------------------------------------------------------------
+
+if (is_post()) {
+    $username = req('username');
+    $email  = req('email');
+    $password  = req('password');
+    $confirm = req('confirm');
+    $f = get_file('profilepic');
+
+    // Validate: username
+    if (!$username) {
+        $_err['username'] = 'Required';
+    }
+    else if (strlen($username) > 100) {
+        $_err['username'] = 'Maximum 100 characters';
+    }
+    
+    // Validate: email
+    if (!$email) {
+        $_err['email'] = 'Required';
+    }
+    else if (strlen($email) > 100) {
+        $_err['email'] = 'Maximum 100 characters';
+    }
+    else if (!is_email($email)) {
+        $_err['email'] = 'Invalid email';
+    }
+    else if (!is_unique($email, 'users', 'email')) {
+        $_err['email'] = 'Duplicated';
+    }
+
+    // Validate: password
+    if (!$password) {
+        $_err['password'] = 'Required';
+    }
+    else if (strlen($password) < 5 || strlen($password) > 100) {
+        $_err['password'] = 'Between 5-100 characters';
+    }
+
+    // Validate: confirm
+    if (!$confirm) {
+        $_err['confirm'] = 'Required';
+    }
+    else if (strlen($confirm) < 5 || strlen($confirm) > 100) {
+        $_err['confirm'] = 'Between 5-100 characters';
+    }
+    else if ($confirm != $password) {
+        $_err['confirm'] = 'Not matched';
+    }
+
+    // Validate: photo (file)
+    if (!$f) {
+        $_err['profilepic'] = 'Required';
+    }
+    else if (!str_starts_with($f->type, 'image/')) {
+        $_err['profilepic'] = 'Must be image';
+    }
+    else if ($f->size > 1 * 1024 * 1024) {
+        $_err['profilepic'] = 'Maximum 1MB';
+    }
+
+    // DB operation
+    if (!$_err) {
+
+        // Ensure folder exists
+        $folder = __DIR__ . '/../images/new-image-save';
+
+        if (!is_dir($folder)) {
+            mkdir($folder, 0777, true);
+        }
+
+        try {
+            $profilepic = upload_image($f, $folder);
+        } catch (Exception $e) {
+            $_err['pprofilepic'] = $e->getMessage();
+        }
+
+        if ($_err) {
+            temp('error', 'Image upload failed');
+            redirect(); 
+        }
+
+        // (2) Insert user (member)
+        $stm = $_db->prepare('
+            INSERT INTO users (username, email, password, profilepic, role)
+            VALUES (?, ?, SHA1(?), ?, "Member")
+        ');
+        $stm->execute([$username, $email, $password, $profilepic]);
+
+        temp('info', 'Record inserted');
+        redirect('/login.php');
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,65 +106,78 @@
 </head>
 <body class="account-management-system">
     <?php include '../header.php'; ?>
-    
+
     <button class="logout-btn" id="logoutBtn">← Back to Login</button>
-    
+
     <div class="user-status-bar">
         Logged in as: <span id="navUsername">Guest</span>
     </div>
+    
+    <form method="post" enctype="multipart/form-data">
+        <div class="container">
+            <div class="header">
+                <h1>Account Settings</h1>
+            </div>
 
-    <div class="container">
-        <div class="header">
-            <h1>Account Settings</h1>
-        </div>
+            <div class="card">
+                <div class="success-message" id="successMessage">✓ Profile updated successfully</div>
+                <div class="error-message" id="errorMessage"></div>
 
-        <div class="card">
-            <div class="success-message" id="successMessage">✓ Profile updated successfully</div>
-            <div class="error-message" id="errorMessage"></div>
+                <div class="profile-section">
+                    <div class="upload-area">
+                        <div class="profile-picture-container" id="profilePictureContainer">
+                            <img id="imagePreview" src="" alt="Profile" style="display: none;">
+                            <span id="imgPlacehovlder">USER</span>
+                        </div>
+                        <div class="account-upload"><label for="photo"></label>
+                            <label class="insert-upload">
+                                <?= html_file('profilepic', 'image/*', 'hidden') ?>
+                                <div class="insert-upload-box">
+                                    <img src ="/images/icon/account-drag-drop.png">
+                                </div>
+                            </label>
+                            <?= err('profilepic') ?><br>
+                        </div>
 
-            <div class="profile-section">
-                <div class="upload-area">
-                    <div class="profile-picture-container" id="profilePictureContainer">
-                        <img id="imagePreview" src="" alt="Profile" style="display: none;">
-                        <span id="imgPlaceholder">USER</span>
                     </div>
 
-                    <div class="drag-drop-area" id="dragDropArea">
-                        <div class="drag-drop-text">Drag & Drop or Click to Upload</div>
-                        <div class="drag-drop-hint">PNG, JPG up to 5MB</div>
-                    </div>
-                    <input type="file" id="fileInput" accept="image/*" style="display: none;">
-                </div>
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <?= html_text('username', 'maxlength="100"') ?>
+                            <?= err('username') ?>
+                        </div>
 
-                <div class="form-section">
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" placeholder="Enter username">
-                    </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <?= html_text('email', 'maxlength="100"') ?>
+                            <?= err('email') ?>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" placeholder="example@gmail.com">
-                    </div>
+                        <div class="form-group">
+                            <label for="phone">Password</label>
+                            <?= html_password('password', 'maxlength="100"') ?>
+                            <?= err('password') ?>
+                        </div>
+                        </div> </div> 
+                        <div class="form-group">
+                            <label for="confirm">Confirm Password</label>
+                            <?= html_password('confirm', 'maxlength="100"') ?>
+                            <?= err('confirm') ?>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" placeholder="Numbers only (e.g. 0123456789)">
+                    <div class="button-group">
+                        <button class="btn btn-primary" id="saveBtn">Save Changes</button>
+                        <button class="btn btn-secondary" id="clearBtn">Clear All</button>
                     </div>
-                </div>
-
-                <div class="button-group">
-                    <button class="btn btn-primary" id="saveBtn">Save Changes</button>
-                    <button class="btn btn-secondary" id="clearBtn">Clear All</button>
                 </div>
             </div>
         </div>
-    </div>
-
+    </form>
+</body>
+<!--
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-    const phoneInput = document.getElementById('phone');
-    const dragDropArea = document.getElementById('dragDropArea');
     const fileInput = document.getElementById('fileInput');
     const imagePreview = document.getElementById('imagePreview');
     const imgPlaceholder = document.getElementById('imgPlaceholder');
@@ -81,9 +192,6 @@
         window.location.href = 'login.php';
     });
 
-    phoneInput.addEventListener('input', (e) => {
-        e.target.value = e.target.value.replace(/\D/g, '');
-    });
 
     const handleFileUpload = (file) => {
         if (file && file.type.startsWith('image/')) {
@@ -105,21 +213,6 @@
         handleFileUpload(e.target.files[0]);
     });
 
-    dragDropArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dragDropArea.style.borderColor = '#764ba2';
-    });
-
-    dragDropArea.addEventListener('dragleave', () => {
-        dragDropArea.style.borderColor = '#667eea';
-    });
-
-    dragDropArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dragDropArea.style.borderColor = '#667eea';
-        const file = e.dataTransfer.files[0];
-        handleFileUpload(file);
-    });
 
     saveBtn.addEventListener('click', () => {
         const userValue = document.getElementById('username').value;
@@ -140,7 +233,6 @@
     clearBtn.addEventListener('click', () => {
         document.getElementById('username').value = '';
         document.getElementById('email').value = '';
-        phoneInput.value = '';
         imagePreview.src = '';
         imagePreview.style.display = 'none';
         imgPlaceholder.style.display = 'block';

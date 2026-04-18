@@ -12,7 +12,7 @@ $cartItems = [];
 $subtotal = 0;
 try {
     $stmt = $_db->prepare("
-        SELECT cart.*, products.productName, products.price, products.imageFile
+        SELECT cart.*, products.productName, products.productPrice, products.imageFile
         FROM cart
         JOIN products ON cart.productID = products.productID
         WHERE cart.userID = ?

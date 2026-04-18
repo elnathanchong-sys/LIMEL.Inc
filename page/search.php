@@ -46,7 +46,7 @@ include '../header.php';
                         <div class="keyboard-price">RM <?= number_format($product->productPrice, 2) ?></div>
                         
                         <div style="margin-top: 15px; text-align: center;">
-                            <a href="/page/product-page.php?id=<?= $product->productID ?>" style="color: #fff; text-decoration: underline; font-size: 14px;">View Details</a>
+                            <a href="/page/productdetail.php?id=<?= $product->productID ?>" style="color: #fff; text-decoration: underline; font-size: 14px;">View Details</a>
                         </div>
                     </div>
 

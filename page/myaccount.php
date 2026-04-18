@@ -1,8 +1,7 @@
-
 <?php
 session_start();
-require_once '../db_connection.php'
-$user = $_SESSION['user'] ?? null; 
+include '../base.php';
+$users = $_SESSION['users'] ?? null; 
 $message = "";
 $messageClass= "";
 
@@ -15,14 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_password'])) {
         $message = "New passwords do not match!";
         $messageClass = "error";
     } else {
-        $stmt = $pdo->prepare("SELECT password FROM users WHERE id = ?");
-        $stmt->execute([$user->id]);
+        $stmt = $_db->prepare("SELECT password FROM users WHERE id = ?");
+        $stmt->execute([$users->id]);
         $db_user = $stmt->fetch();
 
         if ($db_user && password_verify($current_pass, $db_user['password'])) {
             $new_hash = password_hash($new_pass, PASSWORD_DEFAULT);
-            $update = $pdo->prepare("UPDATE users SET password = ? WHERE id = ?");
-            $update->execute([$new_hash, $user->id]);
+            $update = $_db->prepare("UPDATE users SET password = ? WHERE id = ?");
+            $update->execute([$new_hash, $users->id]);
             
             $message = "Password updated successfully!";
             $messageClass = "success";
@@ -37,21 +36,17 @@ $pageTitle = 'My Account';
 include '../header.php'; 
 ?>
 
-<link rel="styleshoot" href="/app.css">
+<link rel="stylesheet" href="/app.css">
 
 <main class="container">
     <div class="account-header">
-        <h1 style="color: white;">Welcome Back, <?= htmlspecialchars($user->name ?? 'Guest') ?>!</h1>
+        <h1 style="color: white;">Welcome back!</h1>
     </div>
 
     <div class="account-card">
         <div class="account-hero">
-            <div class="account-avatar">
-                <span style="color:white;"><?= $user ? strtoupper(substr($user->name, 0, 2)) : 'GU' ?></span>
-            </div>
-            <div>
-                <span style="color: white;"><?= htmlspecialchars($user->name ?? 'Guest') ?></span>
-                <span style="color: white;"><?= htmlspecialchars($user->email ?? 'Not logged in') ?></span>
+            <div> 
+                <span style="color: white;"><?= htmlspecialchars($users->name ?? 'Guest') ?></span>
             </div>
         </div>
 

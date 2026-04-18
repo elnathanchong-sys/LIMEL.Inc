@@ -1,5 +1,5 @@
 <?php
-require_once '../base.php';
+include '../base.php';
 auth();
 
 if (!is_post()) {
@@ -22,7 +22,7 @@ if (!$fullName || !$phone || !$address1 || !$city || !$postcode) {
 
 // Fetch cart items
 $stmt = $_db->prepare("
-    SELECT cart.*, products.price 
+    SELECT cart.*, products.productPrice 
     FROM cart 
     JOIN products ON cart.productID = products.productID 
     WHERE cart.userID = ?

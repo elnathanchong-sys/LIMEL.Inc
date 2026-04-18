@@ -1,5 +1,5 @@
 <?php
-require_once '../base.php';
+include '../base.php';
 
 $action    = trim($_GET['action'] ?? '');
 $productID = trim($_GET['id'] ?? '');
