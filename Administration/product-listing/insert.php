@@ -13,6 +13,7 @@ if (is_post()) {
     $productKeycaps = req('productKeycaps');
     $productSwitches = req('productSwitches');
     $productDesc = req('productDesc');
+    $categoryID = req('categoryID');
     $productPrice = req('productPrice');
     $stockAmount = req('stockAmount');  
     $f = $_FILES['imageFile'] ?? null;
@@ -75,6 +76,15 @@ if (is_post()) {
         $_err['productDesc'] = 'Required';
     }
 
+    //Validate: CategoryID
+    if ($categoryID == '') {
+        $_err['categoryID'] = 'Required';
+    }
+
+    if (!preg_match('/^[KM]\d{3}$/', $categoryID)) {
+        $_err['categoryID'] = 'Format must be K001 or M001';
+    }
+
     // Validate: price
     if ($productPrice == '') {
         $_err['productPrice'] = 'Required';
@@ -94,14 +104,6 @@ if (is_post()) {
         $_err['stockAmount'] = 'Must be non-negative number';
     }
 
-    // Validate: category
-    //if ($categoryID == '') {
-    //    $_err['categoryID'] = 'Required';
-    //}
-    //else if (!is_exists($categoryID, 'category', 'categoryID')) {
-    //    $_err['categoryID'] = 'Invalid Category';
-    //}
-
     // Validate: photo (file)
     if (!$f || $f['error'] !== UPLOAD_ERR_OK) {
         $_err['imageFile'] = 'Required';
@@ -109,12 +111,11 @@ if (is_post()) {
     else if (!str_starts_with($f['type'], 'image/')) {
         $_err['imageFile'] = 'Must be image';
     }
-    else if ($f['size'] > 10 * 1024 * 1024) { 
-        $_err['imageFile'] = 'Image too large (max 10MB)';
+    else if ($f['size'] > 40 * 1024 * 1024) { 
+        $_err['imageFile'] = 'Image too large (max 40MB)';
     }
 
     //databse that executes to save the data
-// ================= INSERT =================
     if (!$_err) {
 
         // Ensure folder exists
@@ -132,16 +133,16 @@ if (is_post()) {
 
         if ($_err) {
             temp('error', 'Image upload failed');
-            redirect(); // reload page with error
+            redirect(); 
         }
 
         // Insert into DB
         $stm = $_db->prepare("
             INSERT INTO products
             (productID, productName, productTheme, productLayers,
-            productKeycaps, productSwitches, productDesc,
+            productKeycaps, productSwitches, productDesc, categoryID,
             productPrice, stockAmount, imageFile)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ");
 
         $stm->execute([
@@ -152,6 +153,7 @@ if (is_post()) {
             $productKeycaps,
             $productSwitches,
             $productDesc,
+            $categoryID,
             $productPrice,
             $stockAmount,
             $imageFile
@@ -229,6 +231,10 @@ include '../sidebar.php';
                         <?= html_text('productDesc') ?>
                         <?= err('productDesc') ?><br><br>
 
+                        <label for="categoryID">Product Category</label><br>
+                        <?= html_text('categoryID') ?>
+                        <?= err('categoryID') ?><br><br>
+
                         <label for="productPrice">Price</label><br>
                         <?= html_number('productPrice', 0.01, 9999.99, 0.01) ?>
                         <?= err('productPrice') ?><br><br>
@@ -246,8 +252,7 @@ include '../sidebar.php';
                         <label class="insert-upload">
                             <?= html_file('imageFile', 'image/*', 'hidden') ?>
                             <div class="insert-upload-box">
-                                <br>Drag & Drop Image Here<br>
-                                <span>or click to upload</span><br><br>
+                                <img src ="/images/icon/dark-mode-drag-and-drop.jpg.jpg">
                             </div>
                         </label>
                         <?= err('imageFile') ?><br>
@@ -263,8 +268,10 @@ include '../sidebar.php';
             </form>
         </div>
 
-        <p>
-            <button data-get="inventory.php">Back</button>
-        </p>
+        <div class="insert-back-button">
+            <p>
+                <button class="back-button" data-get="inventory.php">Back</button>
+            </p>
+        </div>
     </div>
 </body>

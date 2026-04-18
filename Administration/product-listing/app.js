@@ -59,9 +59,9 @@ $(() => {
     });
 
     // Image preview for uploads
-    $('label.upload input[type=file]').on('change', function () {
+    $('label.insert-upload input[type=file]').on('change', function (e) {
         const file = this.files[0];
-        const img = $(this).siblings('img')[0];
+        const img = $(e.target).siblings('.insert-upload-box').find('img')[0];
 
         if (!img) return;
 

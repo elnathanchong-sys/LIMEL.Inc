@@ -40,6 +40,14 @@ include '../header.php';
                     <div class="card-desc">Check status and history of your purchases</div>
                 </div>
             </a>
+            <a href="security_update.php" class="dashboard-card">
+        <div class="card-icon">🔒</div>
+        <div>
+            <div class="card-title">Password & Security</div>
+            <div class="card-desc">Update your password and secure your account</div>
+        </div>
+            </a>
+            </div>
         </div>
 
         <div class="logout-section">

@@ -120,6 +120,28 @@ $json_waterfall_data = json_encode($waterfall_data);
             </div>
         </header>
         
+        <div class="summary-grid">
+            <div class="summary-card">
+                <span class="summary-title">Total Revenue</span>
+                <h3 class="summary-value">RM 145,000</h3>
+            </div>
+            
+            <div class="summary-card green">
+                <span class="summary-title">Orders Pending</span>
+                <h3 class="summary-value">24</h3>
+            </div>
+            
+            <div class="summary-card orange">
+                <span class="summary-title">Total Products</span>
+                <h3 class="summary-value">156</h3>
+            </div>
+            
+            <div class="summary-card red">
+                <span class="summary-title">Total Members</span>
+                <h3 class="summary-value">1,204</h3>
+            </div>
+        </div>
+
         <div class="dashboard-row">
             <div class="admin-panel">
                 <div id="curve_chart" style="width: 100%; height: 400px;"></div>
@@ -135,6 +157,7 @@ $json_waterfall_data = json_encode($waterfall_data);
             </div>
         </div>
 
+    
     </main>
 </body>
 </html>
