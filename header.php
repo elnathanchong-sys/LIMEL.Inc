@@ -33,6 +33,10 @@
                 </form>
             </div>
         </div>
+
+        <a href="/page/cart.php">
+            <img src="/images/icon/shopping-cart.png" width="20" alt="Cart">
+        </a>
         
         <a href="#" id="userMenuBtn"><img src="/images/icon/user.png" width="20" alt="User"></a>
     </div>

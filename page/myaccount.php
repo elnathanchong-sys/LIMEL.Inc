@@ -1,12 +1,43 @@
 
 <?php
 session_start();
+require_once '../db_connection.php'
+$user = $_SESSION['user'] ?? null; 
+$message = "";
+$messageClass= "";
 
-$user = $_SESSION['user'] ?? null;  // 👈 grab the user object
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_password'])) {
+    $current_pass = $_POST['current_password'];
+    $new_pass = $_POST['new_password'];
+    $confirm_pass = $_POST['confirm_password'];
+
+    if ($new_pass !== $confirm_pass) {
+        $message = "New passwords do not match!";
+        $messageClass = "error";
+    } else {
+        $stmt = $pdo->prepare("SELECT password FROM users WHERE id = ?");
+        $stmt->execute([$user->id]);
+        $db_user = $stmt->fetch();
+
+        if ($db_user && password_verify($current_pass, $db_user['password'])) {
+            $new_hash = password_hash($new_pass, PASSWORD_DEFAULT);
+            $update = $pdo->prepare("UPDATE users SET password = ? WHERE id = ?");
+            $update->execute([$new_hash, $user->id]);
+            
+            $message = "Password updated successfully!";
+            $messageClass = "success";
+        } else {
+            $message = "Current password is incorrect.";
+            $messageClass = "error";
+        }
+    }
+}
 
 $pageTitle = 'My Account';
 include '../header.php'; 
 ?>
+
+<link rel="styleshoot" href="/app.css">
 
 <main class="container">
     <div class="account-header">

@@ -1,90 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIMEL - Cart</title>
-    <link rel="stylesheet" href="/app.css">
-    <link rel="tab icon" href="/images/Logo.png">
-</head>
+<?php
+require_once '../base.php';
 
-<body>
-    <?php include '../header.php'; ?>
-    
-    <main class="cart-container">
-        
-    <!--
-    <?php if (empty($cart_items)): ?>
-        <section class="empty-cart-section">
-            <h1 class="cart-title">Your Cart</h1>
-            <p class="empty-text">It's empty right here...</p>
-            <p class="empty-subtext">Anything you like so far?</p>
-        </section>
-    <?php else: ?>
-        <section class="filled-cart-section">
-            <h1 class="cart-title">Your Cart Items</h1>
-            <div class="cart-list">
-                <?php foreach ($cart_items as $item): ?>
-                    <div class="cart-item-row">
-                        <p><?php echo htmlspecialchars($item['name']); ?> - <?php echo $item['price']; ?></p>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </section>
+$action    = trim($_GET['action'] ?? '');
+$productID = trim($_GET['id'] ?? '');
+
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
+if ($action && $productID) {
+    if ($action === 'increase') {
+        $stmt = $_db->prepare("SELECT stockAmount FROM products WHERE productID = ? LIMIT 1");
+        $stmt->execute([$productID]);
+        $product = $stmt->fetch();
+
+        if ($product && $_SESSION['cart'][$productID] < $product->stockAmount) {
+            $_SESSION['cart'][$productID]++;
+        } else {
+            temp('error', 'No more stock available.');
+        }
+
+    } elseif ($action === 'decrease') {
+        if (isset($_SESSION['cart'][$productID])) {
+            $_SESSION['cart'][$productID]--;
+            if ($_SESSION['cart'][$productID] <= 0) {
+                unset($_SESSION['cart'][$productID]);
+            }
+        }
+
+    } elseif ($action === 'remove') {
+        unset($_SESSION['cart'][$productID]);
+        temp('success', 'Item removed.');
+    }
+
+    redirect('../page/cart.php');
+}
+
+$pageTitle = 'My Cart';
+include '../header.php';
+
+$items   = [];
+$total   = 0;
+
+if (!empty($_SESSION['cart'])) {
+    $ids         = array_keys($_SESSION['cart']);
+    $placeholders = implode(',', array_fill(0, count($ids), '?'));
+
+    $stmt = $_db->prepare("SELECT * FROM products WHERE productID IN ($placeholders)");
+    $stmt->execute($ids);
+    $products = $stmt->fetchAll();
+
+    foreach ($products as $p) {
+        $qty     = $_SESSION['cart'][$p->productID];
+        $subtotal = $p->productPrice * $qty;
+        $total   += $subtotal;
+        $items[] = (object)[
+            'productID'   => $p->productID,
+            'productName' => $p->productName,
+            'productPrice'=> $p->productPrice,
+            'imageFile'   => $p->imageFile,
+            'stockAmount' => $p->stockAmount,
+            'quantity'    => $qty,
+            'subtotal'    => $subtotal,
+        ];
+    }
+}
+
+$success = temp('success');
+$error   = temp('error');
+?>
+
+<link rel="stylesheet" href="/app.css">
+
+<div class="cart-page">
+<main class="container">
+    <h1 class="cart-title">My Cart</h1>
+
+    <?php if ($success): ?>
+        <div class="success-box"><?= htmlspecialchars($success) ?></div>
     <?php endif; ?>
 
-    <section class="recommendation-section">
-        <h2 class="recommendation-title">You Might Like..</h2>
-        <div class="cart-grid">
-            </div>
-    </section>
-    -->
-    <section class="empty-cart-section">
-            <h1 class="cart-title">Your Cart</h1>
-            <p class="empty-text">It's empty right here...</p>
-            <p class="empty-subtext">Anything you like so far?</p>
-        </section>
+    <?php if ($error): ?>
+        <div class="error-box"><?= htmlspecialchars($error) ?></div>
+    <?php endif; ?>
 
-        <section class="recommendation-section">
-            <h2 class="recommendation-title">You Might Like..</h2>
-            
-            <div class="cart-grid">
-                
-                <div class="cart-card">
-                    <div class="cart-image-container">
-                        <img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png" alt="Keyboard">
+    <?php if (empty($items)): ?>
+        <div class="cart-empty">
+            <p>Your cart is empty.</p>
+            <a href="../page/keyboards.php" class="btn-checkout">Shop Now</a>
+        </div>
+    <?php else: ?>
+        <div class="cart-list">
+            <?php foreach ($items as $item): ?>
+                <div class="cart-item">
+                    <img src="/images/<?= htmlspecialchars($item->imageFile) ?>" alt="<?= htmlspecialchars($item->productName) ?>">
+                    <div class="cart-item-info">
+                        <div class="cart-item-name"><?= htmlspecialchars($item->productName) ?></div>
+                        <div class="cart-item-price">RM <?= number_format($item->productPrice, 2) ?></div>
                     </div>
-                    <div class="card-line">____________________________________</div>
-                    <div class="keyboard-brand">Limel</div>
-                    <div class="keyboard-title">Limel K60 HE v2</div>
-                    <div class="keyboard-price">MYR 690.00</div>
-                </div>
-
-                <div class="cart-card">
-                    <div class="cart-image-container">
-                        <img src="/images/mouse pic/Limel M Hyperlight.png" alt="Mouse">
+                    <div class="cart-item-controls">
+                        <a href="cart.php?id=<?= $item->productID ?>&action=decrease">−</a>
+                        <span><?= $item->quantity ?></span>
+                        <a href="cart.php?id=<?= $item->productID ?>&action=increase">+</a>
                     </div>
-                    <div class="card-line">____________________________________</div>
-                    <div class="keyboard-brand">Limel</div>
-                    <div class="keyboard-title">Limel M Hyperlight</div>
-                    <div class="keyboard-price">MYR 499.99</div>
-                </div>
-
-                <div class="cart-card">
-                    <div class="cart-image-container">
-                        <img src="/images/keyboard-pic/Limel K80HE (Top View).png" alt="Keyboard">
+                    <div class="cart-item-subtotal">
+                        RM <?= number_format($item->subtotal, 2) ?>
                     </div>
-                    <div class="card-line">____________________________________</div>
-                    <div class="keyboard-brand">Limel</div>
-                    <div class="keyboard-title">Limel K80HE</div>
-                    <div class="keyboard-price">MYR 729.00</div>
+                    <a href="cart.php?id=<?= $item->productID ?>&action=remove" class="cart-remove">✕</a>
                 </div>
+            <?php endforeach; ?>
+        </div>
 
-            </div>
-        </section>
+        <div class="cart-summary">
+            <div class="cart-total">Total: <strong>RM <?= number_format($total, 2) ?></strong></div>
+            <a href="checkout.php" class="btn-checkout">Proceed to Checkout</a>
+        </div>
+    <?php endif; ?>
+</main>
+</div>
 
-    </main>
-        
-    <?php include '../footer.php'; ?>
-</body>
-</html>
+<?php include '../footer.php'; ?>

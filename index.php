@@ -82,7 +82,7 @@
        
         <div class="keyboard-card">
             <div class="keyboard-image-container">
-              <img src="/images/keyboard-pic/Limel K80HE Jerri Edition (Top View).png"></a>
+              <a href="/security/login.php"><img src="/images/keyboard-pic/Limel K80HE Jerri Edition (Top View).png"></a>
             </div>
             <div class="card-line">_________________________________</div>
             <div class="keyboard-title">Limel K80HE Jerri Edition</div>

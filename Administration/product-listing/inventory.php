@@ -54,6 +54,7 @@ $arr = $_db->query('SELECT * FROM products')->fetchAll();
                             <th>Keycaps</th>
                             <th>Switches</th>
                             <th>Description</th>
+                            <th>Manage</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -87,17 +88,19 @@ $arr = $_db->query('SELECT * FROM products')->fetchAll();
                         <td><?= $p->productDesc ?? '-' ?></td>
 
                         <td>
-                            <button type="button"
-                                class="update-button-insert"
-                                data-get="update.php?productID=<?= $p->productID ?>">
-                                Update
-                            </button>
-
-                            <button class="insert-button-delete"
-                                data-post="delete.php"
-                                data-id="<?= $p->productID ?>">
-                                Delete
-                            </button>
+                            <div class="update-delete-button-insert-page">
+                                <button type="button"
+                                    class="update-button-insert"
+                                    data-get="update.php?productID=<?= $p->productID ?>">
+                                    Update
+                                </button>
+                            
+                                <button class="insert-button-delete"
+                                    data-post="delete.php"
+                                    data-id="<?= $p->productID ?>">
+                                    Delete
+                                </button>
+                            </div>
                         </td>
                     </tr>
                         <?php endforeach ?>

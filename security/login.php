@@ -1,55 +1,67 @@
 <?php
-require_once '../base.php';
-$error = temp('error');
+include '../Administration/product-listing/base.php';
+
+// ----------------------------------------------------------------------------
+
+if (is_post()) {
+    $email    = req('email');
+    $password = req('password');
+
+    // Validate: email
+    if ($email == '') {
+        $_err['email'] = 'Required';
+    }
+    else if (!is_email($email)) {
+        $_err['email'] = 'Invalid email';
+    }
+
+    // Validate: password
+    if ($password == '') {
+        $_err['password'] = 'Required';
+    }
+
+    // Login user
+    if (!$_err) {
+        // TODO
+        $stm = $_db->prepare('
+            SELECT * FROM user
+            WHERE email = ? AND password = SHA1(?)
+        ');
+        $stm->execute([$email, $password]);
+        $u = $stm->fetch();
+
+        if ($u) {
+            temp('info', 'Login successfully');
+            login($u);
+        }
+        else {
+            $_err['password'] = 'Not matched';
+        }
+    }
+}
+
+// ----------------------------------------------------------------------------
+
+$_title = 'Login';
+include '../header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign In — Shop</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../app.css">
-</head>
-<body class="login-page">
-  <div class="card">
-    <div class="logo">Shop<span>.</span></div>
-    <p class="subtitle">Sign in to your account</p>
 
-    <?php if ($error): ?>
-      <div class="error-box"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
+<div class = "login-page">
+    <form method="post" class="form">
+        <label for="email">Email</label>
+        <?= html_text('email', 'maxlength="100"') ?>
+        <?= err('email') ?>
 
-    <form method="POST" action="loginprocess.php" novalidate>
-      
-      <input type="hidden" name="csrf_token" value="<?= generate_csrf() ?>">
-
-      <div class="field">
-        <label for="email">Email address</label>
-        <input type="email" id="email" name="email" required
-               placeholder="you@example.com"
-               autocomplete="email">
-      </div>
-
-      <div class="field">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" required
-               placeholder="••••••••"
-               autocomplete="current-password">
-      </div>
+        <?= html_password('password', 'maxlength="100"') ?>
+        <?= err('password') ?>
 
-      <div class="forgot-link">
-        <a href="forgotpassword.php">Forgot your password?</a>
-      </div>
-
-      <button type="submit" class="btn">Sign In</button>
+        <section>
+            <button>Login</button>
+            <button type="reset">Reset</button>
+        </section>
     </form>
+</div>
 
-    <div class="divider">or</div>
-
-    <p class="register-link">
-      New customer? <a href="../account.php">Create an account</a>
-    </p>
-  </div>
-</body>
-</html>
+<?php
+include '../footer.php';

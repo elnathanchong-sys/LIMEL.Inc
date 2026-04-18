@@ -1,24 +1,21 @@
 <?php
-    require '../Administration/product-listing/base.php';
+require_once '../base.php';
 
-    $stm = $_db->prepare("SELECT * FROM products");
-    $stm->execute([]);
-    $products= $stm->fetchAll();
-    $p = $products[0];
-
+$stmt = $_db->prepare("SELECT * FROM products WHERE productID = 'P1HE' LIMIT 1");
+$stmt->execute();
+$p = $stmt->fetch();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIMEL</title>
+    <title>LIMEL - <?= htmlspecialchars($p->productName) ?></title>
     <link rel="stylesheet" href="/app.css">
 </head>
 <body>
-    <?php include '../header.php';?>
-<main>
+    <?php include '../header.php'; ?>
+    <main>
         <div class="keyboard-product-page">    
             <div class="product-container">    
                 <div class="product-images">
@@ -56,44 +53,41 @@
                 </div>
             
                 <div class="product-info">
-
                     <div class="product-header">
-                        <h1><?php echo $p->productName; ?></h1>
-                        <p>Price: RM<?php echo $p->productPrice; ?></p>
-
+                        <h1><?= htmlspecialchars($p->productName) ?></h1>
+                        <p>Price: RM<?= number_format($p->productPrice, 2) ?></p>
                         <hr>
                     </div>
 
-                    <div class="product-select">
-                        <div class="quantity-button">
-                            <button type="button" id=plus>+</button>
-                            <input type="text" id="quantity" value="1">
-                            <button type="button" id=minus>-</button>
-                        </div>
+                    <?php if (temp('success')): ?>
+                        <div class="success-box"><?= htmlspecialchars(temp('success')) ?></div>
+                    <?php endif; ?>
+                    <?php if (temp('error')): ?>
+                        <div class="error-box"><?= htmlspecialchars(temp('error')) ?></div>
+                    <?php endif; ?>
 
+                    <div class="product-select">
                         <div class="buy-now">
-                            <button type="button" id=buy-now>Add to cart</button>
+                            <a href="/page/addtocart.php?id=<?= $p->productID ?>">
+                                <button type="button">Add to Cart</button>
+                            </a>
                         </div>
                     </div>
 
                     <div class="product-details">
-                        
-                        <br><p>Theme: <?php echo $p->productTheme; ?></p><br>
-                        
+                        <br><p>Theme: <?= htmlspecialchars($p->productTheme) ?></p><br>
                         <p>The Fully Assembled version includes:</p>
                         <ul>
-                            <li><?php echo $p->productLayers; ?></li>
-                            <li><?php echo $p->productKeycaps; ?></li>
-                            <li><?php echo $p->productSwitches; ?></li>
+                            <li><?= htmlspecialchars($p->productLayers) ?></li>
+                            <li><?= htmlspecialchars($p->productKeycaps) ?></li>
+                            <li><?= htmlspecialchars($p->productSwitches) ?></li>
                         </ul><br>
-                        
-                        <p><?php echo $p->productDesc; ?></p><br>
-                        <p style="color:red;">Please drop your emailon "Notify Me When Available" if the product model is out of stock.</p>
+                        <p><?= $p->productDesc ?></p><br>
+                        <p style="color:red;">Please drop your email on "Notify Me When Available" if the product model is out of stock.</p>
+                    </div>
                 </div>
             </div>
-            
         </div>
     </main>
-
     <?php include '../footer.php'; ?>
 </body>

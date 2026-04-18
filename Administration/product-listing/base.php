@@ -150,6 +150,16 @@ function html_file($key, $accept = '', $attr = '') {
     echo "<input type='file' id='$key' name='$key' accept='$accept' $attr>";
 }
 
+//--------------------practical 7--------------------------- 
+
+// Generate <input type='password'>
+function html_password($key, $attr = '') {
+    $value = encode($GLOBALS[$key] ?? '');
+    echo "<input type='password' id='$key' name='$key' value='$value' $attr>";
+}
+
+
+
 // Generate table headers <th>
 function table_headers($fields, $sort, $dir, $href = '') {
     foreach ($fields as $k => $v) {
@@ -233,5 +243,41 @@ function upload_image($file, $folder, $width = 200, $height = 200)
         ->toFile("$folder/$filename", 'image/jpeg');
 
     return $filename;
+}
+
+// ============================================================================
+// Security
+// ============================================================================
+
+// Global user object
+$_user = $_SESSION['user'] ?? null;
+
+// Login user
+function login($user, $url = '/') {
+    $_SESSION['user'] = $user;
+    redirect($url);
+}
+
+// Logout user
+function logout($url = '/') {
+    unset($_SESSION['user']);
+    redirect($url);
+}
+
+// Authorization
+function auth(...$roles) {
+    global $_user;
+    if ($_user) {
+        if ($roles) {
+            if (in_array($_user->role, $roles)) {
+                return; // OK
+            }
+        }
+        else {
+            return; // OK
+        }
+    }
+    
+    redirect('/login.php');
 }
 
