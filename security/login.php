@@ -1,43 +1,55 @@
 <?php
 require_once '../base.php';
-$err = temp('error');
+$error = temp('error');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="../app.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../app.css">
 </head>
-<body class="login-body">
-<main class="login-main">
-    <div class="login-container">
-        <div class="login-header">
-            <h1>Welcome Back</h1>
-            <p>Enter your credentials to access your account</p>
-        </div>
+<body class="login-page">
+  <div class="card">
+    <div class="logo">Shop<span>.</span></div>
+    <p class="subtitle">Sign in to your account</p>
 
-        <?php if ($err): ?>
-            <div class="error-message show"><?= htmlspecialchars($err) ?></div>
-        <?php endif; ?>
+    <?php if ($error): ?>
+      <div class="error-box"><?= htmlspecialchars($error) ?></div>
+    <?php endif; ?>
 
-        <form method="POST" action="loginprocess.php">
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" name="email" required placeholder="email@example.com">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" name="password" required placeholder="Enter password">
-            </div>
-            <button type="submit" class="login-btn">Sign In</button>
-        </form>
+    <form method="POST" action="loginprocess.php" novalidate>
+      
+      <input type="hidden" name="csrf_token" value="<?= generate_csrf() ?>">
 
-        <div class="signup-link">
-            Don't have an account? <a href="register.php">Create one</a>
-        </div>
-    </div>
-</main>
+      <div class="field">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" required
+               placeholder="you@example.com"
+               autocomplete="email">
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required
+               placeholder="••••••••"
+               autocomplete="current-password">
+      </div>
+
+      <div class="forgot-link">
+        <a href="forgotpassword.php">Forgot your password?</a>
+      </div>
+
+      <button type="submit" class="btn">Sign In</button>
+    </form>
+
+    <div class="divider">or</div>
+
+    <p class="register-link">
+      New customer? <a href="../account.php">Create an account</a>
+    </p>
+  </div>
 </body>
 </html>

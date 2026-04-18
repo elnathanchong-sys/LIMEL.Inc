@@ -1,11 +1,11 @@
 <?php
 session_start();
-
+ 
 $host = 'localhost';
 $db   = 'limel';
 $user = 'root';
 $pass = '';
-
+ 
 try {
     $_db = new PDO("mysql:host=$host;dbname=$db;charset=utf8mb4", $user, $pass, [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -14,22 +14,22 @@ try {
 } catch (PDOException $e) {
     die("Database connection failed: " . $e->getMessage());
 }
-
+ 
 $_user = $_SESSION['user'] ?? null;
-
+ 
 function is_post() {
     return $_SERVER['REQUEST_METHOD'] == 'POST';
 }
-
+ 
 function post($key) {
     return trim($_POST[$key] ?? '');
 }
-
+ 
 function redirect($url) {
     header("Location: $url");
     exit();
 }
-
+ 
 function temp($key, $value = null) {
     if ($value !== null) {
         $_SESSION["temp_$key"] = $value;
@@ -39,30 +39,40 @@ function temp($key, $value = null) {
         return $value;
     }
 }
-
+ 
+function login($u, $url = 'index.php') {
+    $_SESSION['user'] = $u;
+    redirect($url);
+}
+ 
+function logout($url = 'index.php') {
+    unset($_SESSION['user']);
+    redirect($url);
+}
+ 
 function auth(...$roles) {
     global $_user;
-    if (!$_user || ($roles && !in_array($_user->role, $roles))) {
-        redirect('/security/login.php');
+    if ($_user) {
+        if (!$roles || in_array($_user->role, $roles)) {
+            return;
+        }
     }
+    redirect('/security/login.php');
 }
-
-//use PHPMailer\PHPMailer\PHPMailer;
-//use PHPMailer\PHPMailer\Exception;
-
-//require 'PHPMailer/src/Exception.php';
-//require 'PHPMailer/src/PHPMailer.php';
-//require 'PHPMailer/src/SMTP.php';
-
-//function get_mail() {
-   // $mail = new PHPMailer(true);
-    //$mail->isSMTP();
-    //$mail->Host       = 'stmp.gmail.com';
-   // $mail->SMTPAuth   = true;
-   // $mail->Username   = 'j3rome0202@gmail.com';
-   // $mail->Password   = 'adbcefghijklmnop';
-   // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-   // $mail->Port       = 587;
-   // $mail->setFrom('j3rome0202@gmail.com', 'Limel System');
-   // return $mail;
-//}
+ 
+function is_email($email) {
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+ 
+function generate_csrf(): string {
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+ 
+function verify_csrf(?string $token): bool {
+    return isset($_SESSION['csrf_token'])
+        && hash_equals($_SESSION['csrf_token'], (string) $token);
+}
+ 

@@ -21,7 +21,6 @@
             </div>
     </div>        
 
-
     <div class="bot-mid1">
         <div class="footer-column">
             <div class="proword">

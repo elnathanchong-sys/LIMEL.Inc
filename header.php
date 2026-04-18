@@ -24,34 +24,39 @@
       </nav>
 
      <div class="right-icon">
-        <div class="hpsearch-container">
-            <form action="/page/search.php" method="GET" id="searchForm">
-                <input type="text" name="q" id="hpsearchInput" placeholder="Search products..." class="hpsearch-input">
-                <a href="#" id="hpsearchIconBtn"><img src="/images/icon/search-icon.png" width="20" alt="Search"></a>
-            </form>
+        <div class="hpsearch-wrapper">
+            <a href="#" id="hpsearchIconBtn"><img src="/images/icon/search-icon.png" width="20" alt="Search"></a>
+            
+            <div class="hpsearch-dropdown" id="hpsearchDropdown">
+                <form action="/page/search.php" method="GET">
+                    <input type="text" name="q" id="hpsearchInput" placeholder="Search products...">
+                </form>
+            </div>
         </div>
         
         <a href="#" id="userMenuBtn"><img src="/images/icon/user.png" width="20" alt="User"></a>
     </div>
-    </header>
+</header>
 
-    <script>
-        document.getElementById('hpsearchIconBtn').addEventListener('click', function(e) {
-            const container = document.querySelector('.hpsearch-container');
-            const input = document.getElementById('hpsearchInput');
+<script>
+    document.getElementById('hpsearchIconBtn').addEventListener('click', function(e) {
+        e.preventDefault(); 
+        const dropdown = document.getElementById('hpsearchDropdown');
+        const input = document.getElementById('hpsearchInput');
 
-          
-            if (!container.classList.contains('active')) {
-                e.preventDefault(); 
-                container.classList.add('active');
-                input.focus();
-            } else {
-             
-                if (input.value.trim() === '') {
-                    e.preventDefault();
-                    container.classList.remove('active');
-                }
-          
-            }
-        });
-    </script>
+        dropdown.classList.toggle('active');
+        
+        if (dropdown.classList.contains('active')) {
+            input.focus();
+        }
+    });
+
+    document.addEventListener('click', function(e) {
+        const wrapper = document.querySelector('.hpsearch-wrapper');
+        const dropdown = document.getElementById('hpsearchDropdown');
+        
+        if (!wrapper.contains(e.target) && dropdown.classList.contains('active')) {
+            dropdown.classList.remove('active');
+        }
+    });
+</script>

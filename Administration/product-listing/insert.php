@@ -252,7 +252,7 @@ include '../sidebar.php';
                         <label class="insert-upload">
                             <?= html_file('imageFile', 'image/*', 'hidden') ?>
                             <div class="insert-upload-box">
-                                <img src ="/images/icon/dark-mode-drag-and-drop.jpg.jpg">
+                                <img src ="/images/icon/insert-new-image-icon.png">
                             </div>
                         </label>
                         <?= err('imageFile') ?><br>
