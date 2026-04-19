@@ -3,8 +3,17 @@ include '../../base.php';
 
 auth('Admin');
 
-$arr = $_db->query('SELECT * FROM products')->fetchAll();
+// ── Search: filter products by name or ID ──
+$search = trim($_GET['search'] ?? '');
 
+if (!empty($search)) {
+    $stmt = $_db->prepare("SELECT * FROM products WHERE productName LIKE ? OR productID LIKE ?");
+    $searchTerm = "%$search%";
+    $stmt->execute([$searchTerm, $searchTerm]);
+    $arr = $stmt->fetchAll();
+} else {
+    $arr = $_db->query('SELECT * FROM products')->fetchAll();
+}
 
 ?>
 <!DOCTYPE html>
@@ -16,6 +25,29 @@ $arr = $_db->query('SELECT * FROM products')->fetchAll();
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="tab icon" href="/images/Logo.png">
     <script src="./app.js"></script>
+
+    <style>
+    /* ── Batch Delete button style ── */
+    .button-batch-delete {
+        background: transparent;
+        border: 1px solid #c0392b;
+        color: #e74c3c;
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        display: none; /* hidden until checkboxes are checked */
+        align-items: center;
+        gap: 6px;
+        transition: background 0.2s;
+    }
+    .button-batch-delete:hover { background: rgba(231,76,60,0.1); }
+    .button-batch-delete.visible { display: inline-flex; }
+
+    /* Select all / row checkbox */
+    .row-checkbox { cursor: pointer; width: 16px; height: 16px; }
+    </style>
 </head>
 <body>
     <div class="inventory-layout">   
@@ -28,24 +60,56 @@ $arr = $_db->query('SELECT * FROM products')->fetchAll();
                     <h1 class="title">Inventory</h1>
                     <p class="subtitle">Manage Products</p>
                 </div>
-                <button type="button" class="button-insert" data-get="insert.php">
-                    Add New Product <span>+</span>
-                </button>
+                <div style="display:flex; gap:10px; align-items:center;">
+                    <!-- Batch Delete button — shows only when rows are selected -->
+                    <button type="button"
+                            class="button-batch-delete"
+                            id="batchDeleteBtn"
+                            onclick="batchDelete()">
+                        🗑 Delete Selected (<span id="selectedCount">0</span>)
+                    </button>
+
+                    <!-- Add New Product button -->
+                    <button type="button" class="button-insert" data-get="insert.php">
+                        Add New Product <span>+</span>
+                    </button>
+                </div>
             </div>
 
+            <!-- ── Search + filter section ── -->
             <section class="filter-section">
-                <div class="inventory-search-bar">
-                    <i class="isearch"></i>
-                    <input type="text" placeholder="Search products by name, ID">
-                </div>
+                <form method="GET" style="display:flex; gap:10px; flex:1;">
+                    <div class="inventory-search-bar" style="flex:1;">
+                        <i class="isearch"></i>
+                        <input type="text"
+                               name="search"
+                               id="searchInput"
+                               placeholder="Search products by name, ID"
+                               value="<?= htmlspecialchars($search) ?>">
+                    </div>
+                    <button type="submit" class="filter-button">Search</button>
+                    <?php if (!empty($search)): ?>
+                        <a href="inventory.php" class="filter-button" style="text-decoration:none; background:transparent; color:#aaa; border:1px solid #444;">✕ Clear</a>
+                    <?php endif; ?>
+                </form>
                 <select class="filter-select"><option>All Categories</option></select>
                 <button class="filter-button">Keyboard</button>
             </section>
 
+            <?php if (!empty($search)): ?>
+            <p style="color:#888; font-size:13px; margin: 8px 0 14px;">
+                Showing <?= count($arr) ?> result(s) for "<?= htmlspecialchars($search) ?>"
+            </p>
+            <?php endif; ?>
+
             <div class="inventory-table-container">
+                <!-- Batch delete form — wraps the whole table -->
+                <form id="batchDeleteForm" method="POST" action="delete_batch.php">
                 <table class="product-details-table">
                     <thead>
                         <tr>
+                            <!-- Select All checkbox -->
+                            <th><input type="checkbox" id="selectAll" class="row-checkbox" title="Select all" onchange="toggleSelectAll(this)"></th>
                             <th>Product ID</th>
                             <th>Name</th>
                             <th>Price</th>
@@ -60,8 +124,23 @@ $arr = $_db->query('SELECT * FROM products')->fetchAll();
                         </tr>
                     </thead>
                     <tbody>
+                    <?php if (empty($arr)): ?>
+                        <tr>
+                            <td colspan="12" style="text-align:center; padding:40px; color:#666;">
+                                No products found<?= !empty($search) ? ' matching "' . htmlspecialchars($search) . '"' : '' ?>.
+                            </td>
+                        </tr>
+                    <?php else: ?>
                     <?php foreach ($arr as $p): ?>
                     <tr>
+                        <!-- Per-row checkbox for batch delete -->
+                        <td>
+                            <input type="checkbox"
+                                   name="productIDs[]"
+                                   value="<?= htmlspecialchars($p->productID) ?>"
+                                   class="row-checkbox batch-checkbox"
+                                   onchange="updateBatchCount()">
+                        </td>
                         
                         <td class="text-dim"><?= $p->productID ?></td>
                         
@@ -105,10 +184,48 @@ $arr = $_db->query('SELECT * FROM products')->fetchAll();
                             </div>
                         </td>
                     </tr>
-                        <?php endforeach ?>
+                    <?php endforeach ?>
+                    <?php endif; ?>
                     </tbody>
                 </table>
+                </form>
             </div>
         </main>
     </div>
+
+<script>
+// ── Select All checkbox ──
+function toggleSelectAll(masterCheckbox) {
+    const checkboxes = document.querySelectorAll('.batch-checkbox');
+    checkboxes.forEach(cb => cb.checked = masterCheckbox.checked);
+    updateBatchCount();
+}
+
+// ── Update the batch delete button count and visibility ──
+function updateBatchCount() {
+    const checked = document.querySelectorAll('.batch-checkbox:checked');
+    const btn = document.getElementById('batchDeleteBtn');
+    const countSpan = document.getElementById('selectedCount');
+    
+    countSpan.textContent = checked.length;
+
+    if (checked.length > 0) {
+        btn.classList.add('visible');
+    } else {
+        btn.classList.remove('visible');
+    }
+}
+
+// ── Batch delete: confirm and submit the form ──
+function batchDelete() {
+    const checked = document.querySelectorAll('.batch-checkbox:checked');
+    if (checked.length === 0) return;
+
+    const ok = confirm('Delete ' + checked.length + ' selected product(s)? This cannot be undone.');
+    if (!ok) return;
+
+    document.getElementById('batchDeleteForm').submit();
+}
+</script>
+
 </body>

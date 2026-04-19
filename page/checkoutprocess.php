@@ -6,8 +6,8 @@ if (!is_post()) {
     redirect('checkout.php');
 }
 
-// 1. Get the logged-in user's ID safely
-$userID   = $_users->userID ?? null; 
+// 1. Get the logged-in user's ID from session
+$userID = $_SESSION['users']->userID ?? null;
 
 if (!$userID) {
     temp('error', 'You must be logged in to place an order.');
@@ -31,55 +31,71 @@ if (empty($_SESSION['cart'])) {
     redirect('cart.php');
 }
 
+// 3. Fetch products from DB so we have accurate prices
 $ids = array_keys($_SESSION['cart']);
 $placeholders = implode(',', array_fill(0, count($ids), '?'));
 $stmt = $_db->prepare("SELECT * FROM products WHERE productID IN ($placeholders)");
 $stmt->execute($ids);
 $products = $stmt->fetchAll();
 
+// 4. Build full shipping address string
 $shippingAddress = $address1 . ', ' . $city . ', ' . $postcode . ', Malaysia';
 
-$lastOrder = $_db->query("SELECT orderID FROM orders ORDER BY CAST(SUBSTRING(orderID, 4) AS UNSIGNED) DESC LIMIT 1")->fetch();
+// 5. Generate a unique Order ID (e.g. ORD001, ORD002...)
+$lastOrder = $_db->query("SELECT orderID FROM orders ORDER BY purchasedAt DESC LIMIT 1")->fetch();
 if ($lastOrder) {
-    $lastNum = (int) substr($lastOrder->orderID, 3);
+    // Extract the number from the last order ID and add 1
+    $lastNum = (int) preg_replace('/[^0-9]/', '', $lastOrder->orderID);
     $nextNum = $lastNum + 1;
 } else {
     $nextNum = 1;
 }
+$orderID = 'ORD' . str_pad($nextNum, 3, '0', STR_PAD_LEFT);
 
+// 6. Calculate totals
 $shipping = 15.00;
+$subtotal = 0;
+foreach ($products as $p) {
+    $qty = $_SESSION['cart'][$p->productID];
+    $subtotal += $p->productPrice * $qty;
+}
+$totalAmount = $subtotal + $shipping;
 
 try {
+    // 7. Insert the main order row (one row per checkout, not per product)
+    $stmt = $_db->prepare("
+        INSERT INTO orders (orderID, userID, totalAmount, orderStatus, shippingAddress, phoneNumber, purchasedAt)
+        VALUES (?, ?, ?, 'Processing', ?, ?, NOW())
+    ");
+    $stmt->execute([
+        $orderID,
+        $userID,
+        $totalAmount,
+        $shippingAddress,
+        $phone
+    ]);
+
+    // 8. Insert each product as a separate row in order_items
+    $itemStmt = $_db->prepare("
+        INSERT INTO order_items (orderID, productID, quantity, priceAtPurchase)
+        VALUES (?, ?, ?, ?)
+    ");
     foreach ($products as $p) {
         $qty = $_SESSION['cart'][$p->productID];
-        $orderID    = 'ORD' . str_pad($nextNum, 3, '0', STR_PAD_LEFT);
-        
-        $itemTotal  = ($p->productPrice * $qty) + $shipping;
-        $shipping   = 0; 
-
-        $stmt = $_db->prepare("
-            INSERT INTO orders (orderID, userID, productID, orderHistoryQuantity, totalPrice, orderStatus, shippingAddress, phoneNumber, purchasedAt)
-            VALUES (?, ?, ?, ?, ?, 'Processing', ?, ?, NOW())
-        ");
-        
-        $stmt->execute([
+        $itemStmt->execute([
             $orderID,
-            $userID,
             $p->productID,
             $qty,
-            $itemTotal,
-            $shippingAddress,
-            $phone
+            $p->productPrice
         ]);
-
-        $nextNum++;
     }
 
-    $stmt = $_db->prepare("DELETE FROM cart WHERE userID = ?");
-    $stmt->execute([$userID]);
-    $_SESSION['cart' =] =[];
+    // 9. Clear the session cart (fixed syntax — was: $_SESSION['cart' =] = [])
+    $_SESSION['cart'] = [];
 
+    // 10. Save last order ID so receipt.php can show it
     $_SESSION['last_order_id'] = $orderID;
+
     temp('success', 'Order placed successfully! Your order is now being processed.');
     redirect('receipt.php');
 

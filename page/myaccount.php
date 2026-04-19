@@ -12,6 +12,17 @@ $pageTitle = 'My Account';
 $hasPhoto = !empty($users->profilepic)
     && file_exists(__DIR__ . '/../images/new-image-save/' . $users->profilepic);
 
+// Fetch this user's wishlist items (joined with products)
+$wStmt = $_db->prepare("
+    SELECT w.addedAt, p.*
+    FROM wishlist w
+    JOIN products p ON w.productID = p.productID
+    WHERE w.userID = ?
+    ORDER BY w.addedAt DESC
+");
+$wStmt->execute([$users->userID]);
+$wishlistItems = $wStmt->fetchAll();
+
 include '../header.php';
 ?>
 
@@ -167,6 +178,60 @@ include '../header.php';
     white-space: nowrap;
 }
 .myacc-logout-btn:hover { background: rgba(200,60,60,0.1); border-color: #cc5555; color: #ff6b6b; }
+
+/* ── Wishlist Section ── */
+.myacc-section {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 28px;
+}
+.myacc-section-title {
+    color: #f2f2f2; font-size: 17px; font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 9px;
+}
+
+.wishlist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 14px;
+}
+
+.wishlist-item {
+    background: #242424;
+    border: 1px solid #2f2f2f;
+    border-radius: 10px;
+    padding: 12px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s, transform 0.2s;
+}
+.wishlist-item:hover { border-color: #555; transform: translateY(-2px); }
+
+.wishlist-item img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 7px;
+}
+.wishlist-item-name {
+    color: #e0e0e0; font-size: 12px; font-weight: 500;
+    text-align: center; line-height: 1.3;
+}
+.wishlist-item-price {
+    color: #888; font-size: 12px;
+}
+
+.wishlist-empty {
+    color: #555; font-size: 13px; text-align: center;
+    padding: 20px 0;
+}
 </style>
 
 <main class="myacc-page">
@@ -268,6 +333,38 @@ include '../header.php';
                 <div class="myacc-card-desc">Update your account password</div>
             </div>
         </a>
+    </div>
+
+    <!-- ── Wishlist Section ── -->
+    <div class="myacc-section" style="margin-bottom: 28px;">
+        <div class="myacc-section-title">
+            <!-- Heart icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                 fill="#e74c3c" stroke="#e74c3c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            My Wishlist
+            <span style="color:#555; font-size:13px; font-weight:400;">(<?= count($wishlistItems) ?> items)</span>
+        </div>
+
+        <?php if (empty($wishlistItems)): ?>
+            <div class="wishlist-empty">
+                You haven't wishlisted anything yet.<br>
+                <a href="../page/keyboards.php" style="color:#667eea;">Browse products →</a>
+            </div>
+        <?php else: ?>
+            <div class="wishlist-grid">
+                <?php foreach ($wishlistItems as $wItem): ?>
+                <a href="/product-page/product.php?productID=<?= urlencode($wItem->productID) ?>"
+                   class="wishlist-item">
+                    <img src="/images/<?= htmlspecialchars($wItem->imageFile) ?>"
+                         alt="<?= htmlspecialchars($wItem->productName) ?>">
+                    <div class="wishlist-item-name"><?= htmlspecialchars($wItem->productName) ?></div>
+                    <div class="wishlist-item-price">RM <?= number_format($wItem->productPrice, 2) ?></div>
+                </a>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
     </div>
 
     <!-- Logout -->

@@ -7,7 +7,6 @@ $err = temp('error');
 $suc = temp('success');
 
 // Fetch cart items
-// Replace your entire try/catch cart fetch with this:
 $cartItems = [];
 $subtotal = 0;
 
@@ -31,6 +30,10 @@ if (!empty($_SESSION['cart'])) {
         $subtotal += $p->productPrice * $qty;
     }
 }
+
+// Fixed shipping cost and total — defined here so they work throughout the page
+$shipping = 15.00;
+$total    = $subtotal + $shipping;
 ?>
 
 <div class="checkout-wrapper">
@@ -52,7 +55,7 @@ if (!empty($_SESSION['cart'])) {
                     <h2>Shipping Details</h2>
                     <div class="form-group">
                         <label>Full Name</label>
-                        <input type="text" name="fullName" placeholder="Your full name" required>
+                        <input type="text" name="fullName" id="fullName" placeholder="Your full name" required>
                     </div>
                     <div class="form-group">
                         <label>Phone Number</label>
@@ -60,18 +63,34 @@ if (!empty($_SESSION['cart'])) {
                     </div>
                     <div class="form-group">
                         <label>Address</label>
-                        <input type="text" name="address1" placeholder="Street address" required>
+                        <input type="text" name="address1" id="address1" placeholder="Street address" required oninput="updateMap()">
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label>City</label>
-                            <input type="text" name="city" placeholder="City" required>
+                            <input type="text" name="city" id="city" placeholder="City" required oninput="updateMap()">
                         </div>
                         <div class="form-group">
                             <label>Postcode</label>
-                            <input type="text" name="postcode" placeholder="e.g. 88000" required>
+                            <input type="text" name="postcode" id="postcode" placeholder="e.g. 88000" required oninput="updateMap()">
                         </div>
                     </div>
+
+                    <!-- Google Maps preview: shows the address location as user types -->
+                    <div style="margin-top:14px;">
+                        <label style="font-size:13px; color:#888; margin-bottom:6px; display:block;">📍 Location Preview</label>
+                        <iframe
+                            id="mapFrame"
+                            width="100%"
+                            height="200"
+                            style="border:0; border-radius:10px;"
+                            loading="lazy"
+                            allowfullscreen
+                            referrerpolicy="no-referrer-when-downgrade"
+                            src="https://maps.google.com/maps?q=Malaysia&output=embed">
+                        </iframe>
+                    </div>
+
                     <button type="button" id="saveShippingBtn" onclick="saveShipping()" class="save-shipping-btn">
                         Save Shipping Details
                     </button>
@@ -86,7 +105,7 @@ if (!empty($_SESSION['cart'])) {
                         <div class="tng-amount-badge">RM <?= number_format($total, 2) ?></div>
                         <div class="tng-instructions">
                             <strong>Scan QR with your TnG eWallet app to pay</strong><br>
-                            Total amount shown above
+                            Total amount: RM <?= number_format($total, 2) ?> (includes RM <?= number_format($shipping, 2) ?> shipping)
                         </div>
                         <div class="tng-steps">
                             <div class="tng-step"><span class="step-num">1</span>Open TnG App</div>
@@ -124,10 +143,9 @@ if (!empty($_SESSION['cart'])) {
                 </div>
 
                 <!-- Place Order Button -->
-
-<button type="submit" form="checkoutForm" class="place-order-btn" style="margin-top: 20px;">
-    Place Order
-</button>
+                <button type="submit" form="checkoutForm" class="place-order-btn" style="margin-top: 20px;">
+                    Place Order
+                </button>
             </div>
 
         </div>
@@ -135,9 +153,13 @@ if (!empty($_SESSION['cart'])) {
 </div>
 
 <script>
+// ── Save Shipping feedback ──
 function saveShipping() {
     const fields = ['fullName', 'phone', 'address1', 'city', 'postcode'];
-    const allFilled = fields.every(id => document.querySelector(`[name="${id}"]`).value.trim() !== '');
+    const allFilled = fields.every(id => {
+        const el = document.querySelector(`[name="${id}"]`);
+        return el && el.value.trim() !== '';
+    });
 
     const btn = document.getElementById('saveShippingBtn');
     if (!allFilled) {
@@ -154,8 +176,24 @@ function saveShipping() {
     btn.classList.add('saved');
     btn.textContent = '✓ Saved';
 }
+
+// ── Google Maps preview — updates when user types address fields ──
+let mapTimer = null;
+function updateMap() {
+    clearTimeout(mapTimer);
+    // Wait 800ms after user stops typing before updating map
+    mapTimer = setTimeout(() => {
+        const address = document.getElementById('address1').value.trim();
+        const city    = document.getElementById('city').value.trim();
+        const postcode= document.getElementById('postcode').value.trim();
+
+        if (city || address) {
+            const query = encodeURIComponent([address, city, postcode, 'Malaysia'].filter(Boolean).join(', '));
+            document.getElementById('mapFrame').src =
+                'https://maps.google.com/maps?q=' + query + '&output=embed';
+        }
+    }, 800);
+}
 </script>
 
 <?php include '../footer.php'; ?>
-
-// checkout

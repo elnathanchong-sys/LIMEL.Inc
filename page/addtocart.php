@@ -2,6 +2,8 @@
 include '../base.php';
 
 $productID = trim($_GET['id'] ?? '');
+// Accept optional quantity param (default 1)
+$qty = max(1, (int)($_GET['qty'] ?? 1));
 
 if (empty($productID)) {
     redirect('../page/cart.php');
@@ -25,13 +27,23 @@ if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
+// Add the chosen quantity (instead of always adding 1)
 if (isset($_SESSION['cart'][$productID])) {
-    $_SESSION['cart'][$productID]++;
+    $_SESSION['cart'][$productID] += $qty;
 } else {
-    $_SESSION['cart'][$productID] = 1;
+    $_SESSION['cart'][$productID] = $qty;
 }
 
-temp('success', 'Item added to cart.');
+// Make sure we don't go over stock
+if ($_SESSION['cart'][$productID] > $product->stockAmount) {
+    $_SESSION['cart'][$productID] = $product->stockAmount;
+}
 
+// Redirect back to the product page with ?added=1 so the page can show the toast
 $referer = $_SERVER['HTTP_REFERER'] ?? '../page/keyboards.php';
-redirect($referer);
+// Append ?added=1 to show success toast
+if (strpos($referer, '?') !== false) {
+    redirect($referer . '&added=1');
+} else {
+    redirect($referer . '?added=1');
+}

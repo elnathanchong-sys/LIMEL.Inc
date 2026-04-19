@@ -8,18 +8,24 @@ if (!$orderID) {
 $pageTitle = 'Receipt - ' . htmlspecialchars($orderID);
 include '../header.php';
 
-$stmt = $_db->prepare("
-    SELECT o.*, p.productName 
-    FROM orders o 
-    JOIN products p ON o.productID = p.productID 
-    WHERE o.orderID = ?
-");
+// Fetch the main order info
+$stmt = $_db->prepare("SELECT * FROM orders WHERE orderID = ?");
 $stmt->execute([$orderID]);
 $order = $stmt->fetch();
 
 if (!$order) {
     redirect('myorders.php');
 }
+
+// Fetch all items in this order (joined with products to get name and image)
+$itemStmt = $_db->prepare("
+    SELECT oi.*, p.productName, p.imageFile
+    FROM order_items oi
+    JOIN products p ON oi.productID = p.productID
+    WHERE oi.orderID = ?
+");
+$itemStmt->execute([$orderID]);
+$orderItems = $itemStmt->fetchAll();
 ?>
 
 <link rel="stylesheet" href="/app.css">
@@ -44,32 +50,41 @@ if (!$order) {
             </address>
         </article>
 
+        <!-- All items in this order -->
         <table class="receipt-table">
             <thead>
                 <tr>
                     <th>Description</th>
                     <th>Qty</th>
+                    <th>Unit Price</th>
                     <th>Amount</th>
                 </tr>
             </thead>
             <tbody>
+                <?php foreach ($orderItems as $item): ?>
                 <tr>
-                    <td><?= htmlspecialchars($order->productName) ?></td>
-                    <td><?= $order->orderHistoryQuantity ?></td>
-                    <td>RM <?= number_format($order->totalPrice, 2) ?></td>
+                    <td><?= htmlspecialchars($item->productName) ?></td>
+                    <td><?= $item->quantity ?></td>
+                    <td>RM <?= number_format($item->priceAtPurchase, 2) ?></td>
+                    <td>RM <?= number_format($item->priceAtPurchase * $item->quantity, 2) ?></td>
                 </tr>
+                <?php endforeach; ?>
             </tbody>
             <tfoot>
                 <tr>
-                    <th colspan="2">Total Paid</th>
-                    <td>RM <?= number_format($order->totalPrice, 2) ?></td>
+                    <th colspan="3">Shipping</th>
+                    <td>RM <?= number_format($order->totalAmount - array_sum(array_map(fn($i) => $i->priceAtPurchase * $i->quantity, $orderItems)), 2) ?></td>
+                </tr>
+                <tr>
+                    <th colspan="3">Total Paid</th>
+                    <td>RM <?= number_format($order->totalAmount, 2) ?></td>
                 </tr>
             </tfoot>
         </table>
 
         <footer class="receipt-footer">
             <p>Thank you for choosing LIMEL.Inc!</p>
-            <small>This is a computer-generated receipt.</small>
+            <small>This is a computer-generated receipt. Order Status: <strong><?= htmlspecialchars($order->orderStatus) ?></strong></small>
         </footer>
         
     </section>
@@ -80,5 +95,14 @@ if (!$order) {
         <a href="../index.php" class="btn-secondary">Continue Shopping</a>
     </nav>
 </main>
+
+<!-- Hide nav buttons when printing so only the receipt prints -->
+<style>
+@media print {
+    .receipt-actions, header, footer, nav { display: none !important; }
+    body { background: white !important; }
+    .receipt-card { box-shadow: none !important; border: none !important; }
+}
+</style>
 
 <?php include '../footer.php'; ?>
