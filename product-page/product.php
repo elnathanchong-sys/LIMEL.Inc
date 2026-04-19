@@ -43,7 +43,7 @@ if (!$product) {
                     <input type="radio" name="p" id="p4">
                     <input type="radio" name="p" id="p5">
 
-                    <div class="slides">    
+                    <div class="product-slides">    
                         <div class="product-image">
                             <img src="/images/keyboard-pic/Limel-P1HE White/Limel-P1-HE-01.png" alt="Keyboard">
                         </div>

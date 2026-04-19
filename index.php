@@ -92,7 +92,7 @@
 
         <div class="keyboard-card">
             <div class="keyboard-image-container">
-            <img src="/images/keyboard-pic/Limel K60HE + (Top View).png">
+                <img src="/images/keyboard-pic/Limel K60HE + (Top View).png">
             </div>
             <div class="card-line">_________________________________</div>
             <div class="keyboard-title">Limel K60HE+</div>

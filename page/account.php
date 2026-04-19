@@ -8,7 +8,7 @@ if (is_post()) {
     $email  = req('email');
     $password  = req('password');
     $confirm = req('confirm');
-    $f = get_file('profilepic');
+    $f = $_FILES['profilepic'] ?? null;
 
     // Validate: username
     if (!$username) {
@@ -52,14 +52,18 @@ if (is_post()) {
     }
 
     // Validate: photo (file)
-    if (!$f) {
+    if (!$f || $f['error'] !== UPLOAD_ERR_OK) {
         $_err['profilepic'] = 'Required';
     }
-    else if (!str_starts_with($f->type, 'image/')) {
-        $_err['profilepic'] = 'Must be image';
-    }
-    else if ($f->size > 1 * 1024 * 1024) {
-        $_err['profilepic'] = 'Maximum 1MB';
+    else {
+        $check = getimagesize($f['tmp_name']);
+
+        if ($check === false) {
+            $_err['profilepic'] = 'Must be image';
+        }
+        else if ($f['size'] > 40 * 1024 * 1024) {
+            $_err['profilepic'] = 'Maximum 40MB';
+        }
     }
 
     // DB operation
@@ -75,7 +79,7 @@ if (is_post()) {
         try {
             $profilepic = upload_image($f, $folder);
         } catch (Exception $e) {
-            $_err['pprofilepic'] = $e->getMessage();
+            $_err['profilepic'] = $e->getMessage();
         }
 
         if ($_err) {
@@ -91,157 +95,264 @@ if (is_post()) {
         $stm->execute([$username, $email, $password, $profilepic]);
 
         temp('info', 'Record inserted');
-        redirect('/login.php');
+        redirect('/index.php');
     }
 }
 ?>
 
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Settings</title>
-    <link rel="stylesheet" href="/app.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account</title>
+<link rel="stylesheet" href="/app.css">
+
+<style>
+
+.account-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    padding: 20px;
+}
+
+.account-container {
+    max-width: 700px;
+    background: #1e1e1e;
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+
+.account-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+
+.account-profile-section {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+
+.profile-picture-container {
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    background: #141414;
+    border: 2px solid #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.profile-picture-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+
+#imgPlaceholder {
+    color: #aaa;
+    font-weight: bold;
+}
+
+
+.account-upload-area {
+    width: 220px;
+    margin: 0 auto;
+    padding: 15px;
+    border: 2px dashed #555;
+    border-radius: 10px;
+    cursor: pointer;
+    color: #aaa;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.account-upload-area:hover {
+    border-color: #764ba2;
+    color: #fff;
+}
+
+
+.account-form-group {
+    margin-bottom: 18px;
+}
+
+.account-form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #bbb;
+}
+
+.account-form-group input {
+    width: 100%;
+    padding: 12px;
+    background: #292929;
+    border: 2px solid #444;
+    border-radius: 6px;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+
+.account-button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.account-button-create {
+    flex: 1;
+    background: #764ba2;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.account-button-create:hover {
+    background: #5f3b86;
+}
+
+.account-button-clear {
+    flex: 1;
+    background: #444;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.account-button-clear:hover {
+    background: #555;
+}
+
+</style>
+
 </head>
-<body class="account-management-system">
-    <?php include '../header.php'; ?>
 
-    <button class="logout-btn" id="logoutBtn">← Back to Login</button>
+    <body>
 
-    <div class="user-status-bar">
-        Logged in as: <span id="navUsername">Guest</span>
-    </div>
-    
-    <form method="post" enctype="multipart/form-data">
-        <div class="container">
-            <div class="header">
-                <h1>Account Settings</h1>
-            </div>
+        <div class="account-wrapper">
 
-            <div class="card">
-                <div class="success-message" id="successMessage">✓ Profile updated successfully</div>
-                <div class="error-message" id="errorMessage"></div>
+            <form method="post" enctype="multipart/form-data">
+                <div class="account-container">
 
-                <div class="profile-section">
-                    <div class="upload-area">
-                        <div class="profile-picture-container" id="profilePictureContainer">
-                            <img id="imagePreview" src="" alt="Profile" style="display: none;">
-                            <span id="imgPlacehovlder">USER</span>
+                    <div class="account-header">
+                        <h1>Create Account</h1>
+                    </div>
+
+                    <div class="account-profile-section">
+
+                        <div class="profile-picture-container">
+                            <img id="imagePreview">
+                            <span id="imgPlaceholder">USER</span>
                         </div>
-                        <div class="account-upload"><label for="photo"></label>
-                            <label class="insert-upload">
-                                <?= html_file('profilepic', 'image/*', 'hidden') ?>
-                                <div class="insert-upload-box">
-                                    <img src ="/images/icon/account-drag-drop.png">
-                                </div>
-                            </label>
-                            <?= err('profilepic') ?><br>
+
+                        <div class="account-upload-area" id="uploadArea">
+                            Drag & Drop image<br>or click
+                            <input type="file" id="fileInput" name="profilepic" accept="image/*" hidden>
                         </div>
+
+                        <?= err('profilepic') ?>
+                        
 
                     </div>
 
-                    <div class="form-section">
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <?= html_text('username', 'maxlength="100"') ?>
+                        <div class="account-form-group">
+                            <label>Username</label>
+                            <?= html_text('username') ?>
                             <?= err('username') ?>
                         </div>
 
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <?= html_text('email', 'maxlength="100"') ?>
+                        <div class="account-form-group">
+                            <label>Email</label>
+                            <?= html_text('email') ?>
                             <?= err('email') ?>
                         </div>
 
-                        <div class="form-group">
-                            <label for="phone">Password</label>
-                            <?= html_password('password', 'maxlength="100"') ?>
+                        <div class="account-form-group">
+                            <label>Password</label>
+                            <?= html_password('password') ?>
                             <?= err('password') ?>
                         </div>
-                        </div> </div> 
-                        <div class="form-group">
-                            <label for="confirm">Confirm Password</label>
-                            <?= html_password('confirm', 'maxlength="100"') ?>
+
+                        <div class="account-form-group">
+                            <label>Confirm Password</label>
+                            <?= html_password('confirm') ?>
                             <?= err('confirm') ?>
                         </div>
 
-                    <div class="button-group">
-                        <button class="btn btn-primary" id="saveBtn">Save Changes</button>
-                        <button class="btn btn-secondary" id="clearBtn">Clear All</button>
+                        <div class="account-button-group">
+                            <button type="submit" class="account-button-create">Create</button>
+                            <button type="reset" class="account-button-clear">Clear</button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </form>
+
         </div>
-    </form>
-</body>
-<!--
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-    const fileInput = document.getElementById('fileInput');
-    const imagePreview = document.getElementById('imagePreview');
-    const imgPlaceholder = document.getElementById('imgPlaceholder');
-    const saveBtn = document.getElementById('saveBtn');
-    const clearBtn = document.getElementById('clearBtn');
-    const logoutBtn = document.getElementById('logoutBtn');
-    const navUsername = document.getElementById('navUsername');
-    const successMsg = document.getElementById('successMessage');
-    const errorMsg = document.getElementById('errorMessage');
 
-    logoutBtn.addEventListener('click', () => {
-        window.location.href = 'login.php';
-    });
+        <script>
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const preview = document.getElementById('imagePreview');
+        const placeholder = document.getElementById('imgPlaceholder');
 
+        uploadArea.addEventListener('click', () => fileInput.click());
 
-    const handleFileUpload = (file) => {
-        if (file && file.type.startsWith('image/')) {
+        fileInput.addEventListener('change', e => {
+            handleFile(e.target.files[0]);
+        });
+
+        uploadArea.addEventListener('dragover', e => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', e => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+
+            fileInput.files = e.dataTransfer.files;
+            handleFile(e.dataTransfer.files[0]);
+        });
+
+        function handleFile(file) {
+            if (!file || !file.type.startsWith('image/')) return;
+
             const reader = new FileReader();
-            reader.onload = (e) => {
-                imagePreview.src = e.target.result;
-                imagePreview.style.display = 'block';
-                imgPlaceholder.style.display = 'none';
+            reader.onload = e => {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+                placeholder.style.display = 'none';
             };
             reader.readAsDataURL(file);
         }
-    };
+        </script>
 
-    dragDropArea.addEventListener('click', () => {
-        fileInput.click();
-    });
-
-    fileInput.addEventListener('change', (e) => {
-        handleFileUpload(e.target.files[0]);
-    });
-
-
-    saveBtn.addEventListener('click', () => {
-        const userValue = document.getElementById('username').value;
-        const emailValue = document.getElementById('email').value;
-        const phoneValue = phoneInput.value;
-
-        if (userValue && emailValue && phoneValue) {
-            navUsername.textContent = userValue;
-            errorMsg.classList.remove('show');
-            successMsg.classList.add('show');
-            setTimeout(() => successMsg.classList.remove('show'), 3000);
-        } else {
-            errorMsg.textContent = "Please fill in all fields.";
-            errorMsg.classList.add('show');
-        }
-    });
-
-    clearBtn.addEventListener('click', () => {
-        document.getElementById('username').value = '';
-        document.getElementById('email').value = '';
-        imagePreview.src = '';
-        imagePreview.style.display = 'none';
-        imgPlaceholder.style.display = 'block';
-        fileInput.value = '';
-        successMsg.classList.remove('show');
-        errorMsg.classList.remove('show');
-    });
-});
-    </script>
-    <?php include '../footer.php'; ?>
-</body>
+    </body>
 </html>

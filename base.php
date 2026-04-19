@@ -234,7 +234,10 @@ function is_exists($value, $table, $field) {
 // ============================================================================
 function upload_image($file, $folder, $width = 200, $height = 200)
 {
-    // 1. Check upload success
+    if (!is_dir($folder)) {
+        mkdir($folder, 0755, true);
+    }    
+// 1. Check upload success
     if (!$file || $file['error'] !== UPLOAD_ERR_OK) {
         throw new Exception("Upload failed.");
     }
@@ -242,6 +245,10 @@ function upload_image($file, $folder, $width = 200, $height = 200)
     // 2. Check file type
     if (!str_starts_with($file['type'], 'image/')) {
         throw new Exception("File must be an image.");
+    }
+
+    if ($file['size'] > 40 * 1024 * 1024) {
+        throw new Exception("File too large.");
     }
 
     // 3. Generate unique filename
