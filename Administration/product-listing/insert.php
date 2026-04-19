@@ -223,10 +223,6 @@ include '../sidebar.php';
                         <?= html_text('productSwitches', 'maxlength="200"') ?>
                         <?= err('productSwitches') ?><br><br>
 
-                        <label for="productDesc">Product Description</label><br>
-                        <?= html_text('productDesc') ?>
-                        <?= err('productDesc') ?><br><br>
-
                         <label for="categoryID">Product Category</label><br>
                         <?= html_text('categoryID') ?>
                         <?= err('categoryID') ?><br><br>
@@ -244,6 +240,11 @@ include '../sidebar.php';
                 </div>
 
                 <div class="insert-table-bottom">
+                    <label for="productDesc">Product Description</label><br>
+                        <textarea name="productDesc" rows="1" class="product-desc-box"><?= htmlspecialchars(post('productDesc')) ?></textarea>
+                        <?= err('productDesc') ?>
+                        <?= err('productDesc') ?><br><br><br>
+                
                     <label for="photo"></label>
                         <label class="insert-upload">
                             <?= html_file('imageFile', 'image/*', 'hidden') ?>

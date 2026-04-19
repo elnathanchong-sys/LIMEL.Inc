@@ -1,52 +1,62 @@
 <?php
 include '../base.php';
 
-auth('Member');
+auth();
 
 // ----------------------------------------------------------------------------
 
 if (is_post()) {
-    $current = req('current');
-    $password = req('password');
-    $confirm = req('confirm');
 
-    // Get current user password from DB
-    $stm = $_db->prepare('SELECT password FROM users WHERE userID = ?');
-    $stm->execute([$user->userID]);
-    $u = $stm->fetch();
+    $current = req('current_password');
+    $new     = req('new_password');
+    $confirm = req('confirm_password');
 
-    // Validate: current password
-    if (!$current) {
-        $_err['current'] = 'Required';
-    }
-    else if (!password_verify($current, $u->password)) {
-        $_err['current'] = 'Incorrect password';
+    // CURRENT PASSWORD
+    if ($current == '') {
+        $_err['current_password'] = 'Required';
     }
 
-    // Validate: new password
-    if (!$password) {
-        $_err['password'] = 'Required';
+    // NEW PASSWORD
+    if ($new == '') {
+        $_err['new_password'] = 'Required';
     }
-    else if (strlen($password) < 6) {
-        $_err['password'] = 'Minimum 6 characters';
-    }
-
-    // Validate: confirm
-    if ($confirm !== $password) {
-        $_err['confirm'] = 'Passwords do not match';
+    else if (strlen($new) < 5 || strlen($new) > 100) {
+        $_err['new_password'] = 'Between 5 - 100 characters';
     }
 
-    // ----------------------------------------------------------------------------
+    // CONFIRM PASSWORD
+    if ($confirm == '') {
+        $_err['confirm_password'] = 'Required';
+    }
+    else if ($confirm != $new) {
+        $_err['confirm_password'] = 'Not matched';
+    }
+
+    // CHECK CURRENT PASSWORD (DB)
     if (!$_err) {
 
-        $hashed = password_hash($password, PASSWORD_DEFAULT);
+        $stm = $_db->prepare('SELECT password FROM users WHERE userID = ?');
+        $stm->execute([$_user->userID]);
+        $dbPass = $stm->fetchColumn();
+
+        if ($dbPass != sha1($current)) {
+            $_err['current_password'] = 'Incorrect password';
+        }
+    }
+
+    // UPDATE PASSWORD
+    if (!$_err) {
 
         $stm = $_db->prepare('
             UPDATE users
             SET password = ?
             WHERE userID = ?
         ');
-        $stm->execute([$hashed, $user->userID]);
+
+        $stm->execute([
+            sha1($new),
+            $_user->userID
+        ]);
 
         temp('info', 'Password updated successfully');
         redirect('/page/myaccount.php');
@@ -54,57 +64,54 @@ if (is_post()) {
 }
 ?>
 
+<?php $_title = 'Change Password'; include '../header.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Change Password</title>
-<link rel="stylesheet" href="/app.css">
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/app.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="tab icon" href="/images/Logo.png">
+    <script src="/Administration/product-listing/app.js"></script>
 </head>
+   
+    <div class="passwordUpdate-page">
 
-<?php include '../header.php'; ?>
+        <form method="post" class="passwordUpdate-card">
 
-<body>
+            <h1 class="passwordUpdate-title">Change Password</h1>
 
-<div class="account-wrapper">
-    <form method="post">
-        <div class="account-container">
-
-            <div class="account-header">
-                <h1>Change Password</h1>
+            <!-- CURRENT PASSWORD -->
+            <div class="passwordUpdate-group">
+                <label class="passwordUpdate-label">Current Password</label>
+                <?= html_password('current_password') ?>
+                <?= err('current_password') ?>
             </div>
 
-            <div class="account-form-grid">
-
-                <div class="account-form-group">
-                    <label>Current Password</label>
-                    <?= html_password('current', 'placeholder="Enter current password"') ?>
-                    <div class="field-error"><?= err('current') ?></div>
-                </div>
-
-                <div class="account-form-group">
-                    <label>New Password</label>
-                    <?= html_password('password', 'placeholder="New password"') ?>
-                    <div class="field-error"><?= err('password') ?></div>
-                </div>
-
-                <div class="account-form-group">
-                    <label>Confirm New Password</label>
-                    <?= html_password('confirm', 'placeholder="Confirm new password"') ?>
-                    <div class="field-error"><?= err('confirm') ?></div>
-                </div>
-
+            <!-- NEW PASSWORD -->
+            <div class="passwordUpdate-group">
+                <label class="passwordUpdate-label">New Password</label>
+                <?= html_password('new_password') ?>
+                <?= err('new_password') ?>
             </div>
 
-            <div class="account-button-group">
-                <button type="submit" class="account-button-create">Update Password</button>
-                <button type="reset" class="account-button-clear">Clear</button>
+            <!-- CONFIRM PASSWORD -->
+            <div class="passwordUpdate-group">
+                <label class="passwordUpdate-label">Confirm Password</label>
+                <?= html_password('confirm_password') ?>
+                <?= err('confirm_password') ?>
             </div>
 
-        </div>
-    </form>
-</div>
+            <!-- BUTTONS -->
+            <section class="passwordUpdate-actions">
+                <button class="passwordUpdate-btn primary">Update</button>
+                <button type="reset" class="passwordUpdate-btn secondary">Reset</button>
+            </section>
 
-</body>
-</html>
+        </form>
+
+    </div>  
+
+
+<?php include '../footer.php'; ?>

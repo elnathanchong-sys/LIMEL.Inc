@@ -21,12 +21,12 @@ include '../header.php';
         <!-- RIGHT: STORE INFO -->
         <div class="store-info-card">
             <div class="store-info-header">
-                <span class="store-icon">📍</span>
+
                 <h2>LIMEL Inc.</h2>
             </div>
 
             <div class="store-detail">
-                <span class="detail-icon">🏠</span>
+
                 <div>
                     <div class="detail-label">Address</div>
                     <div class="detail-value">No. 1, Jalan Sulaman, 88450 Kota Kinabalu, Sabah, Malaysia</div>
@@ -34,7 +34,7 @@ include '../header.php';
             </div>
 
             <div class="store-detail">
-                <span class="detail-icon">🕐</span>
+
                 <div>
                     <div class="detail-label">Opening Hours</div>
                     <div class="detail-value">
@@ -46,7 +46,7 @@ include '../header.php';
             </div>
 
             <div class="store-detail">
-                <span class="detail-icon">📞</span>
+
                 <div>
                     <div class="detail-label">Phone</div>
                     <div class="detail-value">+60 3-1234 5678</div>
@@ -54,7 +54,7 @@ include '../header.php';
             </div>
 
             <div class="store-detail">
-                <span class="detail-icon">✉️</span>
+
                 <div>
                     <div class="detail-label">Email</div>
                     <div class="detail-value">support@limel.com</div>
@@ -64,7 +64,7 @@ include '../header.php';
             <a href="https://www.google.com/maps/dir/?api=1&destination=5.9804,116.0735" 
                target="_blank" 
                class="directions-btn">
-                🗺 Get Directions
+                Get Directions
             </a>
         </div>
     </div>

@@ -167,7 +167,7 @@ function is_email($value) {
 function save_photo($f, $folder, $width = 200, $height = 200) {
     $photo = uniqid() . '.jpg';
     
-    require_once 'lib/SimpleImage.php';
+    require_once 'SimpleImage.php';
     $img = new SimpleImage();
     $img->fromFile($f->tmp_name)
         ->thumbnail($width, $height)

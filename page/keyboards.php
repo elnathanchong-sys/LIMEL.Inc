@@ -1,7 +1,7 @@
 <?php
 include '../base.php';
-$stm = $_db->prepare("SELECT * FROM products");
-$stm->execute();
+$stm = $_db->prepare("SELECT * FROM products WHERE categoryID = ?");
+$stm->execute(['K001']);
 $products = $stm->fetchAll();
 ?>
 

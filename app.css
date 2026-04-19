@@ -1104,8 +1104,8 @@ footer{
     color: #ffffff;
     align-items: center;
     justify-content: space-between;
-    width: 70%;
-    margin: 0 auto;
+    width: 58%;
+    margin:50px auto;
 }
 
 .mouse-view-more{
@@ -1202,8 +1202,8 @@ footer{
     color: #ffffff;
     align-items: center;
     justify-content: space-between;
-    width: 70%;
-    margin: 0 auto;
+    width: 58%;
+    margin:50px auto;
 }
 
 .keyboard-header a {
@@ -1274,23 +1274,6 @@ footer{
     object-fit: contain;
 }
 
-.wishlist-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: none; 
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 100;
-    padding: 5px;
-    line-height: 1;
-}
-
-.wishlist-btn.active {
-    font-size: 24px;
-}
 
 .keyboard-brand {
     font-size: 12px;
@@ -1811,7 +1794,6 @@ aside, .sidebar {
 
 }
 
-
 .filter-section {
     display: flex;
     gap: 12px;
@@ -1880,7 +1862,7 @@ aside, .sidebar {
 /*---------------------------------Insert page ---------------------------------------*/
 .insert-container {
     margin-left: 260px;
-    padding: 60px 120px;
+    padding: 30px 120px;
     min-height: 100vh;
     max-width: 2400px;
 }
@@ -1924,6 +1906,18 @@ aside, .sidebar {
     border-radius: 6px;
     color: #fff;
     border: 2px solid #444;
+}
+.product-desc-box {
+    width: 100%;
+    min-height: 100px;
+    resize: vertical;
+    padding: 10px;
+    font-family: inherit;
+    background: #292929;
+    border-radius: 6px;
+    border: 2px solid #444;
+    padding: 12px;
+    color: #FFFFFF;
 }
 
 .insert-table-bottom {
@@ -2187,7 +2181,6 @@ body.auth-layout .account-wrapper {
 .login-button-reset:hover {
     background-color: #4b5563;
 }
-
 
 /*----------------------------------------End of Login page------------------------------------*/
 /*----------------------------------------Start of Order History------------------------------------*/
@@ -3068,3 +3061,190 @@ body.admin-body {
     .directions-btn:hover { 
         opacity: 0.9; 
     }
+
+/*----------------------------------------Start of updateProfile------------------------------------*/
+.profileUpdate-page {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+
+.profileUpdate-card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 30px;
+    width: 450px;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.profileUpdate-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profileUpdate-photoBox {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profileUpdate-upload {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.profileUpdate-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #374151;
+}
+
+.profileUpdate-uploadText {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 8px;
+}
+
+.profileUpdate-group {
+    margin-bottom: 15px;
+}
+
+.profileUpdate-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.profileUpdate-group input {
+    width: 100%;
+    padding: 10px;
+    background-color: #0f0f10;
+    border: 1px solid #374151;
+    border-radius: 5px;
+    color: white;
+}
+
+.profileUpdate-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.profileUpdate-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profileUpdate-btn.primary {
+    background: linear-gradient(135deg, #764ba2, #667eea);
+    color: white;
+}
+
+.profileUpdate-btn.secondary {
+    background: #374151;
+    color: #e5e7eb;
+}
+
+.profileUpdate-btn.secondary:hover {
+    background: #4b5563;
+}
+
+.profileUpdate-upload.dragover {
+    border: 2px dashed #667eea;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.profileUpdate-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.profileUpdate-link a {
+    color: #667eea;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.profileUpdate-link a:hover {
+    text-decoration: underline;
+}
+/*----------------------------------------End of updateProfile------------------------------------*/
+/*----------------------------------------Start of changePassword------------------------------------*/
+.passwordUpdate-page {
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+}
+
+.passwordUpdate-card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 10px;
+    padding: 30px;
+    width: 450px;
+    color: white;
+}
+
+.passwordUpdate-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.passwordUpdate-group {
+    margin-bottom: 15px;
+}
+
+.passwordUpdate-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.passwordUpdate-group input {
+    width: 100%;
+    padding: 10px;
+    background-color: #0f0f10;
+    border: 1px solid #374151;
+    border-radius: 5px;
+    color: white;
+}
+
+.passwordUpdate-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.passwordUpdate-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.passwordUpdate-btn.primary {
+    background: linear-gradient(135deg, #764ba2, #667eea);
+    color: white;
+}
+
+.passwordUpdate-btn.secondary {
+    background: #374151;
+    color: #e5e7eb;
+}
+
+.passwordUpdate-btn.secondary:hover {
+    background: #4b5563;
+}

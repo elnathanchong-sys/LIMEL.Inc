@@ -3,10 +3,12 @@ include '../base.php';
 
 auth('Admin');
 
-$rev_query = $_db->query("SELECT SUM(totalPrice) as total_rev FROM orders WHERE orderStatus != 'cancelled'");
+// FIXED: Changed 'totalPrice' to 'totalAmount' and 'orderStatus' to 'status'
+$rev_query = $_db->query("SELECT SUM(totalAmount) as total_rev FROM orders WHERE status != 'cancelled'");
 $total_revenue = $rev_query->fetch()->total_rev ?? 0;
 
-$pending_query = $_db->query("SELECT COUNT(*) as count FROM orders WHERE orderStatus = 'Processing'");
+// FIXED: Changed 'orderStatus' to 'status' and 'Processing' to 'Pending' (which is your DB default)
+$pending_query = $_db->query("SELECT COUNT(*) as count FROM orders WHERE status = 'Pending'");
 $pending_orders = $pending_query->fetch()->count ?? 0;
 
 $prod_query = $_db->query("SELECT COUNT(*) as count FROM products");
@@ -24,10 +26,11 @@ foreach ($line_results as $row) {
 }
 $json_chart_data = json_encode($chart_data);
 
+// FIXED: Changed to use the 'order_items' table and the 'quantity' column
 $pie_query = $_db->query("
-    SELECT c.categoryName, SUM(o.orderHistoryQuantity) as total_sold
-    FROM orders o
-    JOIN products p ON o.productID = p.productID
+    SELECT c.categoryName, SUM(oi.quantity) as total_sold
+    FROM order_items oi
+    JOIN products p ON oi.productID = p.productID
     JOIN category c ON p.categoryID = c.categoryID
     GROUP BY c.categoryName
 ");

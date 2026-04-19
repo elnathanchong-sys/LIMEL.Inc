@@ -1,3 +1,10 @@
+<?php
+include '../base.php';
+$stm = $_db->prepare("SELECT * FROM products WHERE categoryID = ?");
+$stm->execute(['M001']);
+$products = $stm->fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +14,28 @@
     <link rel="stylesheet" href="/app.css">
     <link rel="tab icon" href="/images/Logo.png">
 </head>
-    
+
 <body>
 
-    <?php include '../header.php';?>
+    <?php include '../header.php'; ?>
 
     <main>
+        <div class="mouse-grid">
 
+            <?php foreach ($products as $p): ?>
+                <div class="mouse-card">
+                    <div class="mouse-image-container">
+                        <a href="../product-page/product.php?productID=<?= htmlspecialchars($p->productID) ?>">
+                            <img src="/images/new-image-save/<?= htmlspecialchars($p->imageFile) ?>" alt="<?= htmlspecialchars($p->productName) ?>">
+                        </a>
+                    </div>
+                    <div class="card-line">______________________________________</div>
+                    <div class="mouse-title"><?= htmlspecialchars($p->productName) ?></div>
+                    <div class="mouse-price">MYR <?= number_format($p->productPrice, 2) ?></div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+<!--
         <div class="mouse-grid">
 
             <div class="mouse-card">
@@ -35,7 +57,7 @@
                 <div class="card-line">_________________________________</div>
                 <div class="mouse-title">Limel M Hyperlight PrintStream</div>
                 <div class="mouse-desc">Limited "PrintStream" edition Mice!</div>
-                <div class="mouse-price">MYR 399.99</div>
+                <div class="mouseprice">MYR 399.99</div>
             </div>
 
             <div class="mouse-card">
@@ -93,7 +115,7 @@ function toggleFavorite(e, button, productID) {
     console.log(isActive ? 'Saved ' : 'Removed ', productID);
 }
 </script>
-
+-->
     </main>
 </body>
     <?php include '../footer.php'; ?>

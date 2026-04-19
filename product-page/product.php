@@ -97,7 +97,7 @@ if (!$product) {
                             <li><?= htmlspecialchars($product->productSwitches) ?></li>
                         </ul><br>
 
-                        <p><?= htmlspecialchars($product->productDesc) ?></p><br>
+                        <p>Description: <br><?= htmlspecialchars($product->productDesc) ?></p><br>
                         <p style="color:red;">Please drop your emailon "Notify Me When Available" if the product model is out of stock.</p>
                 </div>
             </div>

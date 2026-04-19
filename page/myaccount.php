@@ -9,7 +9,7 @@ include '../header.php';
 
 <main class="container-account"> 
     <div class="account-header">
-        <h1 style="color: white;">Welcome back!</h1>
+        <h1 style="color: white;">Account Info</h1>
     </div>
 
     <div class="account-card">
@@ -20,7 +20,7 @@ include '../header.php';
         </div>
 
         <div class="dashboard-grid">
-            <a href="accountupdate.php" class="dashboard-card">
+            <a href="updateProfile.php" class="dashboard-card">
                 <div class="card-icon">👤</div>
                 <div>
                     <div class="card-title">My Profile</div>

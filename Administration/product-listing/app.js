@@ -157,4 +157,49 @@ $(() => {
             e.target.value = '';
         }
     });
+
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('fileInput');
+    const preview = document.getElementById('previewImg');
+
+    // click to upload
+    uploadArea.addEventListener('click', () => fileInput.click());
+
+    // file change
+    fileInput.addEventListener('change', e => {
+        handleFile(e.target.files[0]);
+    });
+
+    // drag over
+    uploadArea.addEventListener('dragover', e => {
+        e.preventDefault();
+        uploadArea.classList.add('dragover');
+    });
+
+    // drag leave
+    uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('dragover');
+    });
+
+    // drop
+    uploadArea.addEventListener('drop', e => {
+        e.preventDefault();
+        uploadArea.classList.remove('dragover');
+
+        const file = e.dataTransfer.files[0];
+        fileInput.files = e.dataTransfer.files;
+        handleFile(file);
+    });
+
+    // preview function
+    function handleFile(file) {
+        if (!file || !file.type.startsWith('image/')) return;
+
+        const reader = new FileReader();
+        reader.onload = e => {
+            preview.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
 });
