@@ -41,9 +41,6 @@ if (is_post()) {
 }
 
 // ----------------------------------------------------------------------------
-
-
-include '../header.php';
 ?>
 
 <!DOCTYPE html>
@@ -51,37 +48,59 @@ include '../header.php';
 <head>
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/app.css">
+    <title>Login | LIMEL</title>
+    <link rel="stylesheet" href="/app.css?v=<?= time() ?>">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="./app.js"></script>
 </head>
 
-<body>
-    
-    <div class = "login-page">
-        <div class="login-title">
-            <h1>Login</h1><br><br>
-        </div>
-        <form method="post" class="login-form">
-            <label for="email">Email</label>
-            <?= html_text('email', 'maxlength="100"') ?>
-            <?= err('email') ?>
+<body class="auth-layout">
 
-            <label for="password">Password</label>
-            <?= html_password('password', 'maxlength="100"') ?>
-            <?= err('password') ?>
+    <?php include '../header.php'; ?>
 
-            
-            <section>
-                <button class="login-button">Login</button>
-                <button class="login-button-create" type="reset">Reset</button>
-            </section>
+    <div class="account-wrapper">
+        <form method="post" class="account-form-wrapper" style="max-width: 450px;">
+            <div class="account-container" style="max-width: 450px; width: 100%; padding: 40px;">
+
+                <div class="account-header">
+                    <h1>Welcome Back</h1>
+                    <p>Log in to your LIMEL account.</p>
+                </div>
+
+                <?php if (isset($_err['password']) && $_err['password'] == 'Not matched'): ?>
+                    <div class="field-error" style="text-align: center; margin-bottom: 20px;">
+                        <span class="err" style="font-size: 14px;">Invalid email or password.</span>
+                    </div>
+                <?php endif; ?>
+
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="account-form-group">
+                        <label for="email">Email</label>
+                        <?= html_text('email', 'placeholder="your@email.com" maxlength="100"') ?>
+                        <div class="field-error"><?= err('email') ?></div>
+                    </div>
+
+                    <div class="account-form-group">
+                        <label for="password">Password</label>
+                        <?= html_password('password', 'placeholder="••••••••" maxlength="100"') ?>
+                        <div class="field-error"><?= err('password') ?></div>
+                    </div>
+                </div>
+
+                <div class="account-button-group">
+                    <button type="submit" class="account-button-create">Login</button>
+                    <button type="reset" class="account-button-clear">Reset</button>
+                </div>
+                
+                <div class="account-login-link">
+                    No account? <a href="/page/account.php">Create account here</a>
+                </div>
+                
+            </div>
         </form>
-        <div class="login-create-account">
-            <a href="/page/account.php" class="no-underlined">No account? Create account</a>
-        </div>
     </div>
-</body>
 
-<?php
-include '../footer.php';
+
+
+</body>
+</html>

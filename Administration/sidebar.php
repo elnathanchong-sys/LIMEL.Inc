@@ -16,7 +16,7 @@
             <span>Staff Name</span>
         </div>
 
-        <a href="/index.php" class="logout-bttn">Logout</a>
+        <a href="/security/logout.php" class="logout-bttn">Logout</a>
 
     </div>
 </aside>

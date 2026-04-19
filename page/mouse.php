@@ -35,7 +35,7 @@
                 <div class="card-line">_________________________________</div>
                 <div class="mouse-title">Limel M Hyperlight PrintStream</div>
                 <div class="mouse-desc">Limited "PrintStream" edition Mice!</div>
-                <div class="mouseprice">MYR 399.99</div>
+                <div class="mouse-price">MYR 399.99</div>
             </div>
 
             <div class="mouse-card">

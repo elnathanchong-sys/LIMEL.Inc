@@ -272,7 +272,6 @@ function upload_image($file, $folder, $width = 200, $height = 200)
 // ============================================================================
 
 // Global users object
-$_users = $_SESSION['users'] ?? null;
 
 // Login users
 function login($users, $url = '/') {
@@ -297,18 +296,20 @@ function logout($url = '/') {
 
 // Authorization
 function auth(...$roles) {
-    global $_users;
-    if ($_users) {
-        if ($roles) {
-            if (in_array($_users->role, $roles)) {
-                return; // OK
-            }
-        }
-        else {
-            return; // OK
+
+    $user = $_SESSION['users'] ?? null;
+
+    if (!$user) {
+        redirect('/login.php');
+    }
+
+    if ($roles) {
+        if (!in_array($user->role, $roles)) {
+            redirect('/login.php');
         }
     }
-    
-    redirect('/login.php');
+
+    // make user globally available if needed
+    $GLOBALS['_user'] = $user;
 }
 

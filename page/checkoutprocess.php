@@ -75,10 +75,13 @@ try {
         $nextNum++;
     }
 
-    unset($_SESSION['cart']);
+    $stmt = $_db->prepare("DELETE FROM cart WHERE userID = ?");
+    $stmt->execute([$userID]);
+    $_SESSION['cart' =] =[];
 
+    $_SESSION['last_order_id'] = $orderID;
     temp('success', 'Order placed successfully! Your order is now being processed.');
-    redirect('myorders.php');
+    redirect('receipt.php');
 
 } catch (PDOException $e) {
     temp('error', 'Failed to place order: ' . $e->getMessage());

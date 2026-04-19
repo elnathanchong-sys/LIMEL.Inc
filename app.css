@@ -22,7 +22,237 @@ main{
     display: block;
     width: 100%;
 }
+/*-----------------------------------------------------Account Page--------------------------------------------*/
+.account-wrapper {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    padding: 0px 20px;
+    font-family: 'Roboto', sans-serif;
+}
 
+.account-form-wrapper {
+    width: 100%;
+    max-width: 800px;
+}
+
+.account-container {
+    width: 100%;
+    background: #111111;
+    padding: 35px 50px;
+    border-radius: 16px;
+    border: 1px solid #2a2a2a;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.account-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.account-header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    margin: 0 0 10px 0;
+    color: #fff;
+}
+
+.account-header p {
+    color: #888;
+    margin: 0;
+    font-size: 15px;
+}
+
+.account-profile-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-picture-container {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    border: 2px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.profile-picture-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#imgPlaceholder {
+    width: 50px;
+    height: 50px;
+    color: #555;
+}
+
+.account-upload-area {
+    width: 250px;
+    margin: 0 auto;
+    padding: 20px 15px;
+    border: 2px dashed #444;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #aaa;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background: rgba(255,255,255,0.02);
+}
+
+.account-upload-area .upload-icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.account-upload-area:hover, 
+.account-upload-area.dragover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.account-upload-error {
+    margin-top: 10px;
+}
+
+.account-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.account-form-group:nth-child(1),
+.account-form-group:nth-child(2) {
+    grid-column: span 2;
+}
+
+.account-form-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.account-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #ccc;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.account-form-group input {
+    width: 100%;
+    padding: 14px 15px;
+    background: #0a0a0a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 15px;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.account-form-group input::placeholder {
+    color: #444;
+}
+
+.account-form-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
+    background: #111;
+}
+
+.field-error span.err, .account-upload-error span.err {
+    display: block;
+    color: #ff7675;
+    font-size: 13px;
+    margin-top: 6px;
+}
+
+.account-button-group {
+    display: flex;
+    gap: 15px;
+    margin-top: 35px;
+}
+
+.account-button-create {
+    flex: 2;
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.account-button-create:hover {
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    transform: translateY(-2px);
+}
+
+.account-button-create:active {
+    transform: translateY(0);
+}
+
+.account-button-clear {
+    flex: 1;
+    background: #2a2a2a;
+    color: #aaa;
+    border: 1px solid #333;
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.account-button-clear:hover {
+    background: #333;
+    color: #fff;
+}
+
+.account-login-link {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 14px;
+    color: #888;
+}
+
+.account-login-link a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.account-login-link a:hover {
+    color: #a3bbfb;
+    text-decoration: underline;
+}
+
+/*---------------------------------------------------end of Account Page-------------------------------------------------*/
 /* --------------------------------> My Account <---------------------------------*/
     /* Profile Section */
 .account-hero {
@@ -57,38 +287,6 @@ main{
 
 .account-email { 
     color: #888; font-size: 14px; margin-top: 4px;
-}
-
-     .status-msg { 
-    padding: 10px; 
-    margin-bottom: 15px; 
-    border-radius: 4px; 
-    text-align: center; 
-}
-
-.error { 
-    background: #f44336; 
-    color: white; 
-}
-
-.success { 
-    background: #4CAF50; 
-    color: white; 
-}
-
-.pw-input { 
-    width: 100%; 
-    padding: 10px; 
-    margin: 8px 0; 
-    border-radius: 4px; 
-    border: none; 
-}
-
-#password-form {
-    background: rgba(0,0,0,0.2); 
-    padding: 20px; 
-    border-radius: 8px; 
-    margin-top: 20px;
 }
 
 .dashboard-grid {
@@ -169,12 +367,12 @@ main{
     background-color: #d63031;
 }
 
-    /*.container {
+    .container-account {
         max-width: 900px;
         margin: 40px auto;
         padding: 0 20px;
     }
-*/
+
 
 /*---------------------------------->Header<----------------------------------*/
 header{
@@ -906,7 +1104,7 @@ footer{
     color: #ffffff;
     align-items: center;
     justify-content: space-between;
-    width: 59%;
+    width: 70%;
     margin: 0 auto;
 }
 
@@ -963,7 +1161,7 @@ footer{
     object-fit: contain;
 }
 
-.mouse.brand {
+.mouse-brand {
     font-size: 12px;
     color: #ffffff;
     margin-bottom: 5px;
@@ -1004,7 +1202,7 @@ footer{
     color: #ffffff;
     align-items: center;
     justify-content: space-between;
-    width: 59%;
+    width: 70%;
     margin: 0 auto;
 }
 
@@ -1036,6 +1234,7 @@ footer{
     transition: all 0.4s ease;
     box-sizing: border-box;
     border: 1px solid #2f2f2f;
+
 }
 
 .keyboard-card:hover {
@@ -1060,6 +1259,21 @@ footer{
     box-sizing: border-box;
 }
 
+.keyboard-image-container a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.keyboard-image-container img {
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 .wishlist-btn {
     position: absolute;
     top: 15px;
@@ -1076,13 +1290,6 @@ footer{
 
 .wishlist-btn.active {
     font-size: 24px;
-}
-
-.keyboard-image-container img {
-    width: 100%;
-    max-width: 100%;
-    height: 100%;
-    object-fit: contain;
 }
 
 .keyboard-brand {
@@ -1470,10 +1677,6 @@ input[name="p"] {
 }
 /*<----------------------------------------------------------------------End of Cart---------------------------------------------------------------------> */
 
-/*<----------------------------------------------------------------------Account Page---------------------------------------------------------------------> */
-
-
-/*<----------------------------------------------------------------------End of Account Page---------------------------------------------------------------------> */
 
 /*----------------------------------------about us----------------------------------*/
 .section-title {
@@ -1568,6 +1771,11 @@ aside, .sidebar {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 25px;
+}
+
+.inventory-header-button {
+    justify-content: flex-end;
+    gap: 10px; 
 }
 
 .inventory-title {
@@ -1672,7 +1880,7 @@ aside, .sidebar {
 /*---------------------------------Insert page ---------------------------------------*/
 .insert-container {
     margin-left: 260px;
-    padding: 60px 40px;
+    padding: 60px 120px;
     min-height: 100vh;
     max-width: 2400px;
 }
@@ -1729,7 +1937,7 @@ aside, .sidebar {
     border-radius: 8px;
     text-align: center;
     cursor: pointer;
-
+    max-width: 97%;;
     transition: border-color 0.3s ease;
     font-size: 20px;
 }
@@ -1857,12 +2065,44 @@ aside, .sidebar {
     vertical-align: middle;
 }
 
+.update-page-success {
+    background: #02fd389d;
+    color: #1a7f37;
+    padding: 12px 16px;
+    border-left: 4px solid #2ecc71;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.update-page-error {
+    background: #ffe6e6;
+    color: #c0392b;
+    padding: 12px 16px;
+    border-left: 4px solid #e74c3c;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
 /*----------------------------------------Login page------------------------------------*/
 /* ─── Reset ──────────────────────────────────────────────────────────────────── */
 
 
 
 /*----------------------------------------Start of Login page------------------------------------*/
+body.auth-layout {
+display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+body.auth-layout .account-wrapper {
+    flex: 1;
+    min-height: auto; 
+    padding: 20px;
+}
+
 .login-page {
     display: flex;
     justify-content: center; 
@@ -2602,3 +2842,229 @@ body.admin-body {
 @media (max-width: 768px) {
     .checkout-grid { grid-template-columns: 1fr; }
 }
+
+/*--------------------------receipt--------------------------*/
+.receipt-container { 
+    max-width: 700px; 
+    margin: 40px auto; 
+    padding: 0 20px; 
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+}
+
+.receipt-card { 
+    background: #ffffff; 
+    border: 1px solid #e1e1e1; 
+    padding: 40px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+}
+
+.receipt-header { 
+    text-align: center; 
+    border-bottom: 2px solid #f0f0f0; 
+    margin-bottom: 30px; 
+    padding-bottom: 20px; 
+}
+
+.receipt-header h1 {
+    color: #2c3e50;
+    margin: 0;
+    font-size: 32px;
+    letter-spacing: 1px;
+}
+
+.receipt-subtitle {
+    color: #7f8c8d;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.receipt-meta {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.9rem;
+    color: #34495e;
+}
+
+.receipt-address { 
+    margin-bottom: 35px; 
+}
+
+.receipt-address h3 {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+    border-left: 4px solid #010101;
+    padding-left: 10px;
+}
+
+.receipt-address address {
+    font-style: normal;
+    line-height: 1.6;
+    color: #555;
+}
+
+.receipt-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-bottom: 30px; 
+}
+
+.receipt-table th { 
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #2c3e50; 
+    padding: 12px 10px; 
+    text-align: left;
+    font-size: 0.9rem;
+    color: #2c3e50;
+}
+
+.receipt-table td { 
+    padding: 15px 10px; 
+    border-bottom: 1px solid #eee; 
+    color: #333;
+}
+
+.receipt-table tfoot th {
+    text-align: right;
+    padding-top: 20px;
+    font-size: 1.1rem;
+}
+
+.receipt-table tfoot td {
+    text-align: right;
+    padding-top: 20px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #010101;
+    border-bottom: none;
+}
+
+.receipt-footer { 
+    text-align: center; 
+    margin-top: 40px; 
+    color: #95a5a6; 
+    border-top: 1px solid #eee; 
+    padding-top: 20px; 
+}
+
+.receipt-actions { 
+    margin-top: 30px; 
+    display: flex; 
+    gap: 15px; 
+    justify-content: center; 
+}
+
+.receipt-btn-print { 
+    background: #27ae60; 
+    color: white; 
+    border: none; 
+    padding: 12px 25px; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    font-weight: bold; 
+    transition: 0.2s;
+}
+
+.receipt-btn-print:hover { background: #219150; }
+
+.receipt-btn-secondary { 
+    background: #ffffff; 
+    color: #34495e; 
+    text-decoration: none; 
+    padding: 12px 25px; 
+    border-radius: 6px; 
+    border: 1px solid #dcdde1; 
+    font-size: 0.9rem; 
+    transition: 0.2s;
+}
+
+.receipt-btn-secondary:hover { 
+    background: #f5f6fa; 
+}
+
+@media print {
+    body { background: white !important; }
+    .receipt-container { margin: 0; width: 100%; max-width: 100%; }
+    .receipt-card { border: none; box-shadow: none; padding: 0; }
+    .receipt-actions, header, footer:not(.receipt-footer) { display: none !important; }
+    #printableReceipt { visibility: visible; }
+}
+
+/*------------------------Map------------------------------*/
+    #map {
+        width: 100%;
+        height: 500px;
+        border-radius: 16px;
+        border: 1px solid #2a2a2a;
+    }
+
+    .store-location-wrapper {
+        max-width: 1100px;
+        margin: 50px auto;
+        padding: 0 20px;
+    }
+
+    .store-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+    }
+
+    .store-info-card {
+        background: #1a1a1a;
+        border: 1px solid #2a2a2a;
+        border-radius: 16px;
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .store-info-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid #2a2a2a;
+        padding-bottom: 16px;
+    }
+
+    .store-info-header h2 { 
+        color: white; font-size: 20px; margin: 0; 
+    }
+
+    .detail-label { 
+        color: #aaa; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
+     }
+
+    .detail-value {
+         color: white; font-size: 14px; line-height: 1.6;
+         }
+
+    .store-detail {
+         display: flex; gap: 14px; align-items: flex-start;
+        }
+
+    .detail-icon { 
+        font-size: 20px; margin-top: 2px; 
+    }
+
+    .directions-btn {
+        display: block;
+        text-align: center;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 14px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 15px;
+        margin-top: auto;
+        transition: opacity 0.2s;
+    }
+
+    .directions-btn:hover { 
+        opacity: 0.9; 
+    }

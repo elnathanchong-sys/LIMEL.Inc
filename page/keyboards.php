@@ -1,3 +1,10 @@
+<?php
+include '../base.php';
+$stm = $_db->prepare("SELECT * FROM products");
+$stm->execute();
+$products = $stm->fetchAll();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +14,30 @@
     <link rel="stylesheet" href="/app.css">
     <link rel="tab icon" href="/images/Logo.png">
 </head>
-    
+
 <body>
 
     <?php include '../header.php'; ?>
-    
+
     <main>
         <div class="keyboard-grid">
+
+            <?php foreach ($products as $p): ?>
+                <div class="keyboard-card">
+                    <div class="keyboard-image-container">
+                        <a href="../product-page/product.php?productID=<?= htmlspecialchars($p->productID) ?>">
+                            <img src="/images/new-image-save/<?= htmlspecialchars($p->imageFile) ?>" alt="<?= htmlspecialchars($p->productName) ?>">
+                        </a>
+                    </div>
+                    <div class="card-line">______________________________________</div>
+                    <div class="keyboard-title"><?= htmlspecialchars($p->productName) ?></div>
+                    <div class="keyboard-price">MYR <?= number_format($p->productPrice, 2) ?></div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+
+        <!-- htmlspecialchars is for security, it converts special characters to HTML entities to prevent XSS attacks. -->
+        <!--<div class="keyboard-grid">
 
             <div class="keyboard-card">
 
@@ -79,7 +103,7 @@
                 <div class="keyboard-desc" >75% Gaming Keyboard</div>
                 <div class="keyboard-price" >MYR 859.00</div>
             </div>
-        </div>
+        </div>-->
     </main>
 
 

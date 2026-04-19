@@ -16,8 +16,8 @@ $p = $stmt->fetch();
 <body>
     <?php include '../header.php'; ?>
     <main>
-        <div class="keyboard-product-page">    
-            <div class="product-container">    
+        <div class="keyboard-product-page">  
+            <div class="product-container">
                 <div class="product-images">
                     <input type="radio" name="p" id="p1" checked>
                     <input type="radio" name="p" id="p2">

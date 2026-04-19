@@ -116,41 +116,42 @@ if (is_post()) {
     }
 
     // Validate: photo (file)
-    if (!$f || $f['error'] !== UPLOAD_ERR_OK) {
-        $_err['imageFile'] = 'Required';
-    }
-    else if (!str_starts_with($f['type'], 'image/')) {
-        $_err['imageFile'] = 'Must be image';
-    }
-    else if ($f['size'] > 40 * 1024 * 1024) { 
-        $_err['imageFile'] = 'Image too large (max 40MB)';
+    $imageFile = $_SESSION['imageFile']; // keep old image
+
+    if ($f && $f['error'] === UPLOAD_ERR_OK) {
+
+        if (!str_starts_with($f['type'], 'image/')) {
+            $_err['imageFile'] = 'Must be image';
+        }
+        else if ($f['size'] > 40 * 1024 * 1024) {
+            $_err['imageFile'] = 'Image too large (max 40MB)';
+        }
+        else {
+            $folder = __DIR__ . '/../../images/new-image-save';
+
+            if (!is_dir($folder)) {
+                mkdir($folder, 0777, true);
+            }
+
+            try {
+                $imageFile = upload_image($f, $folder);
+            } catch (Exception $e) {
+                $_err['imageFile'] = $e->getMessage();
+            }
+        }
     }
 
-    //databse that executes to save the data
+    if ($_err) {
+        temp('error', 'Please fix the errors');
+        redirect(); // or just skip DB update
+    }
+
     if (!$_err) {
-
-        // Ensure folder exists
-        $folder = __DIR__ . '/../../images/new-image-save';
-
-        if (!is_dir($folder)) {
-            mkdir($folder, 0777, true);
-        }
-
-        try {
-            $imageFile = upload_image($f, $folder);
-        } catch (Exception $e) {
-            $_err['imageFile'] = $e->getMessage();
-        }
-
-        if ($_err) {
-            temp('error', 'Image upload failed');
-            redirect(); 
-        }
-
         // Insert into DB
         $stm = $_db->prepare("
             UPDATE products
-            SET productTheme = ?, 
+            SET productName = ?,
+                productTheme = ?, 
                 productLayers = ?, 
                 productKeycaps = ?, 
                 productSwitches = ?, 
@@ -163,7 +164,7 @@ if (is_post()) {
         ");
 
         $stm->execute([
-            
+
             $productName,
             $productTheme,
             $productLayers,
@@ -197,7 +198,7 @@ include '../sidebar.php';
     <script src="./app.js"></script>
 </head>
 
-<body>
+<body class="admin-body">
     <div class="insert-container">
         <div class="insert-header">
             <div class="insert-title">
@@ -207,11 +208,11 @@ include '../sidebar.php';
         
         <div class="insert-body">
             <?php if ($msg = temp('info')): ?>
-                <div class="success"><?= $msg ?></div>
+                <div class="update-page-success"><?= $msg ?></div>
             <?php endif; ?>
 
             <?php if ($msg = temp('error')): ?>
-                <div class="error"><?= $msg ?></div>
+                <div class="update-page-error"><?= $msg ?></div>
             <?php endif; ?>
             <form method="post" class="insert-form" enctype="multipart/form-data">
                 
@@ -269,7 +270,7 @@ include '../sidebar.php';
                         <label class="insert-upload">
                             <?= html_file('imageFile', 'image/*', 'hidden') ?>
                             <div class="insert-upload-box">
-                                <img src ="/images/icon/dark-mode-drag-and-drop.jpg.jpg">
+                                <img src ="/images/icon/insert-new-image-icon.png">
                             </div>
                         </label>
                         <?= err('imageFile') ?><br>

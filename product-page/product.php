@@ -1,26 +1,21 @@
 <?php
-include './base.php';
+include '../base.php';
 
-$id = $_GET['productID'] ?? null;
+$productID = $_GET['productID'] ?? null;
 
-$stmt = $_db->prepare("SELECT * FROM products WHERE productID = ?");
-$stmt->execute([$id]);
-$product = $stmt->fetch();
+if (!$productID) {
+    echo "No product selected";
+    exit;
+}
+
+$stm = $_db->prepare("SELECT * FROM products WHERE productID = ?");
+$stm->execute([$productID]);
+$product = $stm->fetch();
 
 if (!$product) {
     echo "Product not found";
     exit;
 }
-?>
-
-<?php
-    require '../Administration/product-listing/base.php';
-
-    $stm = $_db->prepare("SELECT * FROM products");
-    $stm->execute([]);
-    $products= $stm->fetchAll();
-    $p = $products[0];
-
 ?>
 
 <!DOCTYPE html>
@@ -69,12 +64,12 @@ if (!$product) {
                         <label for="p5" class="dot"></label>
                     </div>
                 </div>
-            
+
                 <div class="product-info">
 
                     <div class="product-header">
-                        <h1><?php echo $p->productName; ?></h1>
-                        <p>Price: RM<?php echo $p->productPrice; ?></p>
+                        <h1><?= htmlspecialchars($product->productName) ?></h1>
+                        <p>Price: RM<?= number_format($product->productPrice, 2) ?></p>
 
                         <hr>
                     </div>
@@ -93,16 +88,16 @@ if (!$product) {
 
                     <div class="product-details">
                         
-                        <br><p>Theme: <?php echo $p->productTheme; ?></p><br>
+                        <br><p>Theme: <?= htmlspecialchars($product->productTheme) ?></p><br>
                         
                         <p>The Fully Assembled version includes:</p>
                         <ul>
-                            <li><?php echo $p->productLayers; ?></li>
-                            <li><?php echo $p->productKeycaps; ?></li>
-                            <li><?php echo $p->productSwitches; ?></li>
+                            <li><?= htmlspecialchars($product->productLayers) ?></li>
+                            <li><?= htmlspecialchars($product->productKeycaps) ?></li>
+                            <li><?= htmlspecialchars($product->productSwitches) ?></li>
                         </ul><br>
-                        
-                        <p><?php echo $p->productDesc; ?></p><br>
+
+                        <p><?= htmlspecialchars($product->productDesc) ?></p><br>
                         <p style="color:red;">Please drop your emailon "Notify Me When Available" if the product model is out of stock.</p>
                 </div>
             </div>

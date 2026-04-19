@@ -6,28 +6,31 @@ include '../header.php';
 $err = temp('error');
 $suc = temp('success');
 
-// Fetch cart items from SESSION
+// Fetch cart items
+// Replace your entire try/catch cart fetch with this:
 $cartItems = [];
 $subtotal = 0;
 
 if (!empty($_SESSION['cart'])) {
     $ids = array_keys($_SESSION['cart']);
     $placeholders = implode(',', array_fill(0, count($ids), '?'));
-    
+
     $stmt = $_db->prepare("SELECT * FROM products WHERE productID IN ($placeholders)");
     $stmt->execute($ids);
     $products = $stmt->fetchAll();
 
     foreach ($products as $p) {
         $qty = $_SESSION['cart'][$p->productID];
-        $p->cartQuantity = $qty; 
-        $cartItems[] = $p;
-        $subtotal += ($p->productPrice * $qty);
+        $cartItems[] = (object)[
+            'productID'    => $p->productID,
+            'productName'  => $p->productName,
+            'productPrice' => $p->productPrice,
+            'imageFile'    => $p->imageFile,
+            'cartQuantity' => $qty,
+        ];
+        $subtotal += $p->productPrice * $qty;
     }
 }
-
-$shipping = 15.00;
-$total    = $subtotal + $shipping;
 ?>
 
 <div class="checkout-wrapper">
@@ -43,6 +46,7 @@ $total    = $subtotal + $shipping;
     <form method="POST" action="checkoutprocess.php" id="checkoutForm">
         <div class="checkout-grid">
 
+            <!-- LEFT: SHIPPING + PAYMENT -->
             <div class="left-col">
                 <div class="section-card">
                     <h2>Shipping Details</h2>
@@ -91,13 +95,12 @@ $total    = $subtotal + $shipping;
                         </div>
                     </div>
                     <input type="hidden" name="paymentMethod" value="tng_qr">
-                    
-                    <button type="submit" class="place-order-btn" style="margin-top: 20px;">Place Order Now</button>
                 </div>
             </div>
 
+            <!-- RIGHT: ORDER SUMMARY -->
             <div class="right-col">
-                <div class="section-card" style="height:100%; box-sizing:border-box;">
+                <div class="section-card" style="box-sizing:border-box;">
                     <h2>Order Summary</h2>
 
                     <?php if (empty($cartItems)): ?>
@@ -119,6 +122,12 @@ $total    = $subtotal + $shipping;
                         <div class="summary-row total"><span>Total</span><span>RM <?= number_format($total, 2) ?></span></div>
                     <?php endif; ?>
                 </div>
+
+                <!-- Place Order Button -->
+
+<button type="submit" form="checkoutForm" class="place-order-btn" style="margin-top: 20px;">
+    Place Order
+</button>
             </div>
 
         </div>
@@ -148,3 +157,5 @@ function saveShipping() {
 </script>
 
 <?php include '../footer.php'; ?>
+
+// checkout

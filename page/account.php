@@ -108,149 +108,10 @@ if (is_post()) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Create Account</title>
 <link rel="stylesheet" href="/app.css">
-
-<style>
-
-.account-wrapper {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #000;
-    padding: 20px;
-}
-
-.account-container {
-    max-width: 700px;
-    background: #1e1e1e;
-    padding: 40px;
-    border-radius: 12px;
-    border: 1px solid #333;
-    color: #fff;
-    box-sizing: border-box;
-}
-
-
-.account-header {
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-
-.account-profile-section {
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-
-.profile-picture-container {
-    width: 110px;
-    height: 110px;
-    margin: 0 auto 15px;
-    border-radius: 50%;
-    background: #141414;
-    border: 2px solid #555;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.profile-picture-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-
-#imgPlaceholder {
-    color: #aaa;
-    font-weight: bold;
-}
-
-
-.account-upload-area {
-    width: 220px;
-    margin: 0 auto;
-    padding: 15px;
-    border: 2px dashed #555;
-    border-radius: 10px;
-    cursor: pointer;
-    color: #aaa;
-    text-align: center;
-    transition: 0.2s;
-}
-
-.account-upload-area:hover {
-    border-color: #764ba2;
-    color: #fff;
-}
-
-
-.account-form-group {
-    margin-bottom: 18px;
-}
-
-.account-form-group label {
-    display: block;
-    margin-bottom: 6px;
-    font-size: 14px;
-    color: #bbb;
-}
-
-.account-form-group input {
-    width: 100%;
-    padding: 12px;
-    background: #292929;
-    border: 2px solid #444;
-    border-radius: 6px;
-    color: #fff;
-    box-sizing: border-box;
-}
-
-
-.account-button-group {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
-}
-
-.account-button-create {
-    flex: 1;
-    background: #764ba2;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.account-button-create:hover {
-    background: #5f3b86;
-}
-
-.account-button-clear {
-    flex: 1;
-    background: #444;
-    color: white;
-    border: none;
-    padding: 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.account-button-clear:hover {
-    background: #555;
-}
-
-</style>
-
 </head>
-
+<?php include '../header.php'; ?>
     <body>
+
 
         <div class="account-wrapper">
 
@@ -259,55 +120,60 @@ if (is_post()) {
 
                     <div class="account-header">
                         <h1>Create Account</h1>
+                        
                     </div>
 
                     <div class="account-profile-section">
-
-                        <div class="profile-picture-container">
-                            <img id="imagePreview">
-                            <span id="imgPlaceholder">USER</span>
-                        </div>
-
-                        <div class="account-upload-area" id="uploadArea">
-                            Drag & Drop image<br>or click
-                            <input type="file" id="fileInput" name="profilepic" accept="image/*" hidden>
-                        </div>
-
-                        <?= err('profilepic') ?>
-                        
-
+                    <div class="profile-picture-container">
+                        <img id="imagePreview" style="display: none;">
+                        <svg id="imgPlaceholder" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
                     </div>
 
-                        <div class="account-form-group">
-                            <label>Username</label>
-                            <?= html_text('username') ?>
-                            <?= err('username') ?>
-                        </div>
+                    <div class="account-upload-area" id="uploadArea">
+                        Drag & Drop image<br><span style="font-size: 12px; color: #777;">or click to browse</span>
+                        <input type="file" id="fileInput" name="profilepic" accept="image/*" hidden>
+                    </div>
+                    <div class="account-upload-error"><?= err('profilepic') ?></div>
+                </div>
 
-                        <div class="account-form-group">
-                            <label>Email</label>
-                            <?= html_text('email') ?>
-                            <?= err('email') ?>
-                        </div>
+                <div class="account-form-grid">
+                    <div class="account-form-group">
+                        <label>Username</label>
+                        <?= html_text('username', 'placeholder="e.g. LimelFan99"') ?>
+                        <div class="field-error"><?= err('username') ?></div>
+                    </div>
 
-                        <div class="account-form-group">
-                            <label>Password</label>
-                            <?= html_password('password') ?>
-                            <?= err('password') ?>
-                        </div>
+                    <div class="account-form-group">
+                        <label>Email</label>
+                        <?= html_text('email', 'placeholder="your@email.com"') ?>
+                        <div class="field-error"><?= err('email') ?></div>
+                    </div>
 
-                        <div class="account-form-group">
-                            <label>Confirm Password</label>
-                            <?= html_password('confirm') ?>
-                            <?= err('confirm') ?>
-                        </div>
+                    <div class="account-form-group">
+                        <label>Password</label>
+                        <?= html_password('password', 'placeholder="••••••••"') ?>
+                        <div class="field-error"><?= err('password') ?></div>
+                    </div>
 
-                        <div class="account-button-group">
-                            <button type="submit" class="account-button-create">Create</button>
-                            <button type="reset" class="account-button-clear">Clear</button>
-                        </div>
+                    <div class="account-form-group">
+                        <label>Confirm Password</label>
+                        <?= html_password('confirm', 'placeholder="••••••••"') ?>
+                        <div class="field-error"><?= err('confirm') ?></div>
                     </div>
                 </div>
+
+                <div class="account-button-group">
+                    <button type="submit" class="account-button-create">Create Account</button>
+                    <button type="reset" class="account-button-clear">Clear</button>
+                </div>
+                
+                <div class="account-login-link">
+                    Already have an account? <a href="/security/login.php">Log in here</a>
+                </div>
+                
             </form>
 
         </div>
@@ -352,7 +218,18 @@ if (is_post()) {
             };
             reader.readAsDataURL(file);
         }
-        </script>
+        
+        document.querySelector('.account-button-clear').addEventListener('click', () => {
+            preview.src = '';
+            preview.style.display = 'none';
+            placeholder.style.display = 'block';
+            uploadArea.classList.remove('dragover');
+        });
+    </script>
 
-    </body>
+    
+</body>
+
+
+
 </html>

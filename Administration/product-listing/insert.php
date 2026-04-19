@@ -182,7 +182,7 @@ include '../sidebar.php';
     <script src="./app.js"></script>
 </head>
 
-<body>
+<body class="admin-body">
     <div class="insert-container">
         <div class="insert-header">
             <div class="insert-title">
