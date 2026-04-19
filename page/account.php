@@ -91,7 +91,6 @@ if (is_post()) {
             VALUES (?, ?, SHA1(?), ?, "Member")
         ');
         $stm->execute([$username, $email, $password, $profilepic]);
-        exit;
 
         temp('info', 'Record inserted');
         redirect('/index.php');

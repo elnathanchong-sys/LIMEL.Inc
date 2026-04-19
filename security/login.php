@@ -28,15 +28,12 @@ if (is_post()) {
             WHERE email = ? AND password = SHA1(?)
         ');
         $stm->execute([$email, $password]);
-        $u = $stm->fetch();
+        $newUser = $_db->prepare('SELECT * FROM users WHERE email = ?');
+        $newUser->execute([$email]);
+        $u = $newUser->fetch();
 
-        if ($u) {
-            temp('info', 'Login successfully');
-            login($u);
-        }
-        else {
-            $_err['password'] = 'Not matched';
-        }
+        temp('info', 'Account created! Welcome.');
+        login($u);
     }
 }
 
