@@ -1,21 +1,24 @@
 <?php
-require_once '../base.php';
+    require '../base.php';
 
-$stmt = $_db->prepare("SELECT * FROM products WHERE productID = 'P1HE' LIMIT 1");
-$stmt->execute();
-$p = $stmt->fetch();
+    $stm = $_db->prepare("SELECT * FROM products");
+    $stm->execute([]);
+    $products= $stm->fetchAll();
+    $p = $products[1];
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIMEL - <?= htmlspecialchars($p->productName) ?></title>
+    <title>LIMEL</title>
     <link rel="stylesheet" href="/app.css">
 </head>
 <body>
-    <?php include '../header.php'; ?>
-    <main>
+    <?php include '../header.php';?>
+<main>
         <div class="keyboard-product-page">    
             <div class="product-container">    
                 <div class="product-images">
@@ -25,7 +28,7 @@ $p = $stmt->fetch();
                     <input type="radio" name="p" id="p4">
                     <input type="radio" name="p" id="p5">
 
-                    <div class="slides">    
+                    <div class="product-slides">    
                         <div class="product-image">
                             <img src="/images/keyboard-pic/Limel-P1HE White/Limel-P1-HE-01.png" alt="Keyboard">
                         </div>
@@ -53,41 +56,42 @@ $p = $stmt->fetch();
                 </div>
             
                 <div class="product-info">
+
                     <div class="product-header">
-                        <h1><?= htmlspecialchars($p->productName) ?></h1>
-                        <p>Price: RM<?= number_format($p->productPrice, 2) ?></p>
+                        <h1><?php echo $p->productName; ?></h1>
+                        <p>Price: RM<?php echo $p->productPrice; ?></p>
+
                         <hr>
                     </div>
 
-                    <?php if (temp('success')): ?>
-                        <div class="success-box"><?= htmlspecialchars(temp('success')) ?></div>
-                    <?php endif; ?>
-                    <?php if (temp('error')): ?>
-                        <div class="error-box"><?= htmlspecialchars(temp('error')) ?></div>
-                    <?php endif; ?>
-
                     <div class="product-select">
+                        <div class="quantity-button">
+                            <button type="button" id=plus>+</button>
+                            <input type="text" id="quantity" value="1">
+                            <button type="button" id=minus>-</button>
+                        </div>
+
                         <div class="buy-now">
-                            <a href="/page/addtocart.php?id=<?= $p->productID ?>">
-                                <button type="button">Add to Cart</button>
-                            </a>
+                            <button type="button" id=buy-now>Add to cart</button>
                         </div>
                     </div>
 
                     <div class="product-details">
-                        <br><p>Theme: <?= htmlspecialchars($p->productTheme) ?></p><br>
+                        <p>Theme: <?php echo $p->productTheme; ?></p>
                         <p>The Fully Assembled version includes:</p>
                         <ul>
-                            <li><?= htmlspecialchars($p->productLayers) ?></li>
-                            <li><?= htmlspecialchars($p->productKeycaps) ?></li>
-                            <li><?= htmlspecialchars($p->productSwitches) ?></li>
-                        </ul><br>
-                        <p><?= $p->productDesc ?></p><br>
-                        <p style="color:red;">Please drop your email on "Notify Me When Available" if the product model is out of stock.</p>
-                    </div>
+                            <li><?php echo $p->productLayers; ?></li>
+                            <li><?php echo $p->productKeycaps; ?></li>
+                            <li><?php echo $p->productSwitches; ?></li>
+                        </ul>
+                        <p> </p>
+                        <p><?php echo $p->productDesc; ?></p>
+                        <p style="color:red;">Please drop your emailon "Notify Me When Available" if the product model is out of stock.</p>
                 </div>
             </div>
+            
         </div>
     </main>
+
     <?php include '../footer.php'; ?>
 </body>

@@ -1,5 +1,5 @@
 <?php
-$basePath = './product-listing/base.php'; 
+$basePath = '../base.php'; 
 
 if (file_exists($basePath)) {
     require_once $basePath;

@@ -3,30 +3,37 @@ include '../base.php';
 
 auth('Admin');
 
-// FIXED: Changed 'totalPrice' to 'totalAmount' and 'orderStatus' to 'status'
-$rev_query = $_db->query("SELECT SUM(totalAmount) as total_rev FROM orders WHERE status != 'cancelled'");
-$total_revenue = $rev_query->fetch()->total_rev ?? 0;
+// 1. Total Revenue - Matches `totalAmount` and `orderStatus` from your limel.sql
+$rev_query = $_db->query("SELECT SUM(totalAmount) as total_rev FROM orders WHERE orderStatus != 'Cancelled'");
+$rev_result = $rev_query->fetch();
+$total_revenue = isset($rev_result->total_rev) ? (float)$rev_result->total_rev : 0.00;
 
-// FIXED: Changed 'orderStatus' to 'status' and 'Processing' to 'Pending' (which is your DB default)
-$pending_query = $_db->query("SELECT COUNT(*) as count FROM orders WHERE status = 'Pending'");
-$pending_orders = $pending_query->fetch()->count ?? 0;
+// 2. Orders Pending - Matches `orderStatus` from your limel.sql
+$pending_query = $_db->query("SELECT COUNT(*) as count FROM orders WHERE orderStatus = 'Processing'");
+$pending_result = $pending_query->fetch();
+$pending_orders = isset($pending_result->count) ? (int)$pending_result->count : 0;
 
+// 3. Total Products 
 $prod_query = $_db->query("SELECT COUNT(*) as count FROM products");
-$total_products = $prod_query->fetch()->count ?? 0;
+$prod_result = $prod_query->fetch();
+$total_products = isset($prod_result->count) ? (int)$prod_result->count : 0;
 
+// 4. Total Members 
 $users_query = $_db->query("SELECT COUNT(*) as count FROM users");
-$total_members = $users_query->fetch()->count ?? 0;
+$users_result = $users_query->fetch();
+$total_members = isset($users_result->count) ? (int)$users_result->count : 0;
 
+// 5. Line Chart 
 $line_query = $_db->query("SELECT monthName, sales, expenses FROM monthlysales");
 $line_results = $line_query->fetchAll();
 
 $chart_data = [['Month', 'Sales', 'Expenses']];
 foreach ($line_results as $row) {
-    $chart_data[] = [ $row->monthName, (int)$row->sales, (int)$row->expenses ];
+    $chart_data[] = [ $row->monthName, (float)$row->sales, (float)$row->expenses ];
 }
 $json_chart_data = json_encode($chart_data);
 
-// FIXED: Changed to use the 'order_items' table and the 'quantity' column
+// 6. Pie Chart - Correctly uses order_items and quantity based on your limel.sql
 $pie_query = $_db->query("
     SELECT c.categoryName, SUM(oi.quantity) as total_sold
     FROM order_items oi
@@ -40,17 +47,26 @@ $pie_data = [['Category', 'Total Sold']];
 foreach ($pie_results as $row) {
     $pie_data[] = [ $row->categoryName, (int)$row->total_sold ];
 }
+// Fallback if the database has no orders yet, preventing Google Charts from crashing
+if (count($pie_data) === 1) {
+    $pie_data[] = ['No Sales Yet', 1]; 
+}
 $json_pie_data = json_encode($pie_data);
 
+// 7. Waterfall Chart 
 $wf_query = $_db->query("SELECT SUM(sales) as total_sales, SUM(expenses) as total_exp FROM monthlysales");
 $wf_data = $wf_query->fetch();
-$rev = (int)($wf_data->total_sales ?? 0);
-$total_exp = (int)($wf_data->total_exp ?? 0);
+
+$rev = isset($wf_data->total_sales) ? (float)$wf_data->total_sales : 0.00;
+$total_exp = isset($wf_data->total_exp) ? (float)$wf_data->total_exp : 0.00;
+
+// Applying expense distribution logic
 $parts = $total_exp * 0.60;
 $ship = $total_exp * 0.20;
 $mkt = $total_exp * 0.20; 
 $net = $rev - $total_exp;
 
+// Step calculations for waterfall visuals
 $step1 = $rev;                   
 $step2 = $step1 - $parts;        
 $step3 = $step2 - $ship;         

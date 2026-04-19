@@ -72,9 +72,9 @@
 
         <div class="keyboard-card">
             <div class="keyboard-image-container">
-                <a href="/Administration/product-listing/inventory.php"><img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png"></a>
+                <a href="/product-page/Limel-K60-HE-v2.php"><img src="/images/keyboard-pic/Limel K60HE v2 (Top View).png"></a>
             </div>
-            <div class="card-line">_________________________________</div>
+            <div class="card-line">______________________________________</div>
             <div class="keyboard-title">Limel K60 HE v2</div>
             <div class="keyboard-desc">60% Gaming Keyboard</div>
             <div class="keyboard-price">MYR 690.00</div>
@@ -82,22 +82,22 @@
        
         <div class="keyboard-card">
             <div class="keyboard-image-container">
-              <a href="/security/login.php"><img src="/images/keyboard-pic/Limel K80HE Jerri Edition (Top View).png"></a>
+              <a href="/product-page/Limel-M1-V5-TMR.php"><img src="images/keyboard-pic/Limel-M1-V5-TMR/M1-V5-TMR-Magnetic-Switch-Keyboard.png"></a>
             </div>
-            <div class="card-line">_________________________________</div>
-            <div class="keyboard-title">Limel K80HE Jerri Edition</div>
-            <div class="keyboard-desc">80% Gaming Keyboard</div>
-            <div class="keyboard-price">MYR 879.00</div>
+            <div class="card-line">______________________________________</div>
+            <div class="keyboard-title">Limel M1 V5 TMR</div>
+            <div class="keyboard-desc">75% Gaming Keyboard</div>
+            <div class="keyboard-price">MYR 969.00</div>
         </div>
 
         <div class="keyboard-card">
             <div class="keyboard-image-container">
-                <img src="/images/keyboard-pic/Limel K60HE + (Top View).png">
+                <a href="/product-page/Limel-P1HE.php"><img src="/images/keyboard-pic/Limel-P1HE White/Limel-P1HE White.png"></a>
             </div>
-            <div class="card-line">_________________________________</div>
-            <div class="keyboard-title">Limel K60HE+</div>
-            <div class="keyboard-desc">80% Gaming Keyboard</div>
-            <div class="keyboard-price">MYR 459.00</div>
+            <div class="card-line">______________________________________</div>
+            <div class="keyboard-title">Limel P1 HE</div>
+            <div class="keyboard-desc">75% Gaming Keyboard</div>
+            <div class="keyboard-price">MYR 869.00</div>
         </div>
     </div>
 
@@ -116,9 +116,9 @@
     <div class="mouse-grid">
         <div class="mouse-card">
             <div class="mouse-image-container">
-                <a href="/Administration/order.php"><img src="images/mouse pic/Limel M Hyperlight.png"></a>
+                <a href="/product-page/LMHL.php"><img src="images/mouse pic/Limel M Hyperlight.png"></a>
             </div>
-            <div class="card-line">_________________________________</div>
+            <div class="card-line">______________________________________</div>
             <div class="mouse-title">Limel M Hyperlight</div>
             <div class="mouse-desc">100% real mouse and not scam.</div>
             <div class="mouse-price">MYR 499.99</div>
@@ -126,9 +126,9 @@
        
         <div class="mouse-card">
             <div class="mouse-image-container">
-                <img src="images/mouse pic/Limel M Hyperlight PrintStream.png">
+            <a href="/product-page/LMHP.php"><img src="images/mouse pic/Limel M Hyperlight PrintStream.png">
             </div>
-            <div class="card-line">_________________________________</div>
+            <div class="card-line">______________________________________</div>
             <div class="mouse-title">Limel M Hyperlight PrintStream</div>
             <div class="mouse-desc">100% not scam and a functional mouse</div>
             <div class="mouse-price">MYR 399.99</div>
@@ -136,9 +136,9 @@
 
         <div class="mouse-card">
             <div class="mouse-image-container">
-                <img src="images/mouse pic/Limel M OP1 8k.png">
+             <a href="/product-page/LMHP.php"> <img src="images/mouse pic/Limel M OP1 8k.png">
             </div>
-            <div class="card-line">_________________________________</div>
+            <div class="card-line">______________________________________</div>
             <div class="mouse-title">Limel M OP1 8k</div>
             <div class="mouse-desc">1% Gaming Mouse</div>
             <div class="mouse-price">MYR 299.99</div>

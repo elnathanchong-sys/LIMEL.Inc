@@ -3,7 +3,7 @@
 <footer>
 <div class="footer-top">
     <div class="bot-left">
-        <a href="/index.php"><img src="/images/logo.png" class="footer-logo" width=100></a>
+        <a href="/Administration/product-listing/inventory.php"><img src="/images/logo.png" class="footer-logo" width=100></a>
             <div class="desctext">
                 <p> Limel specializes in designing and building high- <br>
                 quality keyboards and mice. CNN, The New York <br>

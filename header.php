@@ -19,7 +19,6 @@
           <a href="/page/mouse.php" class="no-underlined">Mouse</a>
           <a href="/page/contactus.php" class="no-underlined">Contact Us</a>
           <a href="/page/learnmore.php" class="no-underlined">Learn More</a>
-          <a href="/page/myaccount.php" class="no-underlined">Account</a>
           <a href="/page/storelocation.php" class="no-underlined">Location</a>
         </div>
       </nav>

@@ -181,7 +181,6 @@ $justAdded = isset($_GET['added']) && $_GET['added'] == '1';
                         </ul><br>
 
                         <p>Description: <br><?= htmlspecialchars($product->productDesc) ?></p><br>
-                        <p style="color:red;">Please drop your email on "Notify Me When Available" if the product model is out of stock.</p>
                 </div>
             </div>
             
