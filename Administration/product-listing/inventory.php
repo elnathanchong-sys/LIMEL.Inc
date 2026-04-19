@@ -92,8 +92,7 @@ if (!empty($search)) {
                         <a href="inventory.php" class="filter-button" style="text-decoration:none; background:transparent; color:#aaa; border:1px solid #444;">✕ Clear</a>
                     <?php endif; ?>
                 </form>
-                <select class="filter-select"><option>All Categories</option></select>
-                <button class="filter-button">Keyboard</button>
+
             </section>
 
             <?php if (!empty($search)): ?>

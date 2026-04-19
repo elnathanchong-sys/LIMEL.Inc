@@ -19,7 +19,6 @@
           <a href="/page/mouse.php" class="no-underlined">Mouse</a>
           <a href="/page/contactus.php" class="no-underlined">Contact Us</a>
           <a href="/page/learnmore.php" class="no-underlined">Learn More</a>
-          <a href="/page/storelocation.php" class="no-underlined">Location</a>
         </div>
       </nav>
 
@@ -45,8 +44,9 @@
         $hasPhoto = !empty($sessionUser->profilepic)
             && file_exists($_SERVER['DOCUMENT_ROOT'] . '/images/new-image-save/' . $sessionUser->profilepic);
  
-        if ($sessionUser && $sessionUser->role === 'Member'): ?>
+        if ($sessionUser): ?>
  
+        <!-- Logged-in user: show profile avatar + dropdown -->
         <div class="hp-profile-wrapper" id="hpProfileWrapper">
             <button class="hp-profile-trigger" id="hpProfileTrigger" type="button" aria-expanded="false">
                 <?php if ($hasPhoto): ?>
@@ -81,18 +81,31 @@
  
                 <div class="hp-profile-divider"></div>
  
-                <a href="/page/myaccount.php" class="hp-profile-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    My Account
-                </a>
-                <a href="/page/myorders.php" class="hp-profile-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                    My Orders
-                </a>
-                <a href="/page/updateProfile.php" class="hp-profile-item">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                    Edit Profile
-                </a>
+                <?php if ($sessionUser->role === 'Member'): ?>
+                    <!-- Member links -->
+                    <a href="/page/myaccount.php" class="hp-profile-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        My Account
+                    </a>
+                    <a href="/page/myorders.php" class="hp-profile-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                        My Orders
+                    </a>
+                    <a href="/page/updateProfile.php" class="hp-profile-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        Edit Profile
+                    </a>
+                <?php else: ?>
+                    <!-- Admin/Staff links -->
+                    <a href="/page/myStaffAccount.php" class="hp-profile-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                        My Staff Account
+                    </a>
+                    <a href="/Administration/dashboard.php" class="hp-profile-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                        Dashboard
+                    </a>
+                <?php endif; ?>
  
                 <div class="hp-profile-divider"></div>
  
@@ -104,6 +117,7 @@
         </div>
  
         <?php else: ?>
+        <!-- Not logged in: show plain user icon -->
         <a href="/security/login.php"><img src="/images/icon/user.png" width="20" alt="User"></a>
         <?php endif; ?>
     </div>

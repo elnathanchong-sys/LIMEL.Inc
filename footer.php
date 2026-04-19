@@ -48,18 +48,6 @@
                     </div>
                 </div>          
                     
-                <div class="pro-col">    
-                    <h3>Other Products</h3>
-                    <div class="bot-oproduct">
-                        <p>Limel Dye-sub PBT</p>
-                        <p>Limel Lekker Springs</p>
-                        <p>Limel S Lekker L45</p>
-                        <p>Limel S Lekker L60</p>
-                        <p>Limel S Lekker Tikken</p>
-                        <p>Limel S RAW</p>
-                        <p>Limel S Lube</p> 
-                    </div>
-                </div>
             </div>
         </div>
     </div>

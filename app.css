@@ -1119,10 +1119,9 @@ footer{
     margin: 0 auto;
     gap: 70px;
     padding: 50px 100px;
-    width: 100%;
+    width:70%;
     box-sizing: border-box;
     padding-bottom: 200px;
-    align-items: start;
 }
 
 .mouse-card {
@@ -1131,8 +1130,6 @@ footer{
     padding: 20px;
     transition: all 0.4s ease;
     border: 1px solid #2f2f2f;
-    display: flex;
-    flex-direction: column;
 }
 
 .mouse-card:hover {
@@ -1154,7 +1151,6 @@ footer{
     justify-content: center;
     text-align: center;
     box-sizing: border-box;
-    flex-shrink: 0;
 }
 
 .mouse-image-container img {
@@ -1175,6 +1171,7 @@ footer{
     font-weight: 700;
     margin: 0 0 5px 0;
     color: #ffffff;
+    min-height: 54px;
 }
 
 .mouse-desc {
@@ -1187,6 +1184,7 @@ footer{
     font-weight: 700;
     font-size: 16px;
     color: #ffffff;
+    margin-top: auto;
 }
 
 .card-line{

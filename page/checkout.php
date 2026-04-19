@@ -63,37 +63,123 @@ $total    = $subtotal + $shipping;
                     </div>
                     <div class="form-group">
                         <label>Address</label>
-                        <input type="text" name="address1" id="address1" placeholder="Street address" required oninput="updateMap()">
+                        <input type="text" name="address1" id="address1" placeholder="Street address" required>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label>City</label>
-                            <input type="text" name="city" id="city" placeholder="City" required oninput="updateMap()">
+                            <input type="text" name="city" id="city" placeholder="City" required>
                         </div>
                         <div class="form-group">
                             <label>Postcode</label>
-                            <input type="text" name="postcode" id="postcode" placeholder="e.g. 88000" required oninput="updateMap()">
+                            <input type="text" name="postcode" id="postcode" placeholder="e.g. 88000" required>
                         </div>
                     </div>
 
-                    <!-- Google Maps preview: shows the address location as user types -->
+                    <!-- Interactive Map: click to drop a pin and auto-fill address -->
                     <div style="margin-top:14px;">
-                        <label style="font-size:13px; color:#888; margin-bottom:6px; display:block;">📍 Location Preview</label>
-                        <iframe
-                            id="mapFrame"
-                            width="100%"
-                            height="200"
-                            style="border:0; border-radius:10px;"
-                            loading="lazy"
-                            allowfullscreen
-                            referrerpolicy="no-referrer-when-downgrade"
-                            src="https://maps.google.com/maps?q=Malaysia&output=embed">
-                        </iframe>
+                        <label style="font-size:13px; color:#888; margin-bottom:6px; display:block;">
+                            📍 Pin Your Location <span style="color:#555; font-size:11px;">(click on the map to auto-fill your address)</span>
+                        </label>
+                        <div id="checkoutMap" style="width:100%; height:220px; border-radius:10px; border:1px solid #333; z-index:1;"></div>
                     </div>
+
+                    <!-- Load Leaflet.js (free map, no API key needed) -->
+                    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+                    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+                    <script>
+                    // ── Leaflet map setup ──
+                    // Default center: Malaysia
+                    const map = L.map('checkoutMap').setView([4.2105, 108.9758], 6);
+
+                    // Use OpenStreetMap tiles (free, no API key)
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap contributors'
+                    }).addTo(map);
+
+                    let marker = null;
+
+                    // When user clicks on the map, drop a pin and reverse-geocode
+                    map.on('click', function(e) {
+                        const lat = e.latlng.lat;
+                        const lng = e.latlng.lng;
+
+                        // Move or place the pin
+                        if (marker) {
+                            marker.setLatLng([lat, lng]);
+                        } else {
+                            marker = L.marker([lat, lng]).addTo(map);
+                        }
+
+                        // Reverse geocode using Nominatim (free, no API key)
+                        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+                            .then(r => r.json())
+                            .then(data => {
+                                const addr = data.address || {};
+
+                                // Fill in the address fields from the geocode result
+                                const streetParts = [addr.house_number, addr.road].filter(Boolean).join(' ');
+                                document.querySelector('[name="address1"]').value = streetParts || (addr.suburb || '');
+                                document.querySelector('[name="city"]').value     = addr.city || addr.town || addr.county || '';
+                                document.querySelector('[name="postcode"]').value = addr.postcode || '';
+
+                                // Show a popup on the pin
+                                marker.bindPopup(data.display_name).openPopup();
+                            })
+                            .catch(() => {
+                                marker.bindPopup('Location pinned!').openPopup();
+                            });
+                    });
+
+                    // Fix map rendering inside flex layout (sometimes tiles don't load until resize)
+                    setTimeout(() => map.invalidateSize(), 300);
+                    </script>
 
                     <button type="button" id="saveShippingBtn" onclick="saveShipping()" class="save-shipping-btn">
                         Save Shipping Details
                     </button>
+                </div>
+
+                <div class="section-card">
+                    <h2>Payment — Bank Transfer</h2>
+                    <p style="color:#666; font-size:13px; margin-bottom:16px;">
+                        Transfer the exact amount to one of the bank accounts below, then fill in your reference number.
+                    </p>
+
+                    <!-- Fake bank details for demo -->
+                    <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:18px;">
+
+                        <!-- Maybank -->
+                        <div style="background:#242424; border:1px solid #2f2f2f; border-radius:10px; padding:14px 16px;">
+                            <div style="color:#f2c14e; font-weight:600; font-size:13px; margin-bottom:6px;">🏦 Maybank</div>
+                            <div style="color:#bbb; font-size:13px;">Account Name: <strong style="color:#e0e0e0;">LIMEL INC SDN BHD</strong></div>
+                            <div style="color:#bbb; font-size:13px;">Account No: <strong style="color:#e0e0e0;">5642 8801 2234</strong></div>
+                        </div>
+
+                        <!-- CIMB -->
+                        <div style="background:#242424; border:1px solid #2f2f2f; border-radius:10px; padding:14px 16px;">
+                            <div style="color:#e07b54; font-weight:600; font-size:13px; margin-bottom:6px;">🏦 CIMB Bank</div>
+                            <div style="color:#bbb; font-size:13px;">Account Name: <strong style="color:#e0e0e0;">LIMEL INC SDN BHD</strong></div>
+                            <div style="color:#bbb; font-size:13px;">Account No: <strong style="color:#e0e0e0;">7012 0045 6789</strong></div>
+                        </div>
+
+                    </div>
+
+                    <!-- Amount reminder -->
+                    <div style="background:#1f2a1f; border:1px solid #2a3f2a; border-radius:8px; padding:12px 14px; margin-bottom:16px;">
+                        <div style="color:#6fcf97; font-size:13px; font-weight:600;">
+                            ✅ Transfer Amount: RM <?= number_format($total, 2) ?>
+                        </div>
+                        <div style="color:#555; font-size:11px; margin-top:3px;">Includes RM <?= number_format($shipping, 2) ?> shipping</div>
+                    </div>
+
+                    <!-- Reference number input -->
+                    <div class="form-group">
+                        <label style="font-size:13px; color:#888;">Your Transfer Reference / Receipt Number</label>
+                        <input type="text" name="bankRef" placeholder="e.g. TXN20260419001" style="margin-top:6px;">
+                    </div>
+                    <input type="hidden" name="paymentMethodBank" value="bank_transfer">
                 </div>
 
                 <div class="section-card">
@@ -177,23 +263,7 @@ function saveShipping() {
     btn.textContent = '✓ Saved';
 }
 
-// ── Google Maps preview — updates when user types address fields ──
-let mapTimer = null;
-function updateMap() {
-    clearTimeout(mapTimer);
-    // Wait 800ms after user stops typing before updating map
-    mapTimer = setTimeout(() => {
-        const address = document.getElementById('address1').value.trim();
-        const city    = document.getElementById('city').value.trim();
-        const postcode= document.getElementById('postcode').value.trim();
-
-        if (city || address) {
-            const query = encodeURIComponent([address, city, postcode, 'Malaysia'].filter(Boolean).join(', '));
-            document.getElementById('mapFrame').src =
-                'https://maps.google.com/maps?q=' + query + '&output=embed';
-        }
-    }, 800);
-}
+// updateMap() is no longer used — the Leaflet map above handles pinning
 </script>
 
 <?php include '../footer.php'; ?>

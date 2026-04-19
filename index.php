@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LIMEL</title>
     <link rel="stylesheet" href="/app.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="tab icon" href="/images/Logo.png">
+    <script src="./app.js"></script>
 </head>
     
 <body>
@@ -40,23 +42,7 @@
 </section>
 
 <script>
-    const slides = document.querySelectorAll('input[name="r"]');
-    let currentIndex = 0;
-
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % slides.length;
-        slides[currentIndex].checked = true;
-    }
-
-    let slideInterval = setInterval(nextSlide, 5000);
-
-    slides.forEach((radio, index) => {
-        radio.addEventListener('change', () => {
-            currentIndex = index;
-            clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, 5000);
-        });
-    });
+    
 </script>
 
 
@@ -114,36 +100,36 @@
     </div>
 
     <div class="mouse-grid">
-        <div class="mouse-card">
-            <div class="mouse-image-container">
-                <a href="/product-page/LMHL.php"><img src="images/mouse pic/Limel M Hyperlight.png"></a>
-            </div>
-            <div class="card-line">______________________________________</div>
-            <div class="mouse-title">Limel M Hyperlight</div>
-            <div class="mouse-desc">100% real mouse and not scam.</div>
-            <div class="mouse-price">MYR 499.99</div>
+    <div class="mouse-card">
+        <div class="mouse-image-container">
+            <a href="/product-page/LMHL.php"><img src="images/mouse pic/Limel M Hyperlight.png"></a>
         </div>
-       
-        <div class="mouse-card">
-            <div class="mouse-image-container">
-            <a href="/product-page/LMHP.php"><img src="images/mouse pic/Limel M Hyperlight PrintStream.png">
-            </div>
-            <div class="card-line">______________________________________</div>
-            <div class="mouse-title">Limel M Hyperlight PrintStream</div>
-            <div class="mouse-desc">100% not scam and a functional mouse</div>
-            <div class="mouse-price">MYR 399.99</div>
-        </div>
-
-        <div class="mouse-card">
-            <div class="mouse-image-container">
-             <a href="/product-page/LMHP.php"> <img src="images/mouse pic/Limel M OP1 8k.png">
-            </div>
-            <div class="card-line">______________________________________</div>
-            <div class="mouse-title">Limel M OP1 8k</div>
-            <div class="mouse-desc">1% Gaming Mouse</div>
-            <div class="mouse-price">MYR 299.99</div>
-        </div>	
+        <div class="card-line">______________________________________</div>
+        <div class="mouse-title">Limel M Hyperlight</div>
+        <div class="mouse-desc">100% real mouse and not scam.</div>
+        <div class="mouse-price">MYR 499.99</div>
     </div>
+   
+    <div class="mouse-card">
+        <div class="mouse-image-container">
+            <a href="/product-page/LMHP.php"><img src="images/mouse pic/Limel M Hyperlight PrintStream.png"></a> <!-- ← added </a> -->
+        </div>
+        <div class="card-line">______________________________________</div>
+        <div class="mouse-title">Limel M Hyperlight PrintStream</div>
+        <div class="mouse-desc">100% not scam and a functional mouse</div>
+        <div class="mouse-price">MYR 399.99</div>
+    </div>
+
+    <div class="mouse-card">
+        <div class="mouse-image-container">
+            <a href="/product-page/LMOP1.php"><img src="images/mouse pic/Limel M OP1 8k.png"></a> <!-- ← added </a> -->
+        </div>
+        <div class="card-line">______________________________________</div>
+        <div class="mouse-title">Limel M OP1 8k</div>
+        <div class="mouse-desc">1% Gaming Mouse</div>
+        <div class="mouse-price">MYR 299.99</div>
+    </div>	
+</div>
 <!--End of Mouse-->
 
 </section>

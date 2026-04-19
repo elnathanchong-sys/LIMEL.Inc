@@ -20,20 +20,19 @@ if (is_post()) {
         $_err['password'] = 'Required';
     }
 
-    // Login user
+    // Login user — check email AND password together
     if (!$_err) {
-        // TODO
-        $stm = $_db->prepare('
-            SELECT * FROM users
-            WHERE email = ? AND password = SHA1(?)
-        ');
+        $stm = $_db->prepare('SELECT * FROM users WHERE email = ? AND password = SHA1(?)');
         $stm->execute([$email, $password]);
-        $newUser = $_db->prepare('SELECT * FROM users WHERE email = ?');
-        $newUser->execute([$email]);
-        $u = $newUser->fetch();
+        $u = $stm->fetch();
 
-        temp('info', 'Account created! Welcome.');
-        login($u);
+        // If no user found, password is wrong
+        if (!$u) {
+            $_err['password'] = 'Not matched';
+        } else {
+            // Login success — login() in base.php redirects Members to /page/myaccount.php
+            login($u);
+        }
     }
 }
 
