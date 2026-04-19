@@ -35,9 +35,19 @@ if (!empty($_SESSION['cart'])) {
 $shipping = 15.00;
 $total    = $subtotal + $shipping;
 ?>
-
-<div class="checkout-wrapper">
-    <h1>Checkout</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/app.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="tab icon" href="/images/Logo.png">
+    <script src="/Administration/product-listing/app.js"></script>
+</head>
+<body>
+    <div class="checkout-wrapper">
+        <h1>Checkout</h1>
 
     <?php if ($err): ?>
         <div class="alert alert-error"><?= htmlspecialchars($err) ?></div>
@@ -49,7 +59,6 @@ $total    = $subtotal + $shipping;
     <form method="POST" action="checkoutprocess.php" id="checkoutForm">
         <div class="checkout-grid">
 
-            <!-- LEFT: SHIPPING + PAYMENT -->
             <div class="left-col">
                 <div class="section-card">
                     <h2>Shipping Details</h2>
@@ -76,7 +85,6 @@ $total    = $subtotal + $shipping;
                         </div>
                     </div>
 
-                    <!-- Interactive Map: click to drop a pin and auto-fill address -->
                     <div style="margin-top:14px;">
                         <label style="font-size:13px; color:#888; margin-bottom:6px; display:block;">
                             📍 Pin Your Location <span style="color:#555; font-size:11px;">(click on the map to auto-fill your address)</span>
@@ -84,47 +92,43 @@ $total    = $subtotal + $shipping;
                         <div id="checkoutMap" style="width:100%; height:220px; border-radius:10px; border:1px solid #333; z-index:1;"></div>
                     </div>
 
-                    <!-- Load Leaflet.js (free map, no API key needed) -->
                     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
                     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
                     <script>
-                    // ── Leaflet map setup ──
-                    // Default center: Malaysia
+
                     const map = L.map('checkoutMap').setView([4.2105, 108.9758], 6);
 
-                    // Use OpenStreetMap tiles (free, no API key)
+
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         attribution: '© OpenStreetMap contributors'
                     }).addTo(map);
 
                     let marker = null;
 
-                    // When user clicks on the map, drop a pin and reverse-geocode
+
                     map.on('click', function(e) {
                         const lat = e.latlng.lat;
                         const lng = e.latlng.lng;
 
-                        // Move or place the pin
+
                         if (marker) {
                             marker.setLatLng([lat, lng]);
                         } else {
                             marker = L.marker([lat, lng]).addTo(map);
                         }
 
-                        // Reverse geocode using Nominatim (free, no API key)
+
                         fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
                             .then(r => r.json())
                             .then(data => {
                                 const addr = data.address || {};
 
-                                // Fill in the address fields from the geocode result
                                 const streetParts = [addr.house_number, addr.road].filter(Boolean).join(' ');
                                 document.querySelector('[name="address1"]').value = streetParts || (addr.suburb || '');
                                 document.querySelector('[name="city"]').value     = addr.city || addr.town || addr.county || '';
                                 document.querySelector('[name="postcode"]').value = addr.postcode || '';
 
-                                // Show a popup on the pin
                                 marker.bindPopup(data.display_name).openPopup();
                             })
                             .catch(() => {
@@ -132,7 +136,7 @@ $total    = $subtotal + $shipping;
                             });
                     });
 
-                    // Fix map rendering inside flex layout (sometimes tiles don't load until resize)
+
                     setTimeout(() => map.invalidateSize(), 300);
                     </script>
 
@@ -203,7 +207,7 @@ $total    = $subtotal + $shipping;
                 </div>
             </div>
 
-            <!-- RIGHT: ORDER SUMMARY -->
+
             <div class="right-col">
                 <div class="section-card" style="box-sizing:border-box;">
                     <h2>Order Summary</h2>
@@ -213,7 +217,6 @@ $total    = $subtotal + $shipping;
                     <?php else: ?>
                         <?php foreach ($cartItems as $item): ?>
                         <div class="order-item">
-                            <img src="/images/<?= htmlspecialchars($item->imageFile) ?>" alt="<?= htmlspecialchars($item->productName) ?>">
                             <div class="order-item-info">
                                 <div class="order-item-name"><?= htmlspecialchars($item->productName) ?></div>
                                 <div class="order-item-qty">Qty: <?= $item->cartQuantity ?></div>
@@ -228,7 +231,7 @@ $total    = $subtotal + $shipping;
                     <?php endif; ?>
                 </div>
 
-                <!-- Place Order Button -->
+
                 <button type="submit" form="checkoutForm" class="place-order-btn" style="margin-top: 20px;">
                     Place Order
                 </button>
@@ -239,7 +242,7 @@ $total    = $subtotal + $shipping;
 </div>
 
 <script>
-// ── Save Shipping feedback ──
+
 function saveShipping() {
     const fields = ['fullName', 'phone', 'address1', 'city', 'postcode'];
     const allFilled = fields.every(id => {

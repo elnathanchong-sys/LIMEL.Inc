@@ -4,7 +4,7 @@
     $stm = $_db->prepare("SELECT * FROM products");
     $stm->execute([]);
     $products= $stm->fetchAll();
-    $p = $products[2];
+    $p = $products[7];
 ?>
 
 <!DOCTYPE html>

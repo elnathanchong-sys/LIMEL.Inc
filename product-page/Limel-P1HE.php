@@ -4,7 +4,7 @@
     $stm = $_db->prepare("SELECT * FROM products");
     $stm->execute([]);
     $products= $stm->fetchAll();
-    $p = $products[1];
+    $p = $products[6];
 
 ?>
 
@@ -86,7 +86,6 @@
                         </ul>
                         <p> </p>
                         <p><?php echo $p->productDesc; ?></p>
-                        <p style="color:red;">Please drop your emailon "Notify Me When Available" if the product model is out of stock.</p>
                 </div>
             </div>
             

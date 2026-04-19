@@ -15,7 +15,7 @@ include '../header.php';
 </head>
 <body>
 
-    <!-- CONTACT US SECTION -->
+
     <main class="contact-main-container">
         <div class="contact-header">
             <h1 style="color: white;">Contact Us</h1>
@@ -50,10 +50,10 @@ include '../header.php';
         </div>
     </main>
 
-    <!-- DIVIDER -->
+
     <hr class="section-divider">
 
-    <!-- STORE LOCATION SECTION -->
+
     <div class="store-location-wrapper">
         <h1 style="color: white; margin-bottom: 10px;">Our Store Location</h1>
         <p style="color: #aaa; margin-bottom: 30px;">Visit us in person or use the map to get directions.</p>

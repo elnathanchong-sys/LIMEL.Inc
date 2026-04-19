@@ -242,7 +242,6 @@ include '../sidebar.php';
                 <div class="insert-table-bottom">
                     <label for="productDesc">Product Description</label><br>
                         <textarea name="productDesc" rows="1" class="product-desc-box"><?= htmlspecialchars(post('productDesc')) ?></textarea>
-                        <?= err('productDesc') ?>
                         <?= err('productDesc') ?><br><br><br>
                 
                     <label for="photo"></label>

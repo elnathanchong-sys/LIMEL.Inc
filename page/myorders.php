@@ -9,11 +9,9 @@ if (!isset($_SESSION['users']) || $_SESSION['users']->role !== 'Member') {
 $users  = $_SESSION['users'];
 $userID = $users->userID;
 
-// Basic search — filter by order ID or status
+
 $search = trim($_GET['search'] ?? '');
 
-// Fetch this user's orders from the database
-// Also fetch all items for each order using a subquery
 if (!empty($search)) {
     $stmt = $_db->prepare("
         SELECT o.*
@@ -35,7 +33,7 @@ if (!empty($search)) {
 
 $orders = $stmt->fetchAll();
 
-// For each order, fetch its items so we can display product names
+
 $orderItems = [];
 foreach ($orders as $ord) {
     $iStmt = $_db->prepare("
@@ -53,7 +51,6 @@ include '../header.php';
 ?>
 
 <style>
-/* Consistent Background */
 body { 
     background-color: black; 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -107,7 +104,7 @@ body {
 
 /* White Container style */
 .order-card {
-    background: #ffffff;
+    background: #292929;
     border-radius: 16px;
     padding: 30px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -131,11 +128,35 @@ body {
     background: #f9f9f9;
 }
 
-.order-info { flex: 1; }
-.order-name { font-weight: bold; font-size: 17px; color: #2d3436; }
-.order-meta { font-size: 14px; color: #636e72; margin-top: 4px; }
-.order-date { font-size: 13px; color: #b2bec3; margin-top: 4px; }
-.order-id-label { font-size: 12px; color: #999; margin-top: 2px; }
+.order-info { 
+    flex: 1; 
+}
+
+.order-name { 
+    font-weight: bold; 
+    font-size: 17px; 
+    color: #2d3436; 
+    color: #FFFFFF; 
+}
+
+.order-meta { 
+    font-size: 14px; 
+    color: #636e72; 
+    margin-top: 4px; 
+}
+
+.order-date { 
+    font-size: 13px; 
+    color: #b2bec3; 
+    margin-top: 4px; 
+}
+
+.order-id-label { 
+    font-size: 12px; 
+    color: #999; 
+    margin-top: 2px; 
+    color: #FFFFFF; 
+}
 
 .order-status {
     padding: 6px 14px;
@@ -146,10 +167,25 @@ body {
 }
 
 /* Status Colors */
-.status-processing { background: #fff3cd; color: #856404; }
-.status-shipped    { background: #cce5ff; color: #004085; }
-.status-delivered  { background: #d4edda; color: #155724; }
-.status-cancelled  { background: #f8d7da; color: #721c24; }
+.status-processing { 
+    background: #fff3cd; 
+    color: #856404; 
+}
+
+.status-shipped    { 
+    background: #cce5ff; 
+    color: #004085; 
+}
+
+.status-delivered  { 
+    background: #d4edda; 
+    color: #155724; 
+}
+
+.status-cancelled  { 
+    background: #f8d7da; 
+    color: #721c24; 
+}
 
 .back-link {
     display: inline-block;
@@ -179,24 +215,39 @@ body {
 /* Order group header (shows per-order info) */
 .order-group {
     margin-bottom: 24px;
-    border: 1px solid #eee;
+    border: 1px solid #252525;
     border-radius: 12px;
     overflow: hidden;
 }
 .order-group-header {
-    background: #f8f8f8;
+    background: #252525;
     padding: 12px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #2a2a2a;
+    color: #FFFFFF;
 }
-.order-group-id { font-weight: 700; color: #333; font-size: 14px; }
-.order-group-date { color: #999; font-size: 13px; }
-.order-group-total { font-weight: 600; color: #2d3436; font-size: 14px; }
-.order-group-body { padding: 0 20px; background: #fff; }
+.order-group-id { 
+    font-weight: 700; 
+    color: #ffffff; 
+    font-size: 14px; 
+}
+.order-group-date { color: #999; 
+font-size: 13px; 
+}
+.order-group-total { 
+    font-weight: 600; 
+    color: #FFFFFF; 
+    font-size: 14px; 
+}
+.order-group-body { 
+    padding: 0 20px; 
+    background: #2a2a2a;
+    color: #FFFFFF; 
+    }
 </style>
 
 <main class="order-container">
@@ -204,7 +255,7 @@ body {
     
     <h1 style="color: #ffffff; margin-bottom: 20px;">My Orders</h1>
 
-    <!-- Search bar -->
+
     <form method="GET" class="order-search-form">
         <input type="text"
                name="search"
@@ -234,7 +285,7 @@ body {
         <?php $items = $orderItems[$ord->orderID] ?? []; ?>
         <div class="order-group">
 
-            <!-- Order header: shows ID, date, total, status -->
+
             <div class="order-group-header">
                 <div>
                     <div class="order-group-id">Order #<?= htmlspecialchars($ord->orderID) ?></div>
@@ -249,12 +300,9 @@ body {
                 </div>
             </div>
 
-            <!-- Each product in this order -->
             <div class="order-group-body">
                 <?php foreach ($items as $item): ?>
                 <div class="order-item">
-                    <img src="/images/<?= htmlspecialchars($item->imageFile) ?>"
-                         alt="<?= htmlspecialchars($item->productName) ?>">
                     <div class="order-info">
                         <div class="order-name"><?= htmlspecialchars($item->productName) ?></div>
                         <div class="order-meta">

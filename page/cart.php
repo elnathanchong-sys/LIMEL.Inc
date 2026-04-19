@@ -93,7 +93,6 @@ $error   = temp('error');
         <div class="cart-list">
             <?php foreach ($items as $item): ?>
                 <div class="cart-item">
-                    <img src="/images/<?= htmlspecialchars($item->imageFile) ?>" alt="<?= htmlspecialchars($item->productName) ?>">
                     <div class="cart-item-info">
                         <div class="cart-item-name"><?= htmlspecialchars($item->productName) ?></div>
                         <div class="cart-item-price">RM <?= number_format($item->productPrice, 2) ?></div>

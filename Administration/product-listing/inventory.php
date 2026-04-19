@@ -25,29 +25,6 @@ if (!empty($search)) {
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="tab icon" href="/images/Logo.png">
     <script src="./app.js"></script>
-
-    <style>
-    /* ── Batch Delete button style ── */
-    .button-batch-delete {
-        background: transparent;
-        border: 1px solid #c0392b;
-        color: #e74c3c;
-        padding: 10px 18px;
-        border-radius: 8px;
-        font-size: 13px;
-        font-weight: 600;
-        cursor: pointer;
-        display: none; /* hidden until checkboxes are checked */
-        align-items: center;
-        gap: 6px;
-        transition: background 0.2s;
-    }
-    .button-batch-delete:hover { background: rgba(231,76,60,0.1); }
-    .button-batch-delete.visible { display: inline-flex; }
-
-    /* Select all / row checkbox */
-    .row-checkbox { cursor: pointer; width: 16px; height: 16px; }
-    </style>
 </head>
 <body>
     <div class="inventory-layout">   
@@ -76,7 +53,6 @@ if (!empty($search)) {
                 </div>
             </div>
 
-            <!-- ── Search + filter section ── -->
             <section class="filter-section">
                 <form method="GET" style="display:flex; gap:10px; flex:1;">
                     <div class="inventory-search-bar" style="flex:1;">
@@ -87,7 +63,7 @@ if (!empty($search)) {
                                placeholder="Search products by name, ID"
                                value="<?= htmlspecialchars($search) ?>">
                     </div>
-                    <button type="submit" class="filter-button">Search</button>
+                <button type="submit" class="filter-button">Search</button>
                     <?php if (!empty($search)): ?>
                         <a href="inventory.php" class="filter-button" style="text-decoration:none; background:transparent; color:#aaa; border:1px solid #444;">✕ Clear</a>
                     <?php endif; ?>

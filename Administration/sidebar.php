@@ -16,7 +16,7 @@ $_sidebarHasPhoto = !empty($_sidebarUser->profilepic)
         <a href="/Administration/product-listing/inventory.php" class="sidebar-link">Inventory</a>
         <a href="/Administration/member.php" class="sidebar-link">Member</a>
         <a href="/Administration/order.php" class="sidebar-link">Order</a>
-        <a href="/page/staffAccount.php" class="sidebar-link">Staff Account</a>
+        <a href="/page/staffAccount.php" class="sidebar-link">Staff Account Create</a>
     </div>
 
     <div class="sidebar-bottom">
@@ -59,7 +59,7 @@ $_sidebarHasPhoto = !empty($_sidebarUser->profilepic)
 </aside>
 
 <style>
-/* ── Sidebar Profile Card ─────────────────────────── */
+/* ── Sidebar ─────────────────────────── */
 .sb-profile-card {
     display: flex;
     align-items: center;

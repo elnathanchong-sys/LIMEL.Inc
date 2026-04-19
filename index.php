@@ -37,7 +37,7 @@
   </div>
 </div>
 <div class="button-wrapper">
-    <a href="page/myorders.php" class="order-button">Order Now</a>
+    <a href="page/keyboards.php" class="order-button">Order Now</a>
 </div>
 </section>
 

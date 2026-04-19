@@ -639,26 +639,12 @@ nav {
 }
 
 /* ----------------------------------Contact Us-------------------------------------*/
-.contact-us{
-    font-size: 20px;
-    color: white;
-    text-indent:50px;
-}
-
-.contact-info p {
-    font-size: 20px;
-    color: white;
-    text-indent:50px;
-    display: grid;
-    grid-template-columns: 200px 10px 1fr;
-}
-
 .contact-main-container {
-    max-width: 1000px;
-    margin: 60px auto 100px auto; 
+    max-width: 700px;
+    margin: 60px auto 100px auto;
     padding: 0 20px;
     font-family: 'Roboto', sans-serif;
-    color: #e6e6e6; 
+    color: #e6e6e6;
 }
 
 .contact-header {
@@ -674,92 +660,50 @@ nav {
 }
 
 .contact-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr; 
-    gap: 50px;
-    background-color: #1A1A1A; 
+    background-color: #1A1A1A;
     border-radius: 16px;
-    padding: 50px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8); 
-}
-
-.contact-wrapper h3 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 24px;
-    margin-top: 0;
-    margin-bottom: 30px;
-    border-bottom: 2px solid #333;
-    padding-bottom: 10px;
-    color: #fff;
+    padding: 40px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.8);
 }
 
 .contact-info-panel {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.contact-wrapper h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 28px;
+    margin: 0 0 20px 0;
+    border-bottom: none;
+    color: #fff;
+    text-align: left;
+    width: 100%;
 }
 
 .con-info {
     display: flex;
     flex-direction: column;
-    font-size: 16px;
+    gap: 4px;
+    width: 100%;
+    text-align: left;
 }
 
 .con-info strong {
     color: #fff;
-    margin-bottom: 5px;
-    font-size: 14px;
+    font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 1px;
+    text-align: left;
 }
 
 .con-info span {
     color: #bbb;
-}
-
-.limel-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.input-row {
-    display: flex;
-    gap: 15px;
-}
-
-.input-row input {
-    flex: 1; 
-}
-
-.limel-form input, .limel-form textarea {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid #333;
-    border-radius: 8px;
-    font-family: 'Roboto', sans-serif;
-    font-size: 15px;
-    box-sizing: border-box; 
-    background-color: #222; 
-    color: #fff;
-}
-
-.submit-message-btn {
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-    color: #fff;
-    border: none;
-    padding: 15px;
-    border-radius: 8px;
     font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s ease;
-    margin-top: 10px;
-}
-
-.submit-message-btn:hover {
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);;
-    transform: translateY(-2px);
+    text-align: left;
 }
 
 /* -------------------------------------Learn More--------------------------------------*/
@@ -1352,7 +1296,7 @@ footer{
     padding: 0;
 }
 
-.product-image img {
+.product-images img {
     display: block;
     width: 100%;
     height: 100%;
@@ -1822,6 +1766,25 @@ aside, .sidebar {
     flex-direction: column;
 }
 
+.button-batch-delete {
+    background: transparent;
+    border: 1px solid #c0392b;
+    color: #e74c3c;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+}
+
+.button-batch-delete:hover { background: rgba(231,76,60,0.1); }
+.button-batch-delete.visible { display: inline-flex; }
+
+.row-checkbox { cursor: pointer; width: 16px; height: 16px; }
 
 .inventory-header {
     display: flex;
@@ -1885,7 +1848,7 @@ aside, .sidebar {
     background: #1e1e1e;
     border: 1px solid #333;
     color: white;
-    padding: 10px 15px;
+    padding: 10px 1px;
     border-radius: 6px;
 }
 
@@ -1908,7 +1871,7 @@ aside, .sidebar {
 
 .product-details-table {
     min-width: 1000px; 
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
 }
 
@@ -1916,7 +1879,7 @@ aside, .sidebar {
     background: #252525;
     color: #999;
     text-align: left;
-    padding: 12px 15px;
+    padding: 12px 0px;
     font-weight: 500;
     border-bottom: 1px solid #333;
     white-space: nowrap;
@@ -1928,7 +1891,6 @@ aside, .sidebar {
     color: #e0e0e0;
     vertical-align: middle;
 }
-
 
 
 /*-------------------------------end of product-listing---------------------------*/
@@ -3323,74 +3285,144 @@ body.admin-body {
     background: #4b5563;
 }
 
-/*------------------- Wishlist------------------ */
+/*----------------------------------------End of changePassword------------------------------------*/
+/*----------------------------------------Start of myaccount------------------------------------*/
+.myacc-page {
+    max-width: 860px;
+    margin: 50px auto 80px;
+    padding: 0 24px;
+    font-family: 'Roboto', sans-serif;
+}
 
-.wishlist-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    border-radius: 50%;
-    width: 50px;  
-    height: 50px;  
-    font-size: 28px; 
-    cursor: pointer;
+
+.myacc-hero {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 16px;
+    padding: 36px 32px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    z-index: 10;
-        }
+    gap: 28px;
+    margin-bottom: 28px;
+}
 
-        /* ── Toast notification ── */
-.cart-toast {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: #1e7e34;
-    color: #fff;
-    padding: 14px 24px;
+.myacc-avatar-wrap { position: relative; flex-shrink: 0; }
+
+
+.myacc-avatar-img {
+    width: 90px; height: 90px;
+    border-radius: 50%; object-fit: cover;
+    border: 3px solid #333;
+    display: block;
+}
+
+
+.myacc-avatar-initials {
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2d2d2d, #444);
+    border: 3px solid #333;
+    color: #e0e0e0;
+    font-size: 36px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.myacc-edit-btn {
+    position: absolute; bottom: 2px; right: 2px;
+    width: 26px; height: 26px;
+    background: #333; border: 2px solid #1a1a1a;
+    border-radius: 50%; display: flex;
+    align-items: center; justify-content: center;
+    text-decoration: none; transition: background 0.2s;
+}
+.myacc-edit-btn:hover { background: #555; }
+
+.myacc-hero-info { flex: 1; min-width: 0; }
+
+.myacc-hero-name {
+    color: #f2f2f2; font-size: 24px; font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    margin-bottom: 5px;
+}
+.myacc-hero-email { color: #666; font-size: 13px; margin-bottom: 12px; }
+
+
+.myacc-role-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid #2f2f2f;
+    color: #999; font-size: 11px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.5px;
+    padding: 4px 10px; border-radius: 20px;
+}
+
+.myacc-hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+
+
+.myacc-action-primary {
+    background: #2a2a2a; color: #e0e0e0;
+    border: 1px solid #3a3a3a;
+    padding: 9px 18px; border-radius: 8px;
+    font-size: 13px; font-weight: 500;
+    text-decoration: none; display: inline-flex;
+    align-items: center; gap: 7px;
+    transition: background 0.2s, border-color 0.2s;
+}
+.myacc-action-primary:hover { background: #333; border-color: #555; color: #fff; }
+
+
+.myacc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+}
+.myacc-card {
+    background: #1a1a1a; border: 1px solid #2a2a2a;
+    border-radius: 14px; padding: 24px;
+    text-decoration: none;
+    display: flex; align-items: center; gap: 18px;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.myacc-card:hover { border-color: #444; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+.myacc-card-icon {
+    width: 46px; height: 46px;
+    background: #242424; border: 1px solid #2f2f2f;
     border-radius: 10px;
-    font-size: 15px;
-    font-family: 'Roboto', sans-serif;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    z-index: 9999;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: #aaa;
 }
-.cart-toast-show {
-    opacity: 1;
-    transform: translateY(0);
+.myacc-card-title { color: #e0e0e0; font-size: 15px; font-weight: 600; font-family: 'Montserrat', sans-serif; margin-bottom: 3px; }
+.myacc-card-desc  { color: #555; font-size: 12px; line-height: 1.4; }
+
+
+.myacc-danger {
+    background: #1a1a1a; border: 1px solid #2a2a2a;
+    border-radius: 14px; padding: 24px 28px;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 20px; flex-wrap: wrap;
 }
-
-/* ── Wishlist heart button ── */
-.wishlist-btn {
-    background: none;
-    border: 2px solid #555;
-    border-radius: 8px;
-    padding: 10px 18px;
-    cursor: pointer;
-    font-size: 20px;
-    color: #888;
-    transition: border-color 0.2s, color 0.2s, transform 0.15s;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
+.myacc-danger-text        { color: #555; font-size: 13px; }
+.myacc-danger-text strong { color: #888; display: block; margin-bottom: 3px; font-size: 14px; }
+.myacc-logout-btn {
+    background: transparent; border: 1px solid #3a2a2a;
+    color: #cc5555; padding: 9px 20px;
+    border-radius: 8px; font-size: 13px; font-weight: 500;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 7px;
+    transition: background 0.2s, border-color 0.2s; white-space: nowrap;
 }
+.myacc-logout-btn:hover { background: rgba(200,60,60,0.1); border-color: #cc5555; color: #ff6b6b; }
 
-.wishlist-btn:hover { 
-    border-color: #e74c3c; color: #e74c3c; transform: scale(1.05); 
+
+.myacc-section {
+    background: #1a1a1a; border: 1px solid #2a2a2a;
+    border-radius: 14px; padding: 24px 28px; margin-bottom: 28px;
 }
-
-.wishlist-btn.wishlisted {
-     border-color: #e74c3c; color: #e74c3c; 
-    }
-
-.wishlist-btn.wishlisted .heart-icon { 
-    fill: #e74c3c; 
+.myacc-section-title {
+    color: #f2f2f2; font-size: 17px; font-weight: 600;
+    font-family: 'Montserrat', sans-serif; margin-bottom: 18px;
+    display: flex; align-items: center; gap: 9px;
 }
-
-.wishlist-label { 
-    font-size: 13px; font-family: 'Roboto', sans-serif;
- }

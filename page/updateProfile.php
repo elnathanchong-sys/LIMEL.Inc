@@ -124,7 +124,6 @@ if (is_post()) {
 
 
     <?php $_title = 'Profile Update'; include '../header.php'; ?>
-
     <div class="profileUpdate-page">
 
         <form method="post" enctype="multipart/form-data" class="profileUpdate-card">
@@ -191,6 +190,5 @@ if (is_post()) {
         </form>
 
     </div>
-
 <?php include '../footer.php'; ?>
 

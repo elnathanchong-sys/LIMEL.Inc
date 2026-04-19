@@ -28,22 +28,19 @@
                     <input type="radio" name="p" id="p4">
                     <input type="radio" name="p" id="p5">
 
-                    <div class="slides">    
+                    <div class="product-slides">    
                         <div class="product-image">
-                            <img src="/images/keyboard-pic/Limel-P1HE White/Limel-P1-HE-01.png" alt="Keyboard">
+                            <img src="/images/sba/IMG_20260415_132450.jpg" alt="Keyboard">
                         </div>
                         <div class="product-image">
-                            <img src="/images/keyboard-pic/Limel-P1HE White/Limel-P1-HE-02.png" alt="Keyboard">
+                            <img src="/images/sba/IMG_20260415_132622.jpg" alt="Keyboard">
                         </div>
                         <div class="product-image">
-                            <img src="/images/keyboard-pic/Limel-P1HE White/Limel-P1-HE-03.png" alt="Keyboard">
+                            <img src="/images/sba/IMG_20260415_163733.jpg" alt="Keyboard">
                         </div>
                         <div class="product-image">
-                            <img src="/images/keyboard-pic/Limel-P1HE White/Limel-P1-HE-04.png" alt="Keyboard">
-                        </div>
-                        <div class="product-image">
-                            <img src="/images/keyboard-pic/Limel-P1HE White/Limel-P1-HE-05.png" alt="Keyboard">
-                        </div>            
+                            <img src="/images/sba/IMG_20260415_164526.jpg" alt="Keyboard">
+                        </div>           
                     </div>
                     
                     <div class="product-navigation">
