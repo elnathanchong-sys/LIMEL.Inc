@@ -96,7 +96,7 @@ if (is_post()) {
         redirect('/index.php');
     }
 }
- ?>
+?>
 <!DOCTYPE html>
 
 <html lang="en">
