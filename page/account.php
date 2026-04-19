@@ -70,22 +70,20 @@ if (is_post()) {
     if (!$_err) {
 
         // Ensure folder exists
+    $profilepic = null;
+
+    if ($f && $f['error'] === UPLOAD_ERR_OK) {
+
         $folder = __DIR__ . '/../images/new-image-save';
 
         if (!is_dir($folder)) {
             mkdir($folder, 0777, true);
         }
 
-        try {
-            $profilepic = upload_image($f, $folder);
-        } catch (Exception $e) {
-            $_err['profilepic'] = $e->getMessage();
-        }
+        $profilepic = uniqid('img_', true) . '.' . pathinfo($f['name'], PATHINFO_EXTENSION);
 
-        if ($_err) {
-            temp('error', 'Image upload failed');
-            redirect(); 
-        }
+        move_uploaded_file($f['tmp_name'], "$folder/$profilepic");
+    }
 
         // (2) Insert user (member)
         $stm = $_db->prepare('
@@ -93,13 +91,13 @@ if (is_post()) {
             VALUES (?, ?, SHA1(?), ?, "Member")
         ');
         $stm->execute([$username, $email, $password, $profilepic]);
+        exit;
 
         temp('info', 'Record inserted');
         redirect('/index.php');
     }
 }
-?>
-
+ ?>
 <!DOCTYPE html>
 
 <html lang="en">
