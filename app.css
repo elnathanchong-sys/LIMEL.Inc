@@ -3321,3 +3321,22 @@ body.admin-body {
 .passwordUpdate-btn.secondary:hover {
     background: #4b5563;
 }
+
+/*------------------- Wishlist------------------ */
+
+.wishlist-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 50%;
+    width: 50px;  
+    height: 50px;  
+    font-size: 28px; 
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+        }

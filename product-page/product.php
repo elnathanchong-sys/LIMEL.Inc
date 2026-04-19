@@ -32,6 +32,7 @@ if (!$product) {
         <div class="keyboard-product-page">    
             <div class="product-container">    
                 <div class="product-images">
+                    <button class="wishlist-btn" onclick="toggleFavorite(event, this, '<?= htmlspecialchars($product->productID) ?>')">🤍</button>
                     <input type="radio" name="p" id="p1" checked>
                     <input type="radio" name="p" id="p2">
                     <input type="radio" name="p" id="p3">
@@ -108,3 +109,34 @@ if (!$product) {
     <?php include '../footer.php'; ?>
 </body>
 
+<script>
+const productID = '<?= htmlspecialchars($product->productID) ?>';
+const btn = document.querySelector('.wishlist-btn');
+let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+
+if (wishlist.includes(productID)) {
+    btn.classList.add('active');
+    btn.textContent = '❤️';
+}
+
+function toggleFavorite(e, button, productID) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const isActive = button.classList.toggle('active');
+    button.textContent = isActive ? '❤️' : '🤍';
+
+    wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+
+    if (isActive) {
+        if (!wishlist.includes(productID)) {
+            wishlist.push(productID);
+        }
+    } else {
+        wishlist = wishlist.filter(id => id !== productID);
+    }
+
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    console.log('Wishlist:', wishlist);
+}
+</script>
